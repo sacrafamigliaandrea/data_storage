@@ -33,7 +33,6 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100vw;height:100vh;overflow:hidden}
-/* fondo = base LEGO: griglia di borchie appena accennata */
 body{font-family:var(--body);font-size:18px;line-height:1.55;color:var(--tx);
   background-color:var(--bg);
   background-image:radial-gradient(circle at 8px 8px,rgba(120,105,70,.10) 3.2px,transparent 3.4px);
@@ -81,7 +80,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--lb);box-shadow:0 0 0 
 select{appearance:none;-webkit-appearance:none;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 5l4 4 4-4' fill='none' stroke='%235A5650' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
-/* bottone-mattoncino */
 .brick-btn{position:relative;border:none;border-radius:9px;background:var(--lb);color:#fff;--bc:var(--lb);
   font-family:var(--head);font-weight:700;letter-spacing:.3px;cursor:pointer;
   box-shadow:0 5px 0 var(--lbD);transition:transform .08s,box-shadow .08s,filter .12s}
@@ -92,7 +90,6 @@ select{appearance:none;-webkit-appearance:none;
 .login-doc{margin-top:16px;font-size:.82rem;color:var(--tx2)}
 .login-doc a{color:var(--lb);cursor:pointer;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 
-/* Avatar 4 Case */
 .av{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover}
 .av-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .av-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 4px 7px;
@@ -106,114 +103,135 @@ select{appearance:none;-webkit-appearance:none;
 
 /* ============ SHELL: UNA SOLA COLONNA INFO A SINISTRA ============ */
 #appContainer{display:none;height:100vh;width:100vw;grid-template-columns:302px 1fr}
-/* --- SIDEBAR (parete di mattoncini gialli) --- */
 .sidebar{background:var(--ly);
   background-image:radial-gradient(circle at 11px 11px,rgba(0,0,0,.07) 4.5px,transparent 4.7px);
   background-size:32px 32px;
-  display:flex;flex-direction:column;gap:10px;padding:16px 15px;overflow-y:auto;
+  display:flex;flex-direction:column;gap:9px;padding:15px 14px;overflow-y:auto;
   box-shadow:inset -5px 0 0 var(--lyD)}
-.sb-brand{padding:2px 2px 4px}
+.sb-brand{padding:2px 2px 3px}
 .card-lite{position:relative;background:var(--card);border:2px solid rgba(0,0,0,.10);border-radius:11px;
-  padding:11px 14px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+  padding:10px 13px;box-shadow:0 4px 0 rgba(0,0,0,.12)}
 .profile-card{display:flex;align-items:center;gap:10px}
-.pav{width:36px;height:36px;flex:0 0 auto}
-.pnick{font-family:var(--head);font-weight:700;font-size:.94rem;line-height:1.2}
-.pcls{font-family:var(--head);font-size:.7rem;color:var(--tx2);font-weight:700}
-/* navigazione verticale: le tappe del percorso */
-.nav{display:flex;flex-direction:column;gap:9px;margin:3px 0 2px}
-.step{position:relative;display:flex;align-items:center;gap:9px;border:2px solid rgba(0,0,0,.12);
-  border-radius:9px;background:var(--card);color:var(--tx2);padding:9px 12px;font-family:var(--head);
-  font-size:.83rem;font-weight:700;letter-spacing:.2px;cursor:pointer;transition:.12s;text-align:left;
+.pav{width:34px;height:34px;flex:0 0 auto}
+.pnick{font-family:var(--head);font-weight:700;font-size:.92rem;line-height:1.2}
+.pcls{font-family:var(--head);font-size:.69rem;color:var(--tx2);font-weight:700}
+.nav{display:flex;flex-direction:column;gap:8px;margin:2px 0}
+.step{position:relative;display:flex;align-items:center;gap:8px;border:2px solid rgba(0,0,0,.12);
+  border-radius:9px;background:var(--card);color:var(--tx2);padding:8px 11px;font-family:var(--head);
+  font-size:.8rem;font-weight:700;letter-spacing:.2px;cursor:pointer;transition:.12s;text-align:left;
   box-shadow:0 4px 0 rgba(0,0,0,.12);--bc:var(--bd);margin-top:4px}
-.step svg{width:16px;height:16px;flex:0 0 auto}
+.step svg{width:15px;height:15px;flex:0 0 auto}
 .step span.stt{flex:1;min-width:0}
 .step:hover{transform:translateY(-1px)}
-.step .stn{width:20px;height:20px;border-radius:4px;background:var(--panel);color:var(--tx2);flex:0 0 auto;
-  display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700}
+.step .stn{width:19px;height:19px;border-radius:4px;background:var(--panel);color:var(--tx2);flex:0 0 auto;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:700}
 .step.a{color:#fff;border-color:rgba(0,0,0,.18)}
 .step.a .stn{background:rgba(255,255,255,.28);color:#fff}
 .step.done .stn{background:var(--lg);color:#fff}
-/* un colore mattoncino per ogni tappa, quando è attiva */
 .step.a.c0{background:var(--lr);box-shadow:0 4px 0 var(--lrD);--bc:var(--lr)}
 .step.a.c1{background:var(--lo);box-shadow:0 4px 0 var(--loD);--bc:var(--lo)}
 .step.a.c2{background:var(--lg);box-shadow:0 4px 0 var(--lgD);--bc:var(--lg)}
 .step.a.c3{background:var(--lb);box-shadow:0 4px 0 var(--lbD);--bc:var(--lb)}
-.step.a.c4{background:var(--lp);box-shadow:0 4px 0 var(--lpD);--bc:var(--lp)}
-.step.a.c5{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
+.step.a.c4{background:var(--ly);color:var(--tx);box-shadow:0 4px 0 var(--lyD);--bc:var(--ly)}
+.step.a.c4 .stn{background:rgba(0,0,0,.16);color:var(--tx)}
+.step.a.c5{background:var(--lp);box-shadow:0 4px 0 var(--lpD);--bc:var(--lp)}
+.step.a.c6{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
 .score-card{display:flex;align-items:center;justify-content:space-around;text-align:center}
-.score-num{font-family:var(--head);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;color:var(--lb);line-height:1}
-.score-done{font-family:var(--head);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;color:var(--tx);line-height:1}
-.score-lbl{font-family:var(--head);font-size:.63rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--tx2);margin-top:3px}
-.sec-lbl{font-family:var(--head);font-size:.66rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--tx2);margin-bottom:7px}
+.score-num{font-family:var(--head);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--lb);line-height:1}
+.score-done{font-family:var(--head);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--tx);line-height:1}
+.score-lbl{font-family:var(--head);font-size:.61rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--tx2);margin-top:3px}
+.sec-lbl{font-family:var(--head);font-size:.65rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--tx2);margin-bottom:6px}
 .rank-line{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.rank-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-size:.98rem;font-weight:700;color:var(--tx)}
-.rank-badge svg{width:19px;height:19px;color:var(--loD)}
-.rank-next{font-family:var(--head);font-size:.68rem;font-weight:700;color:var(--tx2);text-align:right}
-.rank-bar{height:10px;border-radius:5px;background:var(--panel);border:1px solid var(--bd);margin-top:8px;overflow:hidden}
+.rank-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-size:.95rem;font-weight:700;color:var(--tx)}
+.rank-badge svg{width:18px;height:18px;color:var(--loD)}
+.rank-next{font-family:var(--head);font-size:.66rem;font-weight:700;color:var(--tx2);text-align:right}
+.rank-bar{height:9px;border-radius:5px;background:var(--panel);border:1px solid var(--bd);margin-top:7px;overflow:hidden}
 .rank-bar i{display:block;height:100%;background:var(--lo);width:0;transition:width .5s ease;
   background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.3) 0 2px,transparent 2px 14px)}
-.board-card{flex:1;min-height:120px;display:flex;flex-direction:column}
-.board-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
-/* ogni riga di classifica è un mattoncino */
+.board-card{flex:1;min-height:96px;display:flex;flex-direction:column}
+.board-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:5px}
 .board-row{display:flex;align-items:center;gap:7px;background:var(--lb);color:#fff;
-  border-radius:8px;padding:6px 9px;font-size:.82rem;box-shadow:0 4px 0 var(--lbD)}
-.board-row .pos{width:17px;text-align:center;font-family:var(--head);font-weight:700;color:rgba(255,255,255,.8);flex:0 0 auto}
-.board-row .bav{width:22px;height:22px;flex:0 0 auto}
+  border-radius:8px;padding:5px 9px;font-size:.8rem;box-shadow:0 4px 0 var(--lbD)}
+.board-row .pos{width:16px;text-align:center;font-family:var(--head);font-weight:700;color:rgba(255,255,255,.8);flex:0 0 auto}
+.board-row .bav{width:21px;height:21px;flex:0 0 auto}
 .board-row .bnick{flex:1;font-family:var(--head);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .board-row .bpts{font-family:var(--head);font-weight:700;flex:0 0 auto}
 .board-row.top{background:var(--lo);box-shadow:0 4px 0 var(--loD)}
 .board-row.me{background:var(--lg);box-shadow:0 4px 0 var(--lgD)}
-.board-empty{font-size:.8rem;color:var(--tx2);line-height:1.45;padding:4px 2px}
+.board-empty{font-size:.78rem;color:var(--tx2);line-height:1.4;padding:3px 2px}
 .board-live{display:inline-flex;align-items:center;gap:6px}
 .board-live i{width:8px;height:8px;border-radius:2px;background:var(--lg);display:inline-block;animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .sb-foot{display:flex;gap:7px}
 .chip{position:relative;flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  background:var(--card);border:2px solid rgba(0,0,0,.10);border-radius:9px;padding:7px 8px;
-  font-family:var(--head);font-size:.75rem;font-weight:700;color:var(--tx);cursor:pointer;transition:.12s;
+  background:var(--card);border:2px solid rgba(0,0,0,.10);border-radius:9px;padding:6px 8px;
+  font-family:var(--head);font-size:.73rem;font-weight:700;color:var(--tx);cursor:pointer;transition:.12s;
   box-shadow:0 4px 0 rgba(0,0,0,.12);white-space:nowrap}
 .chip:hover{color:var(--lb)}
 .chip:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.12)}
 .chip.muted{color:var(--tx2)}
-.chip svg{width:15px;height:15px}
-.seed-lbl{font-family:var(--mono);font-size:.64rem;color:rgba(0,0,0,.45);text-align:center;font-weight:700}
-/* schermi bassi (laptop 1280×800): la colonna info si compatta invece di scorrere */
-@media (max-height:850px){
-  .sidebar{gap:7px;padding:12px 13px}
-  .brand-mark{width:32px;height:32px}
-  .card-lite{padding:9px 12px}
-  .nav{gap:7px}
-  .step{padding:7px 11px;font-size:.79rem}
-  .score-num,.score-done{font-size:1.55rem}
-  .board-card{min-height:80px}
+.chip svg{width:14px;height:14px}
+.seed-lbl{font-family:var(--mono);font-size:.62rem;color:rgba(0,0,0,.45);text-align:center;font-weight:700}
+/* schermi bassi: la colonna info si compatta invece di scorrere */
+@media (max-height:900px){
+  .sidebar{gap:6px;padding:11px 12px}
+  .brand-mark{width:30px;height:30px}
+  .card-lite{padding:8px 11px}
+  .nav{gap:6px}
+  .step{padding:6px 10px;font-size:.76rem;margin-top:3px}
+  .score-num,.score-done{font-size:1.45rem}
+  .board-card{min-height:70px}
 }
 
 /* --- FRAME CENTRALE: solo attività --- */
-.stage-zone{position:relative;display:flex;flex-direction:column;padding:16px 30px 18px;min-width:0;overflow:hidden}
+.stage-zone{position:relative;display:flex;flex-direction:column;padding:14px 28px 16px;min-width:0;overflow:hidden}
 .sec{display:none;flex:1;min-height:0;flex-direction:column}
 .sec.on{display:flex}
-.sec-head{flex:none;text-align:center;margin:2px 0 4px}
-.sec-title{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
-.sec-sub{font-size:.95rem;color:var(--tx2);margin-top:2px}
-.sec-body{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px}
-
-/* Card mattoncino generica */
+.sec-head{flex:none;text-align:center;margin:0 0 4px}
+.sec-title{font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
+.sec-sub{font-size:.93rem;color:var(--tx2);margin-top:1px}
+.sec-body{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px}
 .brick-card{position:relative;background:var(--card);border:2px solid var(--bd);border-radius:14px;
   box-shadow:0 6px 0 var(--bd)}
 
-/* Box "L'idea diventa azione" — mattoncino giallo */
-.azione{position:relative;display:flex;align-items:flex-start;gap:11px;background:var(--yellL);
-  border:2px solid var(--ly);border-radius:12px;box-shadow:0 5px 0 var(--lyD);
-  padding:10px 16px;max-width:900px;font-size:.9rem;line-height:1.4}
-.azione svg{width:19px;height:19px;color:var(--loD);flex:0 0 auto;margin-top:2px}
-.azione .azl{font-family:var(--head);font-weight:700;color:var(--loD);letter-spacing:.4px;margin-right:6px}
+/* ---- BARRA CONSEGNA (comune a Scala, Converti, Famiglie) ---- */
+.task{width:100%;max-width:1000px;display:flex;align-items:center;gap:14px;padding:10px 18px;flex-wrap:wrap;
+  background:var(--yellL);border:2px solid var(--ly);border-radius:12px;box-shadow:0 5px 0 var(--lyD)}
+.task-n{flex:0 0 auto;font-family:var(--head);font-size:.68rem;font-weight:700;letter-spacing:.7px;
+  text-transform:uppercase;color:var(--loD);background:var(--card);border:2px solid var(--lyD);
+  border-radius:8px;padding:4px 10px;text-align:center;line-height:1.25}
+.task-txt{flex:1 1 260px;min-width:0;font-size:1rem;line-height:1.35}
+.task-txt b{font-family:var(--head)}
+.task-dots{flex:0 0 auto;display:flex;gap:4px}
+.task-dots i{width:13px;height:9px;border-radius:2px;background:rgba(0,0,0,.16);display:block}
+.task-dots i.on{background:var(--lg)}
+/* checklist: dice allo studente che cosa manca ancora */
+.task-check{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tk{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--bd);background:var(--card);
+  border-radius:8px;padding:5px 11px;font-family:var(--head);font-size:.78rem;font-weight:700;color:var(--tx2)}
+.tk svg{width:14px;height:14px}
+.tk.ok{border-color:var(--lg);color:var(--lgD);background:var(--greenL)}
+.ask-row{display:flex;align-items:center;gap:9px;justify-content:center;flex-wrap:wrap}
+.ask-row input[type=number]{width:130px;padding:10px 12px;text-align:center;font-family:var(--head);
+  font-weight:700;font-size:1.05rem}
+.ask-lbl{font-family:var(--head);font-weight:700;font-size:1rem}
+.fb{display:none;align-items:flex-start;gap:9px;border-radius:11px;padding:10px 14px;font-size:.9rem;
+  line-height:1.4;max-width:1000px}
+.fb.show{display:flex}
+.fb svg{width:19px;height:19px;flex:0 0 auto;margin-top:1px}
+.fb.good{background:var(--greenL);border:2px solid var(--lg)} .fb.good svg{color:var(--lg)}
+.fb.bad{background:var(--warnL);border:2px solid var(--warn)} .fb.bad svg{color:var(--warn)}
+.fb .fbl{font-family:var(--head);font-weight:700;margin-right:6px}
+.fb.good .fbl{color:var(--lgD)} .fb.bad .fbl{color:var(--warn)}
+.btn-ok{padding:10px 22px;font-size:.9rem;background:var(--lg);--bc:var(--lg);box-shadow:0 5px 0 var(--lgD)}
+.btn-next{padding:10px 22px;font-size:.9rem;background:var(--ly);color:var(--tx);--bc:var(--ly);box-shadow:0 5px 0 var(--lyD)}
 
 /* ============ VIDEO STIMOLO ============ */
-.vid-shell{position:relative;width:100%;max-width:830px;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+.vid-shell{position:relative;width:100%;max-width:820px;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
   background:#15161a;box-shadow:var(--shadow2),0 8px 0 var(--bd2)}
 .vid-shell iframe{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border:0}
 .vid-cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3}
-.vid-playbtn{width:78px;height:78px;border-radius:14px;background:var(--lr);display:flex;
+.vid-playbtn{width:76px;height:76px;border-radius:14px;background:var(--lr);display:flex;
   align-items:center;justify-content:center;box-shadow:0 6px 0 var(--lrD);transition:transform .15s;padding:24px;color:#fff}
 .vid-cover:hover .vid-playbtn{transform:translateY(-3px)}
 .vid-bar{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;align-items:center;gap:11px;
@@ -223,112 +241,132 @@ select{appearance:none;-webkit-appearance:none;
 .vbtn:hover{background:rgba(255,255,255,.32)}
 .vtrack{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.22);cursor:pointer;overflow:hidden}
 .vtrack i{display:block;height:100%;width:0;background:var(--ly);border-radius:4px}
-.vtime{font-family:var(--mono);font-size:.74rem;color:rgba(255,255,255,.85);flex:0 0 auto;min-width:86px;text-align:right}
-.vid-caption{max-width:830px;text-align:center;font-size:.93rem;color:var(--tx2)}
+.vtime{font-family:var(--mono);font-size:.73rem;color:rgba(255,255,255,.85);flex:0 0 auto;min-width:86px;text-align:right}
+.vid-caption{max-width:820px;text-align:center;font-size:.92rem;color:var(--tx2)}
 .vid-caption b{color:var(--tx)}
 
 /* ============ SCALA + SIMULATORE ============ */
-.scala-row{display:flex;align-items:flex-end;gap:13px;justify-content:center}
-.unit-card{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;border:none;background:none}
-.unit-block{position:relative;border-radius:9px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--head);font-weight:700;color:#fff;transition:transform .15s}
-.unit-card:hover .unit-block{transform:translateY(-4px)}
-.unit-card.sel .unit-block{outline:3px solid var(--tx);outline-offset:4px}
-.unit-name{font-family:var(--head);font-size:.8rem;font-weight:700;color:var(--tx2)}
-.unit-card.sel .unit-name{color:var(--tx)}
-.x1000{align-self:center;margin-bottom:36px;font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--tx2);
-  background:var(--card);border:2px solid var(--bd);border-radius:8px;padding:2px 7px;flex:0 0 auto;box-shadow:0 3px 0 var(--bd)}
-/* pannello simulatore */
-.sim{width:100%;max-width:940px;padding:14px 20px 16px;display:flex;flex-direction:column;gap:11px}
-.sim-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
-.sim-lbl{font-family:var(--head);font-size:.8rem;font-weight:700;color:var(--tx2);letter-spacing:.3px}
-.sim-top input[type=number]{width:110px;padding:9px 11px;text-align:center;font-family:var(--head);font-weight:700}
-.sim-top select{width:auto;padding:9px 34px 9px 12px;font-family:var(--head);font-weight:700}
-.zoom-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center}
+.sim{width:100%;max-width:1000px;padding:12px 18px 14px;display:flex;flex-direction:column;gap:9px}
+.sim-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.sim-lbl{font-family:var(--head);font-size:.78rem;font-weight:700;color:var(--tx2);letter-spacing:.3px}
+.sim-top input[type=number]{width:100px;padding:8px 10px;text-align:center;font-family:var(--head);font-weight:700}
+.sim-top select{width:auto;padding:8px 32px 8px 11px;font-family:var(--head);font-weight:700}
+.zoom-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .zoom-btn{position:relative;border:2px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx2);
-  font-family:var(--head);font-size:.78rem;font-weight:700;padding:6px 12px;cursor:pointer;
+  font-family:var(--head);font-size:.77rem;font-weight:700;padding:6px 11px;cursor:pointer;
   box-shadow:0 3px 0 var(--bd);transition:.12s}
 .zoom-btn:hover{color:var(--lb);border-color:var(--lb)}
 .zoom-btn.a{background:var(--lb);border-color:var(--lb);color:#fff;box-shadow:0 3px 0 var(--lbD)}
-/* area di costruzione */
-.sim-yard{flex:1;min-height:190px;background:var(--panel);border:2px solid var(--bd);border-radius:11px;
-  padding:12px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px;overflow:hidden;
+.sim-yard{flex:1;min-height:150px;background:var(--panel);border:2px solid var(--bd);border-radius:11px;
+  padding:11px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px;overflow:hidden;
   background-image:radial-gradient(circle at 9px 9px,rgba(120,105,70,.14) 3.6px,transparent 3.8px);
   background-size:28px 28px}
-/* pezzi: rettangoli visti dall'alto, con le borchie come puntini */
 .pc{position:relative;border-radius:3px;flex:0 0 auto;
   background-image:radial-gradient(circle at 5px 5px,rgba(255,255,255,.55) 2.4px,transparent 2.6px);
   background-size:10px 10px;background-position:1px 1px;
   box-shadow:0 2px 0 rgba(0,0,0,.28);display:flex;align-items:flex-end;justify-content:center}
-.pc b{font-family:var(--head);font-size:.52rem;font-weight:700;color:rgba(255,255,255,.95);
+.pc b{font-family:var(--head);font-size:.5rem;font-weight:700;color:rgba(255,255,255,.95);
   background:rgba(0,0,0,.34);border-radius:3px;padding:0 3px;margin-bottom:2px;letter-spacing:.3px}
 .pc.p1{width:20px;height:12px}
-.pc.p100{width:32px;height:24px}
-.pc.p10k{width:46px;height:34px}
-.pc.p1m{width:62px;height:44px}
+.pc.p100{width:30px;height:22px}
+.pc.p10k{width:44px;height:32px}
+.pc.p1m{width:58px;height:42px}
 .pc.ghost{opacity:.35;border:2px dashed rgba(0,0,0,.35);background-image:none}
-.sim-read{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
-  font-size:.92rem;line-height:1.4;text-align:center}
+.sim-read{display:flex;align-items:center;gap:13px;flex-wrap:wrap;justify-content:center;
+  font-size:.9rem;line-height:1.35;text-align:center}
 .sim-eq{font-family:var(--mono);font-weight:700;color:var(--tx);background:var(--panel);
-  border:2px solid var(--bd);border-radius:8px;padding:3px 10px;font-size:.86rem}
-.sim-note{font-size:.85rem;color:var(--tx2)}
-.sim-legend{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-family:var(--head);
-  font-size:.7rem;font-weight:700;color:var(--tx2);align-items:center}
-.sim-legend i{display:inline-block;border-radius:2px;margin-right:5px;vertical-align:-1px;
-  background-image:radial-gradient(circle at 4px 4px,rgba(255,255,255,.55) 2px,transparent 2.2px);background-size:8px 8px}
+  border:2px solid var(--bd);border-radius:8px;padding:3px 10px;font-size:.84rem}
+.sim-note{font-size:.84rem;color:var(--tx2)}
+
+/* ============ SCALA VISIVA DEI SALTI (tappa Converti) ============ */
+.ladder{display:flex;align-items:flex-end;justify-content:center;gap:5px;flex-wrap:wrap;
+  padding:12px 14px 10px;width:100%;max-width:1000px}
+.lad-u{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;transition:.15s}
+.lad-brick{position:relative;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--head);font-weight:700;font-size:.82rem;width:58px;height:40px;
+  background:var(--card);border:2px solid var(--bd);color:var(--tx3);box-shadow:0 4px 0 var(--bd);--bc:var(--bd);
+  transition:.15s}
+.lad-u.on .lad-brick{transform:translateY(-3px)}
+.lad-tag{font-family:var(--head);font-size:.6rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--tx3);min-height:1em}
+.lad-u.from .lad-tag{color:var(--lbD)} .lad-u.to .lad-tag{color:var(--lgD)}
+.lad-op{display:flex;flex-direction:column;align-items:center;gap:2px;margin-bottom:22px;
+  font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--bd);min-width:56px}
+.lad-op.on{color:var(--loD)}
+.lad-arrow{font-size:.95rem;line-height:1}
+.lad-op .lad-val{background:var(--card);border:2px solid var(--bd);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.lad-op.on .lad-val{border-color:var(--loD);background:var(--yellL)}
 
 /* ============ CONVERTITORE ============ */
-.cv-wrap{width:100%;max-width:940px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
-.cv-card{padding:16px 20px;display:flex;flex-direction:column;gap:10px}
-.cv-card h3{font-size:1.02rem;display:flex;align-items:center;gap:8px}
-.cv-card h3 svg{width:18px;height:18px;color:var(--lb)}
-.cv-card h3 .cvh-note{margin-left:auto;font-family:var(--head);font-size:.7rem;font-weight:700;
+.cv-wrap{width:100%;max-width:1000px;display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:stretch}
+.cv-card{padding:14px 18px;display:flex;flex-direction:column;gap:9px}
+.cv-card h3{font-size:.98rem;display:flex;align-items:center;gap:8px}
+.cv-card h3 svg{width:17px;height:17px;color:var(--lb)}
+.cv-card h3 .cvh-note{margin-left:auto;font-family:var(--head);font-size:.68rem;font-weight:700;
   color:var(--tx2);letter-spacing:.3px;text-transform:uppercase}
-.cv-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.cv-row input[type=number]{width:120px;padding:10px 12px;text-align:center;font-family:var(--head);font-weight:700}
-.cv-row select{width:auto;padding:10px 34px 10px 12px;font-family:var(--head);font-weight:700}
-.cv-eq{font-family:var(--head);font-weight:700;font-size:1.1rem;color:var(--tx2)}
-.cv-out{font-family:var(--head);font-weight:700;font-size:1.5rem;color:var(--lb);letter-spacing:-.01em;
-  min-height:1.5em;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
-/* catena dei salti ×1000 / ÷1000 */
-.cv-path{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:9px 11px;border-radius:10px;
-  background:var(--panel);border:2px solid var(--bd);font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--tx2)}
-.cv-path .cvu{background:var(--card);border:2px solid var(--bd);border-radius:6px;padding:1px 7px;color:var(--tx)}
-.cv-path .cvop{color:var(--loD)}
-.cv-ex-q{font-family:var(--head);font-size:1.18rem;font-weight:700;line-height:1.35;text-align:center;
-  min-height:2.4em;display:flex;align-items:center;justify-content:center}
-.cv-ex-row{display:flex;align-items:center;gap:9px;justify-content:center;flex-wrap:wrap}
-.cv-ex-row input[type=number]{width:150px;padding:11px 12px;text-align:center;font-family:var(--head);
-  font-weight:700;font-size:1.1rem}
-.cv-unit{font-family:var(--head);font-weight:700;font-size:1.05rem;color:var(--tx)}
-.cv-btn{padding:11px 22px;font-size:.92rem;background:var(--lg);--bc:var(--lg);box-shadow:0 5px 0 var(--lgD)}
-.cv-next{padding:11px 22px;font-size:.92rem;background:var(--ly);color:var(--tx);--bc:var(--ly);box-shadow:0 5px 0 var(--lyD)}
-.cv-fb{display:none;align-items:flex-start;gap:9px;border-radius:11px;padding:11px 14px;font-size:.9rem;line-height:1.4}
-.cv-fb.show{display:flex}
-.cv-fb svg{width:19px;height:19px;flex:0 0 auto;margin-top:1px}
-.cv-fb.good{background:var(--greenL);border:2px solid var(--lg)} .cv-fb.good svg{color:var(--lg)}
-.cv-fb.bad{background:var(--warnL);border:2px solid var(--warn)} .cv-fb.bad svg{color:var(--warn)}
-.cv-fb .cvfl{font-family:var(--head);font-weight:700;margin-right:6px}
-.cv-fb.good .cvfl{color:var(--lgD)} .cv-fb.bad .cvfl{color:var(--warn)}
-.cv-prog{display:flex;align-items:center;gap:8px;font-family:var(--head);font-size:.78rem;font-weight:700;color:var(--tx2)}
-.cv-dots{display:flex;gap:4px}
-.cv-dots i{width:13px;height:9px;border-radius:2px;background:var(--bd);display:block}
-.cv-dots i.on{background:var(--lg)}
+.cv-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cv-row input[type=number]{width:105px;padding:9px 11px;text-align:center;font-family:var(--head);font-weight:700}
+.cv-row select{width:auto;padding:9px 32px 9px 11px;font-family:var(--head);font-weight:700;font-size:.95rem}
+.cv-eq{font-family:var(--head);font-weight:700;font-size:1.05rem;color:var(--tx2)}
+.cv-out{font-family:var(--head);font-weight:700;font-size:1.4rem;color:var(--lb);letter-spacing:-.01em;
+  min-height:1.4em;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.cv-ex-q{font-family:var(--head);font-size:1.12rem;font-weight:700;line-height:1.3;text-align:center;
+  min-height:2.2em;display:flex;align-items:center;justify-content:center}
+
+/* ============ FAMIGLIE DI FILE ============ */
+.fx-wrap{width:100%;max-width:1080px;display:flex;flex-direction:column;gap:11px}
+/* scaffale dei file da smistare */
+.fx-shelf{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:13px;border-radius:12px;
+  background:var(--panel);border:2px solid var(--bd);min-height:76px;align-content:center;
+  background-image:radial-gradient(circle at 9px 9px,rgba(120,105,70,.14) 3.6px,transparent 3.8px);
+  background-size:28px 28px}
+/* tassello file: nome + estensione a incastro */
+.fz{display:inline-flex;align-items:stretch;cursor:pointer;user-select:none;transition:transform .12s;
+  border:none;background:none;padding:0;position:relative}
+.fz-name{padding:8px 4px 8px 12px;border-radius:8px 0 0 8px;font-family:var(--head);font-weight:700;
+  font-size:.86rem;background:#E8E3D6;color:var(--tx);display:flex;align-items:center;
+  box-shadow:0 3px 0 rgba(0,0,0,.14);position:relative}
+.fz-name::after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);
+  width:12px;height:12px;background:#E8E3D6;border-radius:50%;z-index:2}
+.fz-ext{padding:8px 12px 8px 12px;border-radius:0 8px 8px 0;font-family:var(--mono);font-weight:700;
+  font-size:.84rem;color:#fff;display:flex;align-items:center;margin-left:5px;
+  box-shadow:0 3px 0 rgba(0,0,0,.22);background:var(--tx3)}
+.fz:hover{transform:translateY(-2px)}
+.fz.sel{transform:translateY(-3px)}
+.fz.sel .fz-name{background:var(--ly);box-shadow:0 3px 0 var(--lyD)}
+.fz.sel .fz-name::after{background:var(--ly)}
+.fz.shake{animation:shake .32s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+/* le cinque basi-famiglia */
+.fx-bins{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.fx-bin{position:relative;border-radius:12px;padding:9px 10px 10px;min-height:118px;cursor:pointer;
+  border:2px dashed var(--bd);background:var(--card);transition:.14s;display:flex;flex-direction:column;gap:7px;
+  box-shadow:0 5px 0 var(--bd)}
+.fx-bin:hover,.fx-bin.armed{border-style:solid;transform:translateY(-2px)}
+.fx-bin-t{display:flex;align-items:center;gap:7px;font-family:var(--head);font-size:.82rem;font-weight:700}
+.fx-bin-t svg{width:17px;height:17px}
+.fx-bin-i{display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start}
+/* tasselli già sistemati: piccoli */
+.fz.mini{pointer-events:none;transform:none}
+.fz.mini .fz-name{padding:3px 3px 3px 7px;font-size:.66rem;border-radius:5px 0 0 5px;box-shadow:none}
+.fz.mini .fz-name::after{width:8px;height:8px;right:-4px}
+.fz.mini .fz-ext{padding:3px 7px;font-size:.64rem;border-radius:0 5px 5px 0;margin-left:3px;box-shadow:none}
+.fx-hint{text-align:center;font-size:.88rem;color:var(--tx2)}
 
 /* ============ SFIDA ============ */
-.q-card{width:100%;max-width:880px;padding:20px 30px 22px;display:flex;flex-direction:column;gap:14px}
-.q-top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:30px}
-.q-cat{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-size:.75rem;font-weight:700;
-  letter-spacing:.7px;text-transform:uppercase;color:#fff;background:var(--lb);border-radius:8px;padding:6px 13px;
+.q-card{width:100%;max-width:860px;padding:18px 28px 20px;display:flex;flex-direction:column;gap:13px}
+.q-top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:28px}
+.q-cat{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-size:.73rem;font-weight:700;
+  letter-spacing:.7px;text-transform:uppercase;color:#fff;background:var(--lb);border-radius:8px;padding:5px 12px;
   box-shadow:0 3px 0 var(--lbD)}
-.q-cat svg{width:15px;height:15px}
-.q-streak{display:inline-flex;align-items:center;gap:6px;font-family:var(--head);font-size:.82rem;font-weight:700;color:var(--loD)}
-.q-streak svg{width:16px;height:16px}
-.q-text{font-family:var(--head);font-size:1.35rem;font-weight:600;line-height:1.4;text-align:center;min-height:2.5em;
+.q-cat svg{width:14px;height:14px}
+.q-streak{display:inline-flex;align-items:center;gap:6px;font-family:var(--head);font-size:.8rem;font-weight:700;color:var(--loD)}
+.q-streak svg{width:15px;height:15px}
+.q-text{font-family:var(--head);font-size:1.3rem;font-weight:600;line-height:1.35;text-align:center;min-height:2.4em;
   display:flex;align-items:center;justify-content:center}
-.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.q-opt{position:relative;padding:14px 18px;border-radius:10px;border:2px solid var(--bd);background:var(--card);
-  font-family:var(--head);font-size:1.02rem;font-weight:700;color:var(--tx);cursor:pointer;transition:.12s;
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q-opt{position:relative;padding:13px 16px;border-radius:10px;border:2px solid var(--bd);background:var(--card);
+  font-family:var(--head);font-size:1rem;font-weight:700;color:var(--tx);cursor:pointer;transition:.12s;
   text-align:center;box-shadow:0 5px 0 var(--bd);--bc:var(--bd)}
 .q-opt:hover:not(:disabled){border-color:var(--lb);color:var(--lb);box-shadow:0 5px 0 var(--lbD);
   transform:translateY(-1px);--bc:var(--lb)}
@@ -336,116 +374,107 @@ select{appearance:none;-webkit-appearance:none;
 .q-opt:disabled{cursor:default;opacity:.5}
 .q-opt.ok{border-color:var(--lg);background:var(--greenL);color:var(--lgD);box-shadow:0 5px 0 var(--lg);opacity:1;--bc:var(--lg)}
 .q-opt.ko{border-color:var(--warn);background:var(--warnL);color:var(--warn);box-shadow:0 5px 0 var(--warn);opacity:1;--bc:var(--warn)}
-.q-feed{display:none;align-items:flex-start;gap:10px;border-radius:11px;padding:11px 15px;font-size:.92rem;line-height:1.42}
-.q-feed.show{display:flex}
-.q-feed svg{width:20px;height:20px;flex:0 0 auto;margin-top:1px}
-.q-feed.good{background:var(--greenL);border:2px solid var(--lg);color:var(--tx)}
-.q-feed.good svg{color:var(--lg)}
-.q-feed.bad{background:var(--warnL);border:2px solid var(--warn);color:var(--tx)}
-.q-feed.bad svg{color:var(--warn)}
-.q-feed .qfl{font-family:var(--head);font-weight:700;margin-right:6px}
-.q-feed.good .qfl{color:var(--lgD)} .q-feed.bad .qfl{color:var(--warn)}
-.q-next{align-self:center;display:none;padding:12px 30px;font-size:.98rem;background:var(--ly);color:var(--tx);
+.q-next{align-self:center;display:none;padding:11px 28px;font-size:.95rem;background:var(--ly);color:var(--tx);
   box-shadow:0 5px 0 var(--lyD);--bc:var(--ly)}
 .q-next.show{display:inline-flex;align-items:center;gap:9px}
-.q-next svg{width:16px;height:16px}
+.q-next svg{width:15px;height:15px}
 
 /* ============ SPAZIO ============ */
-.sp-wrap{width:100%;max-width:1180px;display:flex;flex-direction:column;gap:10px}
-.sp-goal{padding:11px 18px;display:flex;align-items:center;gap:18px}
-.sp-goal .spg-txt{flex:1;min-width:0;font-size:.9rem;line-height:1.38}
+.sp-wrap{width:100%;max-width:1180px;display:flex;flex-direction:column;gap:9px}
+.sp-goal{padding:10px 16px;display:flex;align-items:center;gap:16px}
+.sp-goal .spg-txt{flex:1;min-width:0;font-size:.88rem;line-height:1.35}
 .sp-goal .spg-txt b{font-family:var(--head)}
 .sp-stat{flex:0 0 auto;text-align:center;padding:0 6px}
-.sp-stat .spn{font-family:var(--head);font-size:1.4rem;font-weight:700;color:var(--lb);line-height:1.1}
+.sp-stat .spn{font-family:var(--head);font-size:1.35rem;font-weight:700;color:var(--lb);line-height:1.1}
 .sp-stat .spn.gold{color:var(--loD)}
-.sp-stat .spl{font-family:var(--head);font-size:.62rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--tx2)}
-.sp-barrow{display:flex;align-items:center;gap:16px}
-.sp-bar{flex:1;height:22px;border-radius:7px;background:var(--greenL);border:2px solid var(--bd);overflow:hidden;display:flex}
+.sp-stat .spl{font-family:var(--head);font-size:.6rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--tx2)}
+.sp-barrow{display:flex;align-items:center;gap:14px}
+.sp-bar{flex:1;height:20px;border-radius:7px;background:var(--greenL);border:2px solid var(--bd);overflow:hidden;display:flex}
 .sp-bar .seg-sys{background:#9A9384;height:100%;transition:width .4s}
 .sp-bar .seg-dati{background:var(--lb);height:100%;transition:width .4s;
   background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 2px,transparent 2px 18px)}
-.sp-legend{display:flex;gap:14px;flex:0 0 auto;font-family:var(--head);font-size:.72rem;font-weight:700;color:var(--tx2)}
-.sp-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.sp-item{background:var(--card);border:2px solid var(--bd);border-radius:11px;padding:8px 12px;
+.sp-legend{display:flex;gap:12px;flex:0 0 auto;font-family:var(--head);font-size:.7rem;font-weight:700;color:var(--tx2)}
+.sp-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sp-item{background:var(--card);border:2px solid var(--bd);border-radius:11px;padding:7px 11px;
   display:flex;flex-direction:column;gap:5px;transition:opacity .3s;box-shadow:0 4px 0 var(--bd)}
 .sp-item.done{opacity:.45}
 .spi-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.spi-name{font-family:var(--head);font-size:.79rem;font-weight:700;line-height:1.2;flex:1;min-width:0}
-.spi-gb{font-family:var(--mono);font-size:.79rem;font-weight:700;color:var(--lb);flex:0 0 auto}
-.spi-tag{align-self:flex-start;font-family:var(--head);font-size:.59rem;font-weight:700;letter-spacing:.5px;
-  text-transform:uppercase;border-radius:6px;padding:2px 8px;color:#fff}
+.spi-name{font-family:var(--head);font-size:.77rem;font-weight:700;line-height:1.2;flex:1;min-width:0}
+.spi-gb{font-family:var(--mono);font-size:.77rem;font-weight:700;color:var(--lb);flex:0 0 auto}
+.spi-tag{align-self:flex-start;font-family:var(--head);font-size:.57rem;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;border-radius:6px;padding:2px 7px;color:#fff}
 .spi-tag.unico{background:var(--lo)}
 .spi-tag.riscaricabile{background:var(--lg)}
 .spi-tag.duplicato{background:var(--lb)}
-.spi-btns{display:flex;gap:7px}
-.spi-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:6px 4px;
+.spi-btns{display:flex;gap:6px}
+.spi-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:5px 4px;
   border-radius:8px;border:2px solid var(--bd);background:var(--bg2);font-family:var(--head);
-  font-size:.73rem;font-weight:700;color:var(--tx2);cursor:pointer;transition:.12s}
-.spi-btn svg{width:13px;height:13px}
+  font-size:.71rem;font-weight:700;color:var(--tx2);cursor:pointer;transition:.12s}
+.spi-btn svg{width:12px;height:12px}
 .spi-btn:hover:not(:disabled){border-color:var(--lb);color:var(--lb);background:var(--blueL)}
 .spi-btn:disabled{opacity:.4;cursor:default}
-.spi-done-lbl{font-family:var(--head);font-size:.73rem;font-weight:700;color:var(--tx2);
-  display:inline-flex;align-items:center;gap:6px;padding:6px 0}
-.spi-done-lbl svg{width:14px;height:14px;color:var(--lg)}
-.sp-install{align-self:center;display:inline-flex;align-items:center;gap:9px;padding:12px 32px;
-  font-size:1rem;background:var(--ly);color:var(--tx);box-shadow:0 5px 0 var(--lyD);--bc:var(--ly)}
-.sp-install svg{width:18px;height:18px}
+.spi-done-lbl{font-family:var(--head);font-size:.71rem;font-weight:700;color:var(--tx2);
+  display:inline-flex;align-items:center;gap:6px;padding:5px 0}
+.spi-done-lbl svg{width:13px;height:13px;color:var(--lg)}
+.sp-install{align-self:center;display:inline-flex;align-items:center;gap:9px;padding:11px 30px;
+  font-size:.98rem;background:var(--ly);color:var(--tx);box-shadow:0 5px 0 var(--lyD);--bc:var(--ly)}
+.sp-install svg{width:17px;height:17px}
 .sp-result{position:absolute;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
   background:rgba(40,34,20,.5)}
 .sp-result.show{display:flex}
-.spr-card{position:relative;width:660px;max-width:92%;background:var(--card);border:2px solid var(--bd);
+.spr-card{position:relative;width:650px;max-width:92%;background:var(--card);border:2px solid var(--bd);
   border-radius:16px;box-shadow:var(--shadow2),0 8px 0 var(--bd2);
-  padding:24px 30px;text-align:center;display:flex;flex-direction:column;gap:10px;max-height:88%;overflow-y:auto}
-.spr-card h3{font-size:1.32rem}
-.spr-pts{font-family:var(--head);font-size:2.1rem;font-weight:700;color:var(--loD);line-height:1.1}
-.spr-list{text-align:left;display:flex;flex-direction:column;gap:7px;max-height:200px;overflow-y:auto}
-.spr-row{display:flex;align-items:flex-start;gap:9px;font-size:.86rem;line-height:1.4;
-  background:var(--bg2);border:2px solid var(--bd);border-radius:9px;padding:8px 12px}
-.spr-row svg{width:16px;height:16px;flex:0 0 auto;margin-top:2px}
+  padding:22px 28px;text-align:center;display:flex;flex-direction:column;gap:9px;max-height:88%;overflow-y:auto}
+.spr-card h3{font-size:1.28rem}
+.spr-pts{font-family:var(--head);font-size:2rem;font-weight:700;color:var(--loD);line-height:1.1}
+.spr-list{text-align:left;display:flex;flex-direction:column;gap:6px;max-height:190px;overflow-y:auto}
+.spr-row{display:flex;align-items:flex-start;gap:9px;font-size:.85rem;line-height:1.38;
+  background:var(--bg2);border:2px solid var(--bd);border-radius:9px;padding:7px 11px}
+.spr-row svg{width:15px;height:15px;flex:0 0 auto;margin-top:2px}
 .spr-row.plus{border-color:var(--lg)} .spr-row.plus svg{color:var(--lg)}
 .spr-row.minus{border-color:var(--warn)} .spr-row.minus svg{color:var(--warn)}
 .spr-btns{display:flex;gap:12px;justify-content:center}
-.spr-btn{padding:12px 24px;font-size:.93rem;background:var(--card);color:var(--tx);
+.spr-btn{padding:11px 22px;font-size:.9rem;background:var(--card);color:var(--tx);
   border:2px solid var(--bd);box-shadow:0 5px 0 var(--bd);--bc:var(--bd)}
 .spr-btn.primary{background:var(--lb);color:#fff;border-color:transparent;box-shadow:0 5px 0 var(--lbD);--bc:var(--lb)}
 
 /* ============ RIFLETTI ============ */
-.rif-wrap{width:100%;max-width:1000px;display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:start}
-.rif-card{padding:17px 21px}
-.rif-card h3{font-size:1.02rem;margin-bottom:9px;display:flex;align-items:center;gap:8px}
-.rif-card h3 svg{width:19px;height:19px;color:var(--lp)}
-.rif-q{margin-bottom:9px}
-.rif-q label{display:block;font-family:var(--head);font-size:.83rem;font-weight:700;color:var(--tx2);margin-bottom:4px}
-.rif-q textarea{resize:none;height:54px;font-size:16px;padding:9px 12px;line-height:1.4}
-.man-opt{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border:2px solid var(--bd);
-  border-radius:10px;margin-bottom:7px;cursor:pointer;transition:.12s;font-size:.88rem;line-height:1.38}
+.rif-wrap{width:100%;max-width:1000px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.rif-card{padding:16px 20px}
+.rif-card h3{font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.rif-card h3 svg{width:18px;height:18px;color:var(--lp)}
+.rif-q{margin-bottom:8px}
+.rif-q label{display:block;font-family:var(--head);font-size:.81rem;font-weight:700;color:var(--tx2);margin-bottom:3px}
+.rif-q textarea{resize:none;height:50px;font-size:16px;padding:8px 11px;line-height:1.35}
+.man-opt{display:flex;align-items:flex-start;gap:10px;padding:7px 11px;border:2px solid var(--bd);
+  border-radius:10px;margin-bottom:6px;cursor:pointer;transition:.12s;font-size:.86rem;line-height:1.35}
 .man-opt:hover{border-color:var(--lp)}
 .man-opt.sel{border-color:var(--ly);background:var(--yellL);box-shadow:0 4px 0 var(--lyD)}
-.man-opt .mbox{flex:0 0 auto;width:20px;height:20px;border-radius:5px;border:2px solid var(--bd);margin-top:1px;
+.man-opt .mbox{flex:0 0 auto;width:19px;height:19px;border-radius:5px;border:2px solid var(--bd);margin-top:1px;
   display:flex;align-items:center;justify-content:center;transition:.12s;padding:3px}
 .man-opt.sel .mbox{border-color:var(--loD);background:var(--loD)}
-.man-opt .mbox svg{color:#fff;display:none;width:12px;height:12px}
+.man-opt .mbox svg{color:#fff;display:none;width:11px;height:11px}
 .man-opt.sel .mbox svg{display:block}
-.man-count{font-family:var(--head);font-size:.79rem;font-weight:700;color:var(--tx2);margin:2px 0 8px}
-.rif-close{width:100%;margin-top:5px;padding:12px;font-size:.98rem;background:var(--ly);color:var(--tx);
+.man-count{font-family:var(--head);font-size:.77rem;font-weight:700;color:var(--tx2);margin:2px 0 7px}
+.rif-close{width:100%;margin-top:4px;padding:11px;font-size:.95rem;background:var(--ly);color:var(--tx);
   box-shadow:0 5px 0 var(--lyD);--bc:var(--ly)}
 .rif-close:disabled{--bc:var(--panel)}
-.fine-card{grid-column:1/-1;padding:20px 26px;text-align:center;display:none}
+.fine-card{grid-column:1/-1;padding:18px 24px;text-align:center;display:none}
 .fine-card.show{display:block}
-.fine-nums{display:flex;justify-content:center;gap:44px;margin:10px 0 6px}
+.fine-nums{display:flex;justify-content:center;gap:40px;margin:9px 0 5px}
 .fine-nums .fn{font-family:var(--head)}
-.fine-nums .fnv{font-size:1.9rem;font-weight:700;color:var(--lb)}
+.fine-nums .fnv{font-size:1.8rem;font-weight:700;color:var(--lb)}
 .fine-nums .fnv.gold{color:var(--loD)}
-.fine-nums .fnl{font-size:.68rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--tx2)}
+.fine-nums .fnl{font-size:.66rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--tx2)}
 
 /* Toast */
-.toast{position:absolute;top:16px;left:50%;transform:translateX(-50%) translateY(-8px);z-index:80;
-  background:var(--tx);color:#fff;border-radius:11px;padding:11px 20px;display:flex;align-items:center;gap:10px;
-  font-family:var(--head);font-weight:700;font-size:.92rem;box-shadow:var(--shadow2);opacity:0;pointer-events:none;
+.toast{position:absolute;top:14px;left:50%;transform:translateX(-50%) translateY(-8px);z-index:80;
+  background:var(--tx);color:#fff;border-radius:11px;padding:10px 19px;display:flex;align-items:center;gap:10px;
+  font-family:var(--head);font-weight:700;font-size:.9rem;box-shadow:var(--shadow2);opacity:0;pointer-events:none;
   transition:opacity .3s,transform .3s}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast svg{width:20px;height:20px;color:var(--ly)}
+.toast svg{width:19px;height:19px;color:var(--ly)}
 
 /* ============ MODAL DOCENTE ============ */
 .doc-modal{position:fixed;inset:0;z-index:9500;display:none;align-items:center;justify-content:center;
@@ -503,7 +532,7 @@ select{appearance:none;-webkit-appearance:none;
 <!-- ==================== APP ==================== -->
 <div id="appContainer">
 
-  <!-- ---------- SIDEBAR UNICA (info + percorso) ---------- -->
+  <!-- ---------- SIDEBAR UNICA ---------- -->
   <aside class="sidebar">
     <div class="sb-brand" id="appBrand"></div>
     <div class="card-lite profile-card">
@@ -534,7 +563,7 @@ select{appearance:none;-webkit-appearance:none;
     <div class="seed-lbl" id="seedLbl"></div>
   </aside>
 
-  <!-- ---------- FRAME CENTRALE: le attività ---------- -->
+  <!-- ---------- FRAME CENTRALE ---------- -->
   <div class="stage-zone">
     <div class="toast" id="toast"></div>
 
@@ -561,44 +590,67 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
-    <!-- TAPPA 1: LA SCALA + SIMULATORE -->
+    <!-- TAPPA 1: LA SCALA — 10 CONSEGNE GUIDATE -->
     <section class="sec" id="sec1">
       <div class="sec-head">
         <div class="sec-title">La Scala dei Mattoncini</div>
-        <div class="sec-sub">Scrivi una dimensione e guardala diventare mattoncini. Cambia unità di conteggio: ogni gradino moltiplica per mille.</div>
+        <div class="sec-sub">Esegui la consegna con i comandi, poi conta i pezzi che vedi comparire.</div>
       </div>
-      <div class="sec-body" style="justify-content:flex-start;gap:11px;">
-        <div class="scala-row" id="scalaRow"></div>
+      <div class="sec-body" style="justify-content:flex-start;gap:9px;">
+        <div class="task">
+          <span class="task-n" id="scN"></span>
+          <span class="task-txt" id="scTxt"></span>
+          <span class="task-dots" id="scDots"></span>
+        </div>
         <div class="sim brick-card">
           <div class="sim-top">
             <span class="sim-lbl">Costruisci</span>
-            <input type="number" id="simVal" value="3" min="0" step="any" oninput="simRender()">
+            <input type="number" id="simVal" value="1" min="0" step="any" oninput="simRender()">
             <select id="simUnit" onchange="simRender()"></select>
             <span class="sim-lbl">contandoli in</span>
             <div class="zoom-row" id="simZoom"></div>
           </div>
           <div class="sim-yard" id="simYard"></div>
           <div class="sim-read" id="simRead"></div>
-          <div class="sim-legend">
-            <span><i class="pc p1" style="width:20px;height:12px;background-color:var(--lb);"></i><span>1 pezzo</span></span>
-            <span><i class="pc p100" style="width:26px;height:18px;background-color:var(--lb);"></i><span>piastra = 100</span></span>
-            <span><i class="pc p10k" style="width:32px;height:22px;background-color:var(--lb);"></i><span>cassa = 10.000</span></span>
-            <span><i class="pc p1m" style="width:40px;height:26px;background-color:var(--lb);"></i><span>pallet = 1.000.000</span></span>
-          </div>
         </div>
+        <div class="task-check" id="scCheck"></div>
+        <div class="ask-row" id="scAsk" style="display:none;">
+          <span class="ask-lbl" id="scAskLbl"></span>
+          <input type="number" id="scAns" step="1" placeholder="?" onkeydown="if(event.key==='Enter')scCheckAns();">
+          <button class="brick-btn btn-ok" id="scBtn" onclick="scCheckAns()"><span class="studs"><span></span><span></span></span>Verifica</button>
+          <button class="brick-btn btn-next" id="scNextBtn" onclick="scNext()" style="display:none;"><span class="studs"><span></span><span></span></span>Consegna successiva</button>
+        </div>
+        <div class="fb" id="scFb"></div>
       </div>
     </section>
 
-    <!-- TAPPA 2: CONVERTITORE -->
+    <!-- TAPPA 2: TRASFORMA LE UNITÀ -->
     <section class="sec" id="sec2">
       <div class="sec-head">
         <div class="sec-title">Trasforma le unità</div>
-        <div class="sec-sub">Salire di un gradino è dividere per 1.000, scendere è moltiplicare per 1.000.</div>
+        <div class="sec-sub">Guarda la scala: ogni salto verso destra divide per 1.000, ogni salto verso sinistra moltiplica per 1.000.</div>
       </div>
-      <div class="sec-body">
+      <div class="sec-body" style="gap:9px;">
+        <div class="task">
+          <span class="task-n" id="cvN"></span>
+          <span class="task-txt" id="cvTxt"></span>
+          <span class="task-dots" id="cvDots"></span>
+        </div>
+        <div class="ladder brick-card" id="cvLadder"></div>
         <div class="cv-wrap">
           <div class="cv-card brick-card">
-            <h3><span id="cvIc1"></span><span>Convertitore</span><span class="cvh-note">Prova quanto vuoi</span></h3>
+            <h3><span id="cvIc2"></span><span>La tua risposta</span></h3>
+            <div class="cv-ex-q" id="cvExQ"></div>
+            <div class="ask-row">
+              <input type="number" id="cvExAns" step="any" placeholder="?" onkeydown="if(event.key==='Enter')cvCheck();">
+              <span class="ask-lbl" id="cvExUnit"></span>
+              <button class="brick-btn btn-ok" id="cvBtn" onclick="cvCheck()"><span class="studs"><span></span><span></span></span>Verifica</button>
+              <button class="brick-btn btn-next" id="cvNextBtn" onclick="cvNewEx()" style="display:none;"><span class="studs"><span></span><span></span></span>Prossima</button>
+            </div>
+            <div class="fb" id="cvFb"></div>
+          </div>
+          <div class="cv-card brick-card">
+            <h3><span id="cvIc1"></span><span>Convertitore</span><span class="cvh-note">Provalo quanto vuoi</span></h3>
             <div class="cv-row">
               <input type="number" id="cvVal" value="1" min="0" step="any" oninput="cvCalc()">
               <select id="cvFrom" onchange="cvCalc()"></select>
@@ -606,33 +658,45 @@ select{appearance:none;-webkit-appearance:none;
               <select id="cvTo" onchange="cvCalc()"></select>
             </div>
             <div class="cv-out" id="cvOut"></div>
-            <div class="cv-path" id="cvPath"></div>
-          </div>
-
-          <div class="cv-card brick-card">
-            <h3><span id="cvIc2"></span><span>Esercizio</span><span class="cvh-note" id="cvProgLbl"></span></h3>
-            <div class="cv-ex-q" id="cvExQ"></div>
-            <div class="cv-ex-row">
-              <input type="number" id="cvExAns" step="any" placeholder="?" onkeydown="if(event.key==='Enter')cvCheck();">
-              <span class="cv-unit" id="cvExUnit"></span>
-              <button class="brick-btn cv-btn" id="cvBtn" onclick="cvCheck()"><span class="studs"><span></span><span></span></span>Verifica</button>
-              <button class="brick-btn cv-next" id="cvNextBtn" onclick="cvNewEx()" style="display:none;"><span class="studs"><span></span><span></span></span>Prossimo</button>
-            </div>
-            <div class="cv-fb" id="cvFb"></div>
-            <div class="cv-prog"><span>Conversioni esatte:</span><span class="cv-dots" id="cvDots"></span></div>
+            <p style="font-size:.84rem;color:var(--tx2);line-height:1.35;"><span>Cambia le unità qui sopra: la scala grande segue le tue scelte e ti mostra i salti da fare.</span></p>
           </div>
         </div>
-        <div class="azione"><span id="azIcon1"></span><span><span class="azl">L'IDEA DIVENTA AZIONE</span><span>Sul tuo iMac: clic destro su un file, «Ottieni informazioni», leggi la voce <b>Dimensioni</b> e converti quel numero nel gradino sopra e in quello sotto.</span></span></div>
       </div>
     </section>
 
-    <!-- TAPPA 3: SFIDA -->
+    <!-- TAPPA 3: FAMIGLIE DI FILE -->
     <section class="sec" id="sec3">
+      <div class="sec-head">
+        <div class="sec-title">Le famiglie dei file</div>
+        <div class="sec-sub">L'estensione è l'etichetta che dice al computer come aprire il file.</div>
+      </div>
+      <div class="sec-body" style="justify-content:flex-start;gap:10px;">
+        <div class="task">
+          <span class="task-n" id="fxN"></span>
+          <span class="task-txt" id="fxTxt"></span>
+          <span class="task-dots" id="fxDots"></span>
+        </div>
+        <div class="fx-wrap">
+          <div class="fx-shelf" id="fxShelf"></div>
+          <p class="fx-hint" id="fxHint"></p>
+          <div class="fx-bins" id="fxBins"></div>
+        </div>
+        <div class="fb" id="fxFb"></div>
+      </div>
+    </section>
+
+    <!-- TAPPA 4: SFIDA -->
+    <section class="sec" id="sec4">
       <div class="sec-head">
         <div class="sec-title">Sfida Dati</div>
         <div class="sec-sub">Domande sempre nuove, oggi uguali per tutti: la classifica a sinistra è live.</div>
       </div>
       <div class="sec-body">
+        <div class="task">
+          <span class="task-n" id="qN"></span>
+          <span class="task-txt" id="qTxt"></span>
+          <span class="task-dots" id="qDots"></span>
+        </div>
         <div class="q-card brick-card">
           <div class="q-top">
             <span class="q-cat" id="qCat"></span>
@@ -640,22 +704,22 @@ select{appearance:none;-webkit-appearance:none;
           </div>
           <div class="q-text" id="qText"></div>
           <div class="q-opts" id="qOpts"></div>
-          <div class="q-feed" id="qFeed"></div>
+          <div class="fb" id="qFeed"></div>
           <button class="brick-btn q-next" id="qNext" onclick="nextQ()"><span class="studs"><span></span><span></span><span></span></span><span>Prossima sfida</span><span id="qNextIc"></span></button>
         </div>
       </div>
     </section>
 
-    <!-- TAPPA 4: SPAZIO -->
-    <section class="sec" id="sec4">
+    <!-- TAPPA 5: SPAZIO -->
+    <section class="sec" id="sec5">
       <div class="sec-head">
         <div class="sec-title">Missione: libera lo spazio</div>
         <div class="sec-sub">L'iPad è pieno e serve posto per l'aggiornamento. Ogni scelta è definitiva: pensa prima di toccare.</div>
       </div>
-      <div class="sec-body" style="justify-content:flex-start;padding-top:4px;">
+      <div class="sec-body" style="justify-content:flex-start;padding-top:2px;">
         <div class="sp-wrap">
           <div class="sp-goal brick-card">
-            <span class="spg-txt"><span><b>Obiettivo:</b> porta lo spazio libero ad almeno <b id="spTargetLbl"></b>. Elimina ciò che si può recuperare, sposta nel cloud ciò che è unico. Ma attenzione: cloud e mosse sono limitati.</span></span>
+            <span class="spg-txt"><span><b>Consegna:</b> porta lo spazio libero ad almeno <b id="spTargetLbl"></b>. Elimina ciò che si può recuperare, sposta nel cloud ciò che è unico. Cloud e mosse sono limitati.</span></span>
             <div class="sp-stat"><div class="spn" id="spFree">0</div><div class="spl">GB liberi</div></div>
             <div class="sp-stat"><div class="spn gold" id="spMosse">0</div><div class="spl">Mosse</div></div>
             <div class="sp-stat"><div class="spn" id="spCloud">0</div><div class="spl">GB cloud</div></div>
@@ -674,18 +738,18 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
-    <!-- TAPPA 5: RIFLETTI -->
-    <section class="sec" id="sec5">
+    <!-- TAPPA 6: RIFLETTI -->
+    <section class="sec" id="sec6">
       <div class="sec-head">
         <div class="sec-title">Rifletti</div>
         <div class="sec-sub">Niente punti giusti o sbagliati, qui: solo la tua testa.</div>
       </div>
-      <div class="sec-body" style="justify-content:flex-start;padding-top:6px;">
+      <div class="sec-body" style="justify-content:flex-start;padding-top:4px;">
         <div class="rif-wrap">
           <div class="rif-card brick-card">
             <h3><span id="rifIc1"></span><span>Tre domande per te</span></h3>
             <div class="rif-q"><label for="rifA">Che cosa hai capito oggi che prima non sapevi?</label><textarea id="rifA"></textarea></div>
-            <div class="rif-q"><label for="rifB">In quale sfida il ragionamento si è inceppato, e perché?</label><textarea id="rifB"></textarea></div>
+            <div class="rif-q"><label for="rifB">In quale consegna il ragionamento si è inceppato, e perché?</label><textarea id="rifB"></textarea></div>
             <div class="rif-q"><label for="rifC">Che cosa faresti di diverso alla prossima partita?</label><textarea id="rifC"></textarea></div>
           </div>
           <div class="rif-card brick-card">
@@ -695,13 +759,13 @@ select{appearance:none;-webkit-appearance:none;
             <button class="brick-btn rif-close" id="rifClose" onclick="chiudiPercorso()" disabled><span class="studs"><span></span><span></span><span></span><span></span><span></span></span>Chiudi il percorso</button>
           </div>
           <div class="fine-card brick-card" id="fineCard">
-            <h3 class="hd" style="font-size:1.28rem;">Percorso completato!</h3>
+            <h3 class="hd" style="font-size:1.25rem;">Percorso completato!</h3>
             <div class="fine-nums">
               <div class="fn"><div class="fnv" id="finescore">0</div><div class="fnl">Punti</div></div>
               <div class="fn"><div class="fnv" id="finedone">0</div><div class="fnl">Risposte esatte</div></div>
               <div class="fn"><div class="fnv gold" id="finerank">Byte</div><div class="fnl">Grado finale</div></div>
             </div>
-            <p style="font-size:.9rem;color:var(--tx2);">La classifica resta viva finché sei qui: se vuoi, torna alla <b>Sfida Dati</b> e difendi la tua posizione.</p>
+            <p style="font-size:.88rem;color:var(--tx2);">La classifica resta viva finché sei qui: se vuoi, torna alla <b>Sfida Dati</b> e difendi la tua posizione.</p>
           </div>
         </div>
       </div>
@@ -713,10 +777,10 @@ select{appearance:none;-webkit-appearance:none;
         <h3 class="hd" id="sprTitle">Aggiornamento installato!</h3>
         <div class="spr-pts" id="sprPts">+0</div>
         <div class="spr-list" id="sprList"></div>
-        <div class="azione" style="max-width:100%;text-align:left;"><span id="azIcon3"></span><span><span class="azl">L'IDEA DIVENTA AZIONE</span><span>Stasera, sul tuo iPad: apri <b>Impostazioni → Generali → Spazio iPad</b> e guarda che cosa occupa di più. C'è qualcosa di «riscaricabile» che puoi salutare?</span></span></div>
+        <div class="task" style="max-width:100%;"><span id="azIcon3" style="width:19px;height:19px;color:var(--loD);flex:0 0 auto;"></span><span class="task-txt" style="text-align:left;font-size:.88rem;"><span><b>L'idea diventa azione:</b> stasera, sul tuo iPad, apri <b>Impostazioni → Generali → Spazio iPad</b> e guarda che cosa occupa di più. C'è qualcosa di «riscaricabile» che puoi salutare?</span></span></div>
         <div class="spr-btns">
           <button class="brick-btn spr-btn" onclick="spReset()"><span class="studs"><span></span><span></span></span>Rigioca la missione</button>
-          <button class="brick-btn spr-btn primary" onclick="document.getElementById('spResult').classList.remove('show');G(5)"><span class="studs"><span></span><span></span></span>Vai a Rifletti</button>
+          <button class="brick-btn spr-btn primary" onclick="document.getElementById('spResult').classList.remove('show');G(6)"><span class="studs"><span></span><span></span></span>Vai a Rifletti</button>
         </div>
       </div>
     </div>
@@ -731,26 +795,27 @@ select{appearance:none;-webkit-appearance:none;
     <div class="doc-sub">Data Storage Challenge · Scuola Sacra Famiglia di Orzinuovi · Animatore Digitale Andrea Cerioli</div>
 
     <h3><span id="docIc1"></span><span>Obiettivo didattico</span></h3>
-    <p>Consapevolezza delle unità di misura digitali (Byte → Terabyte), padronanza operativa delle <b>conversioni ×1000 / ÷1000</b> e gestione dello spazio sui dispositivi. Competenze DigComp 2.2: area 1 (Informazione) e area 4 (Sicurezza/Benessere digitale).</p>
+    <p>Consapevolezza delle unità di misura digitali (Byte → Terabyte), padronanza operativa delle <b>conversioni ×1000 / ÷1000</b>, riconoscimento delle <b>famiglie di file</b> dalle estensioni e gestione dello spazio sui dispositivi. Competenze DigComp 2.2: area 1 (Informazione) e area 4 (Sicurezza/Benessere digitale).</p>
 
-    <h3><span id="docIc2"></span><span>Struttura (6 tappe, tutte a schermo pieno)</span></h3>
+    <h3><span id="docIc2"></span><span>Struttura (7 tappe, tutte a schermo pieno)</span></h3>
     <ul>
       <li><b>Video stimolo</b> — apre l'esperienza, prima di ogni spiegazione.</li>
-      <li><b>La Scala dei Mattoncini</b> — le cinque unità come mattoncini che crescono, più il <b>simulatore</b>: lo studente scrive una dimensione e la vede costruita in pezzi (mattoncino 1, piastra 100, cassa 10.000, pallet 1.000.000). Cambiando unità di conteggio vede il ×1000 diventare fisico.</li>
-      <li><b>Trasforma le unità</b> — il convertitore libero (esplorazione) con la catena dei salti sempre visibile, più esercizi generati con verifica numerica e spiegazione del calcolo. È l'esercizio-chiave del percorso.</li>
-      <li><b>Sfida Dati</b> — esercizi generati (conversioni, stime, estensioni, velocità) con la <b>classifica live</b> di chi è in laboratorio in quel momento. Pool seedato sul giorno: tutta la classe gioca le stesse domande, discutibili insieme.</li>
+      <li><b>La Scala dei Mattoncini</b> — <b>10 consegne guidate</b>: l'app chiede di costruire una dimensione precisa contandola in una unità precisa; una checklist mostra quali comandi sono già impostati, poi lo studente conta i pezzi comparsi e verifica. Difficoltà crescente: mattoncini singoli → piastre da 100 → pallet da un milione.</li>
+      <li><b>Trasforma le unità</b> — <b>10 conversioni</b> con la <b>scala dei salti sempre visibile</b>: si accendono le unità coinvolte e i moltiplicatori tra un gradino e l'altro. Accanto, il convertitore libero per esplorare.</li>
+      <li><b>Le famiglie dei file</b> — <b>10 file</b> da smistare nelle cinque famiglie (immagini, documenti, audio, video, archivi) toccando prima il file e poi la famiglia. L'errore spiega che cosa contiene davvero quel formato.</li>
+      <li><b>Sfida Dati</b> — 10 domande generate con la <b>classifica live</b> di chi è in laboratorio in quel momento; il pool è seedato sul giorno, quindi tutta la classe gioca le stesse domande e sono discutibili insieme. Si può proseguire oltre le 10 per scalare la classifica.</li>
       <li><b>Missione Spazio</b> — decisioni con scarsità reale (mosse e cloud limitati, scelte irreversibili). Il feedback strategico arriva alla fine, come conseguenza.</li>
       <li><b>Rifletti</b> — metacognizione e manifesto digitale personale.</li>
     </ul>
 
     <h3><span id="docIc3"></span><span>Metodologie</span></h3>
-    <p>Dewey (learning by doing), Bruner (scoperta: il simulatore si esplora prima di essere spiegato), Vygotskij (scaffolding nella catena dei salti e nelle spiegazioni degli errori), metacognizione finale. La metafora concreta «1 Byte = 1 mattoncino» attraversa tutta l'interfaccia. L'errore è spiegato in ambra, mai in rosso, e l'attenzione è su che cosa non ha funzionato nel ragionamento, mai sulle persone.</p>
+    <p>Dewey (learning by doing), Bruner (scoperta guidata: la consegna dice cosa fare, non cosa capire), Vygotskij (scaffolding esplicito — checklist dei comandi, scala dei salti, spiegazione di ogni errore), metacognizione finale. La metafora concreta «1 Byte = 1 mattoncino» attraversa tutta l'interfaccia. L'errore è spiegato in ambra, mai in rosso, e l'attenzione è su che cosa non ha funzionato nel ragionamento, mai sulle persone.</p>
 
     <h3><span id="docIc4"></span><span>Classifica live</span></h3>
     <p>La classifica mostra <b>solo studenti reali e attivi negli ultimi 2 minuti</b> (battito ogni 10 secondi verso un Google Sheet via Apps Script, con archivio storico consultabile sul foglio). Istruzioni di installazione nel file <span style="font-family:var(--mono);font-size:.82em;">DIMENSIONE-FILE-classifica.gs</span>.</p>
 
     <h3><span id="docIc5"></span><span>Tempi e valutazione</span></h3>
-    <p>40–55 minuti. Il punteggio riflette qualità e costanza (bonus serie); le conversioni misurano la competenza tecnica, la Missione Spazio il pensiero strategico; la curva tra una partita e l'altra è la valutazione formativa. L'app è stateless: sugli iMac condivisi del laboratorio ogni sessione riparte pulita.</p>
+    <p>50–65 minuti per il percorso completo; le tappe sono indipendenti e si possono spezzare in due lezioni (1–3 e 4–7). Ogni tappa vale 10 consegne, quindi il progresso è leggibile a colpo d'occhio dai pallini. L'app è stateless: sugli iMac condivisi del laboratorio ogni sessione riparte pulita.</p>
 
     <div class="doc-foot"><b>SacraFamiglia education</b> — CC BY-NC-SA 4.0</div>
   </div>
@@ -760,17 +825,13 @@ select{appearance:none;-webkit-appearance:none;
 <script>
 "use strict";
 
-/* ============ CONFIG CLASSIFICA (Google Sheets + Apps Script) ============
-   Stesso protocollo generico della Keyboard Training Challenge (ping/board con
-   topic+giorno): il deployment è condiviso e le righe non si mescolano perché
-   questa app usa topic "datastorage". Per un foglio dedicato: istruzioni in
-   DIMENSIONE-FILE-classifica.gs, poi incollare qui il nuovo URL /exec. */
+/* ============ CONFIG CLASSIFICA (Google Sheets + Apps Script) ============ */
 const LB_URL = "https://script.google.com/macros/s/AKfycbzF5vkJWB9bRZhuPePh9hJZrYYY5cfcksRzMsiWNZAtm9jS1NVq2ne7Nzx9364yhPW-ug/exec";
 const LB_TOPIC = "datastorage";
-const LB_PUSH_MS = 10000;   // heartbeat: invio punteggio ogni 10 s
-const LB_POLL_MS = 12000;   // lettura classifica ogni 12 s
+const LB_PUSH_MS = 10000;
+const LB_POLL_MS = 12000;
 
-/* ============ PRNG seedato (RIGIOCABILITA.md): stesso giorno = stesso pool ============ */
+/* ============ PRNG seedato: stesso giorno = stesse consegne per tutta la classe ============ */
 function cyrb53(s,seed=0){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;
   for(let i=0,c;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}
   h1=Math.imul(h1^h1>>>16,2246822507)^Math.imul(h2^h2>>>13,3266489909);
@@ -783,6 +844,7 @@ const shuffle=(arr,r)=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=M
 function dayStr(){const d=new Date(),p=n=>(n<10?'0':'')+n;return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
 const DAY=dayStr();
 const SESSION_ID='S'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const GOAL=10;   // consegne per ogni esercizio
 
 /* ============ ICONE SVG (zero emoji) ============ */
 const ICONS={
@@ -799,6 +861,7 @@ const ICONS={
   medal:'<circle cx="12" cy="9.5" r="5.5"/><path d="M12 7.4l.8 1.6 1.8.3-1.3 1.3.3 1.8-1.6-.8-1.6.8.3-1.8-1.3-1.3 1.8-.3z"/><path d="M8.8 14.2L7.2 21l4.8-2.5L16.8 21l-1.6-6.8"/>',
   check:'<path d="M4 12l5 5L20 6"/>',
   x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  dot:'<circle cx="12" cy="12" r="4.5"/>',
   arrowR:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   swap:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
   calc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h.5M8 15h2M12 15h2M16 15h.5M8 18h6"/>',
@@ -814,7 +877,11 @@ const ICONS={
   download:'<path d="M12 4v11M7 11l5 5 5-5"/><path d="M4 20h16"/>',
   chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
   pen:'<path d="M4 20l4-1L20 7l-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/>',
-  tower:'<rect x="6" y="15" width="12" height="5" rx="1"/><rect x="7.5" y="10" width="9" height="5" rx="1"/><rect x="9" y="5" width="6" height="5" rx="1"/>'
+  tower:'<rect x="6" y="15" width="12" height="5" rx="1"/><rect x="7.5" y="10" width="9" height="5" rx="1"/><rect x="9" y="5" width="6" height="5" rx="1"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-6 6-2-2-5 5"/>',
+  doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  music:'<path d="M9 18V6l10-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/>',
+  zip:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M11 5h2M11 8h2M11 11h2M11 14h2"/>'
 };
 function svg(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;">'+ICONS[name]+'</svg>';}
 function svgI(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;display:inline-block;vertical-align:-.12em;">'+ICONS[name]+'</svg>';}
@@ -830,8 +897,11 @@ function nfmt(n){
   const p=s.split('.');
   return (neg?'-':'')+p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+(p[1]?','+p[1]:'');
 }
+/* pallini di avanzamento, uguali per tutte le tappe */
+function dots(el,done){document.getElementById(el).innerHTML=
+  Array.from({length:GOAL},(_,i)=>'<i'+(i<done?' class="on"':'')+'></i>').join('');}
+function taskN(el,i){document.getElementById(el).innerHTML='Consegna<br>'+Math.min(i+1,GOAL)+' / '+GOAL;}
 
-/* Marchio: mattoncino rosso 2×2 con borchie + wordmark */
 function brandHTML(){
   return '<div class="brand"><svg class="brand-mark" viewBox="0 0 44 44" role="img" aria-label="Scuola Sacra Famiglia">'+
     '<rect x="4" y="15" width="36" height="22" rx="3" fill="var(--lr,#E3000B)"/>'+
@@ -843,7 +913,6 @@ function brandHTML(){
     '<span class="brand-role">Animatore Digitale · Andrea Cerioli</span></div></div>';
 }
 
-/* ============ AVATAR — le 4 Case ============ */
 const AVATARS=[
   {f:'av-aquila.png',n:'AquilaBlu'},
   {f:'av-cero.png',n:'CeroGiallo'},
@@ -853,7 +922,7 @@ const AVATARS=[
 function avatarImg(i){i=Number(i)||0;i=((i%AVATARS.length)+AVATARS.length)%AVATARS.length;
   const a=AVATARS[i];return '<img class="av" src="'+a.f+'" alt="'+a.n+'">';}
 
-/* ============ SUONI (WebAudio sintetizzati, zero file esterni) ============ */
+/* ============ SUONI ============ */
 let sndOn=true,AC=null;
 function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}}
   if(AC&&AC.state==='suspended')AC.resume();return AC;}
@@ -865,7 +934,6 @@ function tone(freq,dt,dur,vol){const a=ac();if(!a)return;const t=a.currentTime+d
 function sndOk(){if(sndOn){tone(660,0,.14,.11);tone(880,.11,.2,.11);}}
 function sndMiss(){if(sndOn)tone(150,0,.1,.05);}
 function sndRank(){if(sndOn)[523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.2,.12));}
-/* "click" del mattoncino che si incastra */
 function sndClick(){if(!sndOn)return;const a=ac();if(!a)return;const t=a.currentTime;
   const len=Math.floor(a.sampleRate*.025),buf=a.createBuffer(1,len,a.sampleRate),d=buf.getChannelData(0);
   for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3);
@@ -879,29 +947,27 @@ function toggleSnd(){sndOn=!sndOn;
   document.getElementById('sndBtn').classList.toggle('muted',!sndOn);
   document.getElementById('sndBtn').blur();}
 
-/* ============ STATO (fonte unica; stateless tra sessioni: iMac condivisi) ============ */
-const st={user:'',cls:'',avatar:0,score:0,done:0,streak:0,sec:0,qi:0,cvOk:0,cvI:0,spDone:false,rifDone:false};
-const CV_GOAL=8;   // conversioni esatte che completano la tappa
+/* ============ STATO ============ */
+const st={user:'',cls:'',avatar:0,score:0,done:0,streak:0,sec:0,
+  scI:0,scOk:0, cvI:0,cvOk:0, fxOk:0, qi:0,qOk:0, spDone:false,rifDone:false};
 
-/* ============ UNITÀ (fonte unica per scala, simulatore e convertitore) ============ */
+/* ============ UNITÀ (fonte unica) ============ */
 const UNITS=[
-  {s:'B', n:'Byte',    c:'--lr',ic:'pen',   ex:'Una singola lettera di testo: la «A» che digiti è UN mattoncino.',        eq:'l\'unità di base'},
-  {s:'KB',n:'Kilobyte',c:'--lo',ic:'tag',   ex:'Un\'email senza allegati o una pagina di solo testo: qualche decina di KB.',eq:'1 KB = 1.000 mattoncini'},
-  {s:'MB',n:'Megabyte',c:'--ly',ic:'film',  ex:'Una foto scattata con l\'iPad (~3 MB) o una canzone (~4 MB).',             eq:'1 MB = 1.000 KB'},
-  {s:'GB',n:'Gigabyte',c:'--lg',ic:'tablet',ex:'Un film in alta definizione (~4 GB) o la memoria di un iPad (64 GB).',     eq:'1 GB = 1.000 MB'},
-  {s:'TB',n:'Terabyte',c:'--lb',ic:'chip',  ex:'L\'archivio fotografico di una famiglia intera, o il disco di un server.', eq:'1 TB = 1.000 GB'}
+  {s:'B', n:'Byte',    c:'--lr',ic:'pen'},
+  {s:'KB',n:'Kilobyte',c:'--lo',ic:'tag'},
+  {s:'MB',n:'Megabyte',c:'--ly',ic:'film'},
+  {s:'GB',n:'Gigabyte',c:'--lg',ic:'tablet'},
+  {s:'TB',n:'Terabyte',c:'--lb',ic:'chip'}
 ];
-/* il giallo mattoncino vuole testo scuro, gli altri testo bianco */
 const inkOn=v=>v==='--ly'?'#1A1A1A':'#fff';
-/* conversione: ogni gradino vale 1000 */
 const convert=(val,from,to)=>val*Math.pow(1000,from-to);
 function unitOptions(sel){return UNITS.map((u,i)=>
   '<option value="'+i+'"'+(i===sel?' selected':'')+'>'+u.n+' ('+u.s+')</option>').join('');}
 
 /* ============ GRADI ============ */
 const RANKS=[
-  {n:"Byte",p:0},{n:"Kilobyte",p:150},{n:"Megabyte",p:400},
-  {n:"Gigabyte",p:800},{n:"Terabyte",p:1500}
+  {n:"Byte",p:0},{n:"Kilobyte",p:200},{n:"Megabyte",p:500},
+  {n:"Gigabyte",p:900},{n:"Terabyte",p:1600}
 ];
 function rankIdx(pts){let i=0;RANKS.forEach((r,k)=>{if(pts>=r.p)i=k;});return i;}
 function addPoints(n){
@@ -923,7 +989,7 @@ let toastTimer=null;
 function showToast(html){const t=document.getElementById('toast');t.innerHTML=html;t.classList.add('show');
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
 
-/* ============ CLASSIFICA LIVE (solo studenti reali e presenti) ============ */
+/* ============ CLASSIFICA LIVE ============ */
 function lbPush(){
   if(!LB_URL)return;
   // NB: parametro "sess", NON "sid" ("sid" è riservato dall'infrastruttura Google)
@@ -934,9 +1000,7 @@ function lbPush(){
 function lbPoll(){
   if(!LB_URL){renderBoard(null);return;}
   fetch(LB_URL+'?'+new URLSearchParams({action:'board',topic:LB_TOPIC,day:DAY}))
-    .then(r=>r.json())
-    .then(j=>renderBoard(j&&j.ok?j.rows:null))
-    .catch(()=>renderBoard(null));
+    .then(r=>r.json()).then(j=>renderBoard(j&&j.ok?j.rows:null)).catch(()=>renderBoard(null));
 }
 function renderBoard(rows){
   const el=document.getElementById('boardList');
@@ -960,11 +1024,12 @@ function lbStart(){
   if(LB_URL){lbTimers.push(setInterval(lbPush,LB_PUSH_MS));lbTimers.push(setInterval(lbPoll,LB_POLL_MS));}
 }
 
-/* ============ NAVIGAZIONE (sidebar verticale; il centro non scorre mai) ============ */
+/* ============ NAVIGAZIONE ============ */
 const SECS=[
   {t:'Video stimolo',ic:'film'},
   {t:'La Scala',ic:'tower'},
   {t:'Trasforma le unità',ic:'swap'},
+  {t:'Famiglie di file',ic:'tag'},
   {t:'Sfida Dati',ic:'bolt'},
   {t:'Missione Spazio',ic:'tablet'},
   {t:'Rifletti',ic:'brain'}
@@ -980,11 +1045,11 @@ function G(i){
     document.getElementById('sec'+k).classList.toggle('on',k===i);
     document.getElementById('step'+k).classList.toggle('a',k===i);
   });
-  if(ytPlayer&&ytPlayer.pauseVideo&&i!==0)ytPlayer.pauseVideo(); // mai audio fantasma
+  if(ytPlayer&&ytPlayer.pauseVideo&&i!==0)ytPlayer.pauseVideo();
 }
 function markDone(i){document.getElementById('step'+i).classList.add('done');}
 
-/* ============ VIDEO STIMOLO (player custom, YouTube IFrame API) ============ */
+/* ============ VIDEO STIMOLO ============ */
 let ytPlayer=null,ytPoll=null;
 function onYouTubeIframeAPIReady(){
   ytPlayer=new YT.Player('ytp',{
@@ -1010,173 +1075,311 @@ function vidTick(){
   document.getElementById('vProg').style.width=d?(c/d*100)+'%':'0';
   document.getElementById('vTime').textContent=fmtT(c)+' / '+fmtT(d);
 }
-function vidToggle(){
-  if(!ytPlayer||!ytPlayer.getPlayerState)return;
-  ytPlayer.getPlayerState()===1?ytPlayer.pauseVideo():ytPlayer.playVideo();
-}
-function vidSeek(e){
-  if(!ytPlayer||!ytPlayer.getDuration)return;
+function vidToggle(){if(!ytPlayer||!ytPlayer.getPlayerState)return;
+  ytPlayer.getPlayerState()===1?ytPlayer.pauseVideo():ytPlayer.playVideo();}
+function vidSeek(e){if(!ytPlayer||!ytPlayer.getDuration)return;
   const r=document.getElementById('vTrack').getBoundingClientRect();
-  ytPlayer.seekTo(((e.clientX-r.left)/r.width)*ytPlayer.getDuration(),true);
-}
-function vidMute(){
-  if(!ytPlayer||!ytPlayer.isMuted)return;
-  ytPlayer.isMuted()?ytPlayer.unMute():ytPlayer.mute();
-  setTimeout(vidUI,80);
-}
+  ytPlayer.seekTo(((e.clientX-r.left)/r.width)*ytPlayer.getDuration(),true);}
+function vidMute(){if(!ytPlayer||!ytPlayer.isMuted)return;
+  ytPlayer.isMuted()?ytPlayer.unMute():ytPlayer.mute();setTimeout(vidUI,80);}
 
-/* ============ TAPPA 1 — SCALA + SIMULATORE DI MATTONCINI ============ */
-function buildScala(){
-  const sizes=[38,50,64,80,98];
-  const nStuds=[1,2,2,3,4];
-  let html='';
-  UNITS.forEach((u,i)=>{
-    if(i>0)html+='<span class="x1000">×1000</span>';
-    html+='<button class="unit-card" id="uc'+i+'" onclick="selUnit('+i+')" title="'+u.ex+'">'+
-      '<span class="unit-block" style="width:'+sizes[i]+'px;height:'+sizes[i]+'px;font-size:'+(0.78+i*0.08)+'rem;'+
-        'background:var('+u.c+');color:'+inkOn(u.c)+';box-shadow:0 6px 0 var('+u.c+'D);--bc:var('+u.c+');">'+
-        studs(nStuds[i])+u.s+'</span>'+
-      '<span class="unit-name">'+u.n+'</span></button>';
-  });
-  document.getElementById('scalaRow').innerHTML=html;
-}
-/* selezionare un'unità nella scala = impostare l'unità del simulatore */
-function selUnit(i){
-  document.getElementById('simUnit').value=i;
-  simRender();sndClick();
-}
-
-/* I quattro pezzi della metafora: la scala visiva del ×1000 */
+/* ============ TAPPA 1 — SIMULATORE + 10 CONSEGNE ============ */
 const PIECES=[
   {k:'p1',  v:1,       lbl:'',    name:'mattoncino', plur:'mattoncini'},
   {k:'p100',v:100,     lbl:'100', name:'piastra',    plur:'piastre'},
   {k:'p10k',v:10000,   lbl:'10K', name:'cassa',      plur:'casse'},
   {k:'p1m', v:1000000, lbl:'1M',  name:'pallet',     plur:'pallet'}
 ];
-const MAX_PEZZI=150;   // oltre questo numero il muro diventa illeggibile
+const MAX_PEZZI=150;
+let simZoomUnit=2;
+
+/* Consegne a difficoltà crescente. I valori sono scelti perché la
+   decomposizione dia UN SOLO tipo di pezzo: così "quante piastre vedi?"
+   ha una risposta non ambigua. */
+function genScTask(i){
+  const r=mulberry32(cyrb53(DAY+'|sc'+i));
+  const salti=i<3?0:(i<7?1:2);
+  const to=Math.floor(r()*(UNITS.length-salti));
+  const from=to+salti;
+  const val=salti===0?3+Math.floor(r()*38):salti===1?2+Math.floor(r()*8):1+Math.floor(r()*9);
+  const count=val*Math.pow(1000,salti);
+  const piece=salti===0?PIECES[0]:salti===1?PIECES[1]:PIECES[3];
+  return {val,from,to,count,piece,n:count/piece.v,salti};
+}
+let scTask=null,scPhase='setup';
+function scStart(){
+  scTask=genScTask(st.scI);scPhase='setup';
+  taskN('scN',st.scI);
+  // a zero salti l'unità di conteggio coincide: ripeterla suonerebbe ridondante
+  document.getElementById('scTxt').innerHTML=scTask.salti===0
+    ? '<span>Costruisci <b>'+nfmt(scTask.val)+' '+UNITS[scTask.from].s+'</b> e conta i mattoncini che compaiono.</span>'
+    : '<span>Costruisci <b>'+nfmt(scTask.val)+' '+UNITS[scTask.from].s+'</b> contandoli in <b>'+UNITS[scTask.to].s+
+      '</b>, poi conta i pezzi che vedi.</span>';
+  document.getElementById('scAsk').style.display='none';
+  document.getElementById('scFb').className='fb';
+  document.getElementById('scBtn').style.display='';
+  document.getElementById('scNextBtn').style.display='none';
+  dots('scDots',st.scOk);
+  simRender();
+}
+/* checklist: scaffolding esplicito su che cosa manca ancora da impostare */
+function scCheckSetup(){
+  if(!scTask)return;
+  const val=Number(document.getElementById('simVal').value);
+  const from=Number(document.getElementById('simUnit').value);
+  const okVal=val===scTask.val, okFrom=from===scTask.from, okTo=simZoomUnit===scTask.to;
+  document.getElementById('scCheck').innerHTML=
+    '<span class="tk'+(okVal?' ok':'')+'">'+svgI(okVal?'check':'dot')+'<span>valore '+nfmt(scTask.val)+'</span></span>'+
+    '<span class="tk'+(okFrom?' ok':'')+'">'+svgI(okFrom?'check':'dot')+'<span>unità '+UNITS[scTask.from].s+'</span></span>'+
+    '<span class="tk'+(okTo?' ok':'')+'">'+svgI(okTo?'check':'dot')+'<span>conta in '+UNITS[scTask.to].s+'</span></span>';
+  const pronto=okVal&&okFrom&&okTo;
+  if(pronto&&scPhase==='setup'){
+    scPhase='ask';
+    document.getElementById('scAskLbl').textContent='Quanti/e '+scTask.piece.plur+' vedi?';
+    document.getElementById('scAsk').style.display='flex';
+    const a=document.getElementById('scAns');a.value='';a.disabled=false;a.focus();
+  }else if(!pronto&&scPhase==='ask'){
+    scPhase='setup';
+    document.getElementById('scAsk').style.display='none';
+  }
+}
+function scCheckAns(){
+  if(!scTask||scPhase!=='ask')return;
+  const raw=document.getElementById('scAns').value;
+  if(raw==='')return;
+  const fb=document.getElementById('scFb');
+  if(Number(raw)===scTask.n){
+    st.scOk++;st.done++;
+    fb.className='fb show good';
+    fb.innerHTML=svgI('check')+'<span><span class="fbl">+20 punti</span><span>'+
+      nfmt(scTask.val)+' '+UNITS[scTask.from].s+' = '+nfmt(scTask.count)+' '+UNITS[scTask.to].s+
+      ', cioè '+nfmt(scTask.n)+' '+(scTask.n===1?scTask.piece.name:scTask.piece.plur)+
+      (scTask.piece.v>1?' da '+nfmt(scTask.piece.v):'')+'.</span></span>';
+    addPoints(20);sndOk();
+    if(st.scOk>=GOAL)markDone(1);
+  }else{
+    fb.className='fb show bad';
+    fb.innerHTML=svgI('info')+'<span><span class="fbl">Riguarda il conteggio</span><span>'+
+      nfmt(scTask.val)+' '+UNITS[scTask.from].s+' contati in '+UNITS[scTask.to].s+' fanno '+nfmt(scTask.count)+
+      '. Ogni '+scTask.piece.name+' vale '+nfmt(scTask.piece.v)+', quindi i pezzi sono '+
+      nfmt(scTask.count)+' ÷ '+nfmt(scTask.piece.v)+' = <b>'+nfmt(scTask.n)+'</b>.</span></span>';
+    sndMiss();
+  }
+  dots('scDots',st.scOk);lbPush();
+  document.getElementById('scAns').disabled=true;
+  document.getElementById('scBtn').style.display='none';
+  document.getElementById('scNextBtn').style.display='';
+}
+function scNext(){st.scI=(st.scI+1)%GOAL;scStart();sndClick();}
+
 function simRender(){
   const val=Math.max(0,Number(document.getElementById('simVal').value)||0);
   const from=Number(document.getElementById('simUnit').value);
   const to=simZoomUnit;
   const count=convert(val,from,to);
   const uf=UNITS[from],ut=UNITS[to],col=ut.c;
-  // evidenzia il mattoncino della scala corrispondente all'unità scritta
-  UNITS.forEach((_,k)=>document.getElementById('uc'+k).classList.toggle('sel',k===from));
   document.getElementById('simZoom').innerHTML=UNITS.map((u,i)=>
     '<button class="zoom-btn'+(i===to?' a':'')+'" onclick="setZoom('+i+')">'+u.s+'</button>').join('');
-
   const yard=document.getElementById('simYard'),read=document.getElementById('simRead');
+  scCheckSetup();
   if(val<=0){yard.innerHTML='';read.innerHTML='<span class="sim-note">Scrivi una dimensione per costruirla.</span>';return;}
-
   // meno di un pezzo: l'unità di conteggio è troppo grande. È un'informazione, non un errore.
   if(count<1){
-    yard.innerHTML='<div class="pc p1 ghost" style="width:62px;height:44px;"></div>';
+    yard.innerHTML='<div class="pc p1 ghost" style="width:58px;height:42px;"></div>';
     read.innerHTML='<span class="sim-eq">'+nfmt(val)+' '+uf.s+' = '+nfmt(count)+' '+ut.s+'</span>'+
       '<span class="sim-note">Non basta nemmeno per un mattoncino: contare in '+ut.n+' un file di '+uf.n+
       ' è come pesare una piuma con la bilancia dei camion.</span>';
     return;
   }
-  // decomposizione greedy dal pezzo più grande: mostra il ×1000 come cambio di formato
   let rest=Math.round(count),parts=[],tot=0;
   for(let p=PIECES.length-1;p>=0;p--){
     const q=Math.floor(rest/PIECES[p].v);
     if(q>0){parts.push({p:PIECES[p],q});rest-=q*PIECES[p].v;tot+=q;}
   }
-  // se il muro esplode, tengo solo i tagli grandi e dichiaro l'approssimazione
   let approx=false;
   while(tot>MAX_PEZZI&&parts.length>1){const last=parts.pop();tot-=last.q;approx=true;}
   if(tot>MAX_PEZZI){parts[0].q=MAX_PEZZI;tot=MAX_PEZZI;approx=true;}
-
   yard.innerHTML=parts.map(({p,q})=>
     Array.from({length:q},()=>'<div class="pc '+p.k+'" style="background-color:var('+col+');">'+
       (p.lbl?'<b>'+p.lbl+'</b>':'')+'</div>').join('')).join('');
-
   const detail=parts.map(({p,q})=>q+' '+(q===1?p.name:p.plur)).join(' + ');
   read.innerHTML='<span class="sim-eq">'+nfmt(val)+' '+uf.s+' = '+nfmt(count)+' '+ut.s+'</span>'+
-    '<span class="sim-note">'+(approx?'circa ':'')+detail+
-    (from!==to?' — ogni gradino della scala moltiplica per mille.':'')+'</span>';
+    '<span class="sim-note">'+(approx?'circa ':'')+detail+'</span>';
 }
-let simZoomUnit=2;
-function setZoom(i){simZoomUnit=i;simRender();sndClick();markDone(1);}
+function setZoom(i){simZoomUnit=i;simRender();sndClick();}
 
-/* ============ TAPPA 2 — CONVERTITORE + ESERCIZI DI TRASFORMAZIONE ============ */
+/* ============ TAPPA 2 — SCALA DEI SALTI + 10 CONVERSIONI ============ */
+/* La scala visiva: mostra le unità coinvolte e i moltiplicatori di ogni salto */
+function renderLadder(from,to){
+  const lo=Math.min(from,to),hi=Math.max(from,to);
+  const op=from>to?'×1.000':'÷1.000';
+  let h='';
+  UNITS.forEach((u,i)=>{
+    if(i>0){
+      const on=i>lo&&i<=hi;
+      h+='<span class="lad-op'+(on?' on':'')+'">'+
+         '<span class="lad-arrow">'+(on?(from>to?'&#9654;':'&#9664;'):'&#183;')+'</span>'+
+         '<span class="lad-val">'+(on?op:'×1.000')+'</span></span>';
+    }
+    const isFrom=i===from,isTo=i===to,on=i>=lo&&i<=hi;
+    const style=on?'background:var('+u.c+');color:'+inkOn(u.c)+';border-color:transparent;box-shadow:0 4px 0 var('+u.c+'D);--bc:var('+u.c+');':'';
+    h+='<span class="lad-u'+(on?' on':'')+(isFrom?' from':'')+(isTo?' to':'')+'">'+
+       '<span class="lad-brick" style="'+style+'">'+(on?studs(2):'')+u.s+'</span>'+
+       '<span class="lad-tag">'+(isFrom&&isTo?'da / a':isFrom?'da qui':isTo?'a qui':'')+'</span></span>';
+  });
+  document.getElementById('cvLadder').innerHTML=h;
+}
 function cvCalc(){
   const val=Number(document.getElementById('cvVal').value)||0;
   const from=Number(document.getElementById('cvFrom').value);
   const to=Number(document.getElementById('cvTo').value);
-  const res=convert(val,from,to);
-  document.getElementById('cvOut').innerHTML='<span>'+nfmt(res)+'</span><span style="font-size:1rem;color:var(--tx2);">'+UNITS[to].s+'</span>';
-  // catena dei salti: lo scaffolding che rende visibile il procedimento
-  const path=document.getElementById('cvPath');
-  if(from===to){path.innerHTML='<span class="cvu">'+UNITS[from].s+'</span><span>stessa unità: il numero non cambia</span>';return;}
-  const step=from>to?-1:1, op=from>to?'×1000':'÷1000';
-  let html='<span class="cvu">'+UNITS[from].s+'</span>';
-  for(let i=from;i!==to;i+=step)html+='<span class="cvop">'+op+'</span><span class="cvu">'+UNITS[i+step].s+'</span>';
-  const salti=Math.abs(from-to);
-  html+='<span style="margin-left:6px;">('+salti+(salti===1?' salto':' salti')+': '+op.replace('1000',nfmt(Math.pow(1000,salti)))+')</span>';
-  path.innerHTML=html;
+  document.getElementById('cvOut').innerHTML='<span>'+nfmt(convert(val,from,to))+'</span>'+
+    '<span style="font-size:.95rem;color:var(--tx2);">'+UNITS[to].s+'</span>';
+  renderLadder(from,to);
 }
 let cvEx=null;
 function cvNewEx(){
   const r=mulberry32(cyrb53(DAY+'|cv'+st.cvI));
-  // salto di 1 o 2 gradini, in salita o in discesa
-  const salti=r()<0.7?1:2;
-  const giu=r()<0.6;
-  let from=Math.floor(r()*(UNITS.length-salti));
-  let to=giu?from+salti:from;
-  if(giu){const t=from;from=to;to=t;}   // in discesa: da unità grande a piccola
-  if(from===to)to=Math.min(UNITS.length-1,from+salti);
-  const val=pick(giu?[2,3,4,5,8,10,12,25,50]:[2000,3000,5000,8000,10000,20000,1500,4500],r);
+  const salti=st.cvI<6?1:2;              // prime sei: un salto; ultime quattro: due
+  // A DUE salti si va sempre in discesa, e in salita il valore è multiplo di 1.000:
+  // così il risultato è SEMPRE intero. Un risultato tipo 0,02 costringerebbe a
+  // digitare la virgola, che l'input numerico rifiuta.
+  const giu=salti===2?true:(r()<0.55);
+  const a=Math.floor(r()*(UNITS.length-salti));
+  const from=giu?a+salti:a, to=giu?a:a+salti;
+  const val=giu?pick([2,3,4,5,8,10,12,25],r):pick([2000,3000,5000,8000,10000,20000],r);
   cvEx={val,from,to,res:convert(val,from,to)};
-  st.cvI++;
-  // il contenitore è flex: il testo va in UN solo span, altrimenti ogni nodo
-  // diventa flex-item e la frase si spezza in colonne
+  taskN('cvN',st.cvI);
+  document.getElementById('cvTxt').innerHTML='<span>Guarda la scala qui sotto: conta i salti tra le due unità, poi scrivi il risultato.</span>';
+  // il contenitore è flex: il testo va in UN solo span, altrimenti si spezza in colonne
   document.getElementById('cvExQ').innerHTML='<span>Converti <b>'+nfmt(val)+' '+UNITS[from].s+'</b> in <b>'+UNITS[to].s+'</b></span>';
   document.getElementById('cvExUnit').textContent=UNITS[to].s;
   const ans=document.getElementById('cvExAns');ans.value='';ans.disabled=false;ans.focus();
-  document.getElementById('cvFb').className='cv-fb';
+  document.getElementById('cvFb').className='fb';
   document.getElementById('cvBtn').style.display='';
   document.getElementById('cvNextBtn').style.display='none';
-}
-function cvDots(){
-  document.getElementById('cvDots').innerHTML=Array.from({length:CV_GOAL},(_,i)=>
-    '<i'+(i<st.cvOk?' class="on"':'')+'></i>').join('');
-  document.getElementById('cvProgLbl').textContent=st.cvOk+' / '+CV_GOAL;
+  dots('cvDots',st.cvOk);
+  renderLadder(from,to);
+  // il convertitore libero parte dalle stesse unità della consegna
+  document.getElementById('cvFrom').value=from;
+  document.getElementById('cvTo').value=to;
+  document.getElementById('cvVal').value=1;
+  document.getElementById('cvOut').innerHTML='<span>'+nfmt(convert(1,from,to))+'</span>'+
+    '<span style="font-size:.95rem;color:var(--tx2);">'+UNITS[to].s+'</span>';
 }
 function cvCheck(){
   if(!cvEx)return;
   const raw=document.getElementById('cvExAns').value;
   if(raw==='')return;
-  const given=Number(raw);
   const fb=document.getElementById('cvFb');
   const salti=Math.abs(cvEx.from-cvEx.to);
   const op=cvEx.from>cvEx.to?'moltiplicare':'dividere';
   const fattore=nfmt(Math.pow(1000,salti));
-  // tolleranza relativa: accetta piccoli scarti di arrotondamento sui decimali
-  const ok=Math.abs(given-cvEx.res)<=Math.max(1e-9,Math.abs(cvEx.res)*1e-9);
+  const ok=Math.abs(Number(raw)-cvEx.res)<=Math.max(1e-9,Math.abs(cvEx.res)*1e-9);
   if(ok){
     st.cvOk++;st.done++;
-    const pts=25;
-    fb.className='cv-fb show good';
-    fb.innerHTML=svgI('check')+'<span><span class="cvfl">+'+pts+' punti</span><span>'+
-      nfmt(cvEx.val)+' '+UNITS[cvEx.from].s+' '+(cvEx.from>cvEx.to?'× ':'÷ ')+fattore+' = '+nfmt(cvEx.res)+' '+UNITS[cvEx.to].s+'.</span></span>';
-    addPoints(pts);sndOk();
-    if(st.cvOk>=CV_GOAL)markDone(2);
+    fb.className='fb show good';
+    fb.innerHTML=svgI('check')+'<span><span class="fbl">+25 punti</span><span>'+
+      nfmt(cvEx.val)+' '+UNITS[cvEx.from].s+(cvEx.from>cvEx.to?' × ':' ÷ ')+fattore+' = '+nfmt(cvEx.res)+' '+UNITS[cvEx.to].s+'.</span></span>';
+    addPoints(25);sndOk();
+    if(st.cvOk>=GOAL)markDone(2);
   }else{
-    st.streak=0;
-    fb.className='cv-fb show bad';
-    fb.innerHTML=svgI('info')+'<span><span class="cvfl">Dove si è inceppato il ragionamento?</span><span>Da '+
+    fb.className='fb show bad';
+    fb.innerHTML=svgI('info')+'<span><span class="fbl">Dove si è inceppato il ragionamento?</span><span>Da '+
       UNITS[cvEx.from].n+' a '+UNITS[cvEx.to].n+' ci sono '+salti+(salti===1?' salto':' salti')+', quindi bisogna '+op+
       ' per '+fattore+': la risposta giusta è <b>'+nfmt(cvEx.res)+' '+UNITS[cvEx.to].s+'</b>.</span></span>';
     sndMiss();
   }
-  cvDots();lbPush();
+  dots('cvDots',st.cvOk);lbPush();
   document.getElementById('cvExAns').disabled=true;
   document.getElementById('cvBtn').style.display='none';
   document.getElementById('cvNextBtn').style.display='';
+  st.cvI=(st.cvI+1)%GOAL;
 }
 
-/* ============ TAPPA 3 — SFIDA DATI (generatori seedati) ============ */
+/* ============ TAPPA 3 — FAMIGLIE DI FILE (10 file da agganciare) ============ */
+const FAM=[
+  {k:'img',n:'Immagini', c:'--lg',ic:'image',cosa:'contiene un\'immagine',
+   ext:['jpg','png','heic','gif','svg','webp'],
+   nomi:['gita','selfie','panorama','logo','disegno','tramonto','locandina']},
+  {k:'doc',n:'Documenti',c:'--lb',ic:'doc',  cosa:'contiene testo o pagine da leggere',
+   ext:['pdf','docx','txt','pages','xlsx','pptx'],
+   nomi:['ricerca','relazione','appunti','compito','orario','tesina','verifica']},
+  {k:'aud',n:'Audio',    c:'--lp',ic:'music',cosa:'contiene solo suono',
+   ext:['mp3','wav','m4a','aac','flac'],
+   nomi:['canzone','podcast','intervista','suoneria','vocale','jingle']},
+  {k:'vid',n:'Video',    c:'--lr',ic:'film', cosa:'contiene immagini in movimento e audio insieme',
+   ext:['mp4','mov','mkv','avi'],
+   nomi:['recita','tutorial','trailer','lezione','saggio','vacanze']},
+  {k:'arc',n:'Archivi',  c:'--lo',ic:'zip',  cosa:'è una scatola compressa che contiene altri file',
+   ext:['zip','rar','7z'],
+   nomi:['backup','foto_2026','progetto','scuola','export']}
+];
+let fxFiles=[],fxSel=null;
+function fxInit(){
+  const r=mulberry32(cyrb53(DAY+'|fam'));
+  // 2 file per famiglia = 10 consegne, sempre le stesse per tutta la classe oggi
+  let list=[];
+  FAM.forEach(f=>{
+    const nomi=shuffle(f.nomi,r).slice(0,2), exts=shuffle(f.ext,r);
+    nomi.forEach((n,j)=>list.push({id:f.k+j,nome:n,ext:exts[j%exts.length],fam:f.k,posto:null}));
+  });
+  fxFiles=shuffle(list,r);
+  st.fxOk=0;fxSel=null;
+  document.getElementById('fxTxt').innerHTML='<span>Tocca un file, poi tocca la <b>famiglia</b> a cui appartiene. Guarda l\'estensione dopo il punto: è lei che comanda.</span>';
+  fxRender();
+}
+function fxRender(){
+  taskN('fxN',st.fxOk);
+  dots('fxDots',st.fxOk);
+  const rim=fxFiles.filter(f=>!f.posto);
+  document.getElementById('fxShelf').innerHTML=rim.length?rim.map(f=>
+    '<button class="fz'+(fxSel===f.id?' sel':'')+'" id="fz'+f.id+'" onclick="fxPick(\''+f.id+'\')">'+
+    '<span class="fz-name">'+esc(f.nome)+'</span><span class="fz-ext">.'+f.ext+'</span></button>').join('')
+    : '<span class="sim-note">Scaffale vuoto: tutti i file sono al loro posto.</span>';
+  document.getElementById('fxHint').textContent=fxSel
+    ? 'Ora tocca la famiglia giusta qui sotto.'
+    : (rim.length?'Tocca il file che vuoi sistemare.':'Dieci file su dieci: ottimo lavoro.');
+  document.getElementById('fxBins').innerHTML=FAM.map(f=>{
+    const dentro=fxFiles.filter(x=>x.posto===f.k);
+    // role+tabindex+Invio/Spazio: la base va raggiunta anche da tastiera, non solo a tocco
+    return '<div class="fx-bin'+(fxSel?' armed':'')+'" role="button" tabindex="0"'+
+      ' aria-label="Famiglia '+f.n+'" style="border-color:var('+f.c+');box-shadow:0 5px 0 var('+f.c+'D);"'+
+      ' onclick="fxDrop(\''+f.k+'\')"'+
+      ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();fxDrop(\''+f.k+'\');}">'+
+      '<span class="fx-bin-t" style="color:var('+f.c+'D);">'+svgI(f.ic)+'<span>'+f.n+'</span></span>'+
+      '<span class="fx-bin-i">'+dentro.map(x=>
+        '<span class="fz mini"><span class="fz-name">'+esc(x.nome)+'</span>'+
+        '<span class="fz-ext" style="background:var('+f.c+');">.'+x.ext+'</span></span>').join('')+'</span></div>';
+  }).join('');
+}
+function fxPick(id){fxSel=fxSel===id?null:id;fxRender();sndClick();}
+function fxDrop(famK){
+  if(!fxSel)return;
+  const f=fxFiles.find(x=>x.id===fxSel);
+  if(!f)return;
+  const fb=document.getElementById('fxFb');
+  if(f.fam===famK){
+    f.posto=famK;fxSel=null;st.fxOk++;st.done++;
+    const fam=FAM.find(x=>x.k===famK);
+    fb.className='fb show good';
+    fb.innerHTML=svgI('check')+'<span><span class="fbl">+15 punti</span><span>«'+esc(f.nome)+'.'+f.ext+
+      '» è al suo posto: un file <b>.'+f.ext+'</b> '+fam.cosa+'.</span></span>';
+    addPoints(15);sndOk();
+    if(st.fxOk>=GOAL){markDone(3);showToast(svgI('spark')+'<span>Tutti i file smistati!</span>');}
+  }else{
+    const giusta=FAM.find(x=>x.k===f.fam), sbagliata=FAM.find(x=>x.k===famK);
+    fb.className='fb show bad';
+    fb.innerHTML=svgI('info')+'<span><span class="fbl">Non è questa la famiglia</span><span>Un file <b>.'+f.ext+
+      '</b> '+giusta.cosa+', quindi appartiene a <b>'+giusta.n+'</b>, non a '+sbagliata.n+'.</span></span>';
+    const el=document.getElementById('fz'+f.id);
+    if(el){el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),340);}
+    sndMiss();
+  }
+  lbPush();fxRender();
+}
+
+/* ============ TAPPA 4 — SFIDA DATI ============ */
 const STIME=[
   {n:'una foto scattata con l\'iPad',v:3,u:'MB'},
   {n:'una canzone scaricata',v:4,u:'MB'},
@@ -1191,36 +1394,25 @@ const STIME=[
   {n:'il backup completo di un computer di famiglia',v:1,u:'TB'},
   {n:'una presentazione con tante foto',v:40,u:'MB'}
 ];
-const FAMIGLIE=[
-  {f:'Immagine', ext:['jpg','png','gif','heic']},
-  {f:'Audio',    ext:['mp3','wav','m4a']},
-  {f:'Video',    ext:['mp4','mov','mkv']},
-  {f:'Documento',ext:['pdf','docx','txt','pages']},
-  {f:'Archivio compresso',ext:['zip','rar']}
-];
-const FILE_NAMES=['gita','saggio','ricerca','vacanze','compleanno','progetto','lezione','ricordi'];
 const CATS={
   conv:{lbl:'Conversioni',ic:'ruler'},
   stima:{lbl:'Quanto pesa?',ic:'brick'},
-  ext:{lbl:'Famiglie di file',ic:'tag'},
   vel:{lbl:'Velocità',ic:'timer'}
 };
-
 function genQ(i){
   const r=mulberry32(cyrb53(DAY+'|q'+i));
   const order=shuffle(Object.keys(CATS),mulberry32(cyrb53(DAY+'|ord')));
   const cat=order[i%order.length];
   const q={cat};
   if(cat==='conv'){
-    if(r()<0.35){ // confronto tra unità diverse
+    if(r()<0.35){
       const ui=1+Math.floor(r()*3);
       const big=pick([2,3,5,8],r), smallVal=big*1000+pick([-500,500,2000,-200],r);
       const A=nfmt(smallVal)+' '+UNITS[ui-1].s, B=big+' '+UNITS[ui].s;
-      const aWins=smallVal>big*1000;
       q.text='Quale pesa di più: '+A+' oppure '+B+'?';
       q.opts=[A,B,'Sono uguali','Non si può sapere'];
-      q.ok=aWins?0:1;
-      q.expl=B+' = '+nfmt(big*1000)+' '+UNITS[ui-1].s+': il gradino sopra vale sempre ×1000.';
+      q.ok=smallVal>big*1000?0:1;
+      q.expl=B+' = '+nfmt(big*1000)+' '+UNITS[ui-1].s+': il gradino sopra vale sempre ×1.000.';
     }else{
       const ui=Math.floor(r()*3);
       const v=pick([2,3,5,8,10,20],r);
@@ -1236,15 +1428,7 @@ function genQ(i){
     q.opts=[it.v+' '+it.u,...wrong];
     q.ok=0;
     q.expl='L\'ordine di grandezza giusto è il '+UNITS.find(u=>u.s===it.u).n+': sbagliare unità significa sbagliare di mille volte (o più).';
-  }else if(cat==='ext'){
-    const fam=pick(FAMIGLIE,r);
-    const ext=pick(fam.ext,r);
-    const fname=pick(FILE_NAMES,r)+'.'+ext;
-    q.text='Che tipo di file è «'+fname+'»?';
-    q.opts=[fam.f,...shuffle(FAMIGLIE.filter(f=>f!==fam),r).slice(0,3).map(f=>f.f)];
-    q.ok=0;
-    q.expl='L\'estensione .'+ext+' appartiene alla famiglia «'+fam.f+'»: è l\'etichetta che dice al computer come aprire il file.';
-  }else{ // vel
+  }else{
     if(r()<0.25){
       const invio=r()<0.5;
       q.text=invio?'Mandi il video della gita al tuo prof: per il tuo iPad è un…':'Guardi un film in streaming sul divano: per il tuo dispositivo è un…';
@@ -1253,8 +1437,7 @@ function genQ(i){
       q.expl=invio?'I dati partono DA te verso internet: upload. Quando invece arrivano A te, è download.':'I dati arrivano A te da internet: download. Quando li mandi tu, è upload.';
     }else{
       const s=pick([10,25,50,100],r),t=pick([4,8,10,20],r);
-      const size=s*t;
-      const sizeLbl=size>=1000?(size/1000)+' GB':size+' MB';
+      const size=s*t, sizeLbl=size>=1000?(size/1000)+' GB':size+' MB';
       q.text='La rete scarica '+s+' MB al secondo. Quanto serve per un file da '+sizeLbl+'?';
       q.opts=[...new Set([t,t*2,Math.max(1,Math.round(t/2)),t*10])].map(x=>x+' secondi');
       q.ok=0;
@@ -1266,17 +1449,19 @@ function genQ(i){
   q.okIdx=idx.indexOf(q.ok);
   return q;
 }
-
 let curQ=null,answered=false;
 function renderQ(){
   curQ=genQ(st.qi);answered=false;
   const c=CATS[curQ.cat];
+  taskN('qN',st.qOk);
+  dots('qDots',st.qOk);
+  document.getElementById('qTxt').innerHTML='<span>Rispondi a <b>10 domande</b>: ogni risposta esatta di fila vale un bonus. Puoi continuare oltre le dieci per scalare la classifica.</span>';
   document.getElementById('qCat').innerHTML=svgI(c.ic)+'<span>'+c.lbl+'</span>';
   document.getElementById('qStreak').innerHTML=st.streak>=2?svgI('spark')+'<span>Serie di '+st.streak+'</span>':'';
   document.getElementById('qText').textContent=curQ.text;
   document.getElementById('qOpts').innerHTML=curQ.shuffled.map((o,k)=>
     '<button class="q-opt" onclick="answer('+k+')">'+studs(3)+esc(o)+'</button>').join('');
-  const f=document.getElementById('qFeed');f.className='q-feed';f.innerHTML='';
+  const f=document.getElementById('qFeed');f.className='fb';f.innerHTML='';
   document.getElementById('qNext').classList.remove('show');
 }
 function answer(k){
@@ -1286,27 +1471,27 @@ function answer(k){
   btns[curQ.okIdx].classList.add('ok');
   const f=document.getElementById('qFeed');
   if(k===curQ.okIdx){
-    st.streak++;st.done++;
-    const bonus=Math.min(20,(st.streak-1)*4);
-    const pts=20+bonus;
-    f.className='q-feed show good';
-    f.innerHTML=svgI('check')+'<span><span class="qfl">+'+pts+' punti'+(bonus?' (serie di '+st.streak+')':'')+'</span><span>'+esc(curQ.expl)+'</span></span>';
-    addPoints(pts);sndOk();markDone(3);
+    st.streak++;st.done++;st.qOk++;
+    const bonus=Math.min(20,(st.streak-1)*4), pts=20+bonus;
+    f.className='fb show good';
+    f.innerHTML=svgI('check')+'<span><span class="fbl">+'+pts+' punti'+(bonus?' (serie di '+st.streak+')':'')+'</span><span>'+esc(curQ.expl)+'</span></span>';
+    addPoints(pts);sndOk();
+    if(st.qOk>=GOAL)markDone(4);
   }else{
     btns[k].classList.add('ko');
     st.streak=0;
-    f.className='q-feed show bad';
-    f.innerHTML=svgI('info')+'<span><span class="qfl">Dove si è inceppato il ragionamento?</span><span>'+esc(curQ.expl)+'</span></span>';
+    f.className='fb show bad';
+    f.innerHTML=svgI('info')+'<span><span class="fbl">Dove si è inceppato il ragionamento?</span><span>'+esc(curQ.expl)+'</span></span>';
     document.getElementById('doneNum').textContent=st.done;
     sndMiss();
   }
-  lbPush();
+  dots('qDots',st.qOk);lbPush();
   document.getElementById('qNext').classList.add('show');
   document.getElementById('qNextIc').innerHTML=svgI('arrowR');
 }
 function nextQ(){st.qi++;renderQ();sndClick();}
 
-/* ============ TAPPA 4 — MISSIONE SPAZIO ============ */
+/* ============ TAPPA 5 — MISSIONE SPAZIO ============ */
 /* Taratura scarsità: pool COMPLETO (somma fissa 41,3 GB) → liberi iniziali
    64−18−41,3 = 4,7 GB; per arrivare a 12 servono ~7,3 GB in 6 mosse. */
 const SP_CAP=64, SP_SYS=18, SP_TARGET=12, SP_MOSSE=6, SP_CLOUD=8;
@@ -1328,15 +1513,11 @@ const TAG_HINT={unico:'esiste solo qui',riscaricabile:'si può riscaricare',dupl
 let sp=null;
 function spInit(){
   const r=mulberry32(cyrb53(DAY+'|spazio'));
-  const items=shuffle(SP_POOL,r).map((it,i)=>({...it,id:i,stato:null}));
-  sp={items,mosse:SP_MOSSE,cloud:SP_CLOUD,log:[]};
+  sp={items:shuffle(SP_POOL,r).map((it,i)=>({...it,id:i,stato:null})),mosse:SP_MOSSE,cloud:SP_CLOUD,log:[]};
   document.getElementById('spTargetLbl').textContent=SP_TARGET+' GB';
   spRender();
 }
-function spFree(){
-  const usati=sp.items.filter(i=>!i.stato).reduce((a,i)=>a+i.gb,0);
-  return SP_CAP-SP_SYS-usati;
-}
+function spFree(){return SP_CAP-SP_SYS-sp.items.filter(i=>!i.stato).reduce((a,i)=>a+i.gb,0);}
 function spRender(){
   const free=spFree();
   document.getElementById('spFree').textContent=free.toFixed(1);
@@ -1367,8 +1548,7 @@ function spAct(id,mode){
   const it=sp.items.find(x=>x.id===id);
   if(!it||it.stato)return;
   if(mode==='cloud'&&sp.cloud<it.gb)return;
-  it.stato=mode;
-  sp.mosse--;
+  it.stato=mode;sp.mosse--;
   if(mode==='cloud')sp.cloud-=it.gb;
   sp.log.push({it,mode});
   spRender();sndClick();
@@ -1400,20 +1580,17 @@ function spInstalla(){
   document.getElementById('sprList').innerHTML=rows.map(x=>
     '<div class="spr-row '+x.c+'">'+svgI(x.c==='plus'?'check':'info')+'<span>'+x.t+'</span></div>').join('');
   document.getElementById('azIcon3').innerHTML=svgI('spark');
-  if(primaVolta){st.spDone=true;addPoints(pts);sndRank();lbPush();markDone(4);}
+  if(primaVolta){st.spDone=true;addPoints(pts);sndRank();lbPush();markDone(5);}
   document.getElementById('spResult').classList.add('show');
 }
-function spReset(){
-  document.getElementById('spResult').classList.remove('show');
-  spInit();
-}
+function spReset(){document.getElementById('spResult').classList.remove('show');spInit();}
 
-/* ============ TAPPA 5 — RIFLETTI ============ */
+/* ============ TAPPA 6 — RIFLETTI ============ */
 const MANIFESTO=[
   'Prima di scaricare qualcosa, controllo quanto pesa e quanto spazio ho.',
   'Elimino solo ciò che posso recuperare; ciò che è unico lo metto al sicuro.',
   'Ogni tanto faccio pulizia: duplicati e screenshot inutili non servono a nessuno.',
-  'Non tengo app che non uso: occupano spazio e attenzione.',
+  'Guardo l\'estensione prima di aprire un file: mi dice che cosa contiene.',
   'Se un video non parte, penso a dimensione e velocità prima di prendermela con il Wi-Fi.',
   'Lo spazio digitale non è infinito: anche i dati hanno un costo, per me e per l\'ambiente.'
 ];
@@ -1432,13 +1609,13 @@ function toggleMan(i){
 }
 function chiudiPercorso(){
   if(manSel.size!==3)return;
-  if(!st.rifDone){st.rifDone=true;addPoints(50);markDone(5);
+  if(!st.rifDone){st.rifDone=true;addPoints(50);markDone(6);
     showToast(svgI('spark')+'<span>+50 punti per la riflessione. Ben fatto.</span>');}
   document.getElementById('finescore').textContent=st.score;
   document.getElementById('finedone').textContent=st.done;
   document.getElementById('finerank').textContent=RANKS[rankIdx(st.score)].n;
   // il riepilogo prende il posto delle due card: la pagina resta senza scroll
-  document.querySelectorAll('#sec5 .rif-card').forEach(c=>c.style.display='none');
+  document.querySelectorAll('#sec6 .rif-card').forEach(c=>c.style.display='none');
   document.getElementById('fineCard').classList.add('show');
   lbPush();
 }
@@ -1469,8 +1646,9 @@ function avvia(){
   document.getElementById('profCls').textContent=(clsOpt?clsOpt.textContent:cls)+' · '+AVATARS[st.avatar].n;
   ac(); // sblocca WebAudio col gesto del click
   updateRankUI();
-  simRender();
-  cvCalc();cvNewEx();cvDots();
+  scStart();
+  cvNewEx();
+  fxInit();
   renderQ();
   spInit();
   lbStart();
@@ -1481,7 +1659,6 @@ function esci(){location.reload();}
 document.getElementById('appBrand').innerHTML=brandHTML();
 document.getElementById('sndIcon').innerHTML=svgI('soundOn');
 document.getElementById('exitIcon').innerHTML=svgI('exit');
-document.getElementById('azIcon1').innerHTML=svgI('spark');
 document.getElementById('cvIc1').innerHTML=svgI('calc');
 document.getElementById('cvIc2').innerHTML=svgI('ruler');
 document.getElementById('rifIc1').innerHTML=svgI('brain');
@@ -1495,7 +1672,6 @@ document.getElementById('cvFrom').innerHTML=unitOptions(2);
 document.getElementById('cvTo').innerHTML=unitOptions(1);
 buildLogin();
 buildSteps();
-buildScala();
 buildManifesto();
 document.getElementById('vidPlayIcon').innerHTML=svg('play');
 document.getElementById('vBtnPlay').innerHTML=svg('play');
