@@ -138,6 +138,11 @@ select{appearance:none;-webkit-appearance:none;
 .step.a.c5 .stn{background:rgba(0,0,0,.16);color:var(--tx)}
 .step.a.c6{background:var(--lp);box-shadow:0 4px 0 var(--lpD);--bc:var(--lp)}
 .step.a.c7{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
+.step.a.c8{background:var(--lr);box-shadow:0 4px 0 var(--lrD);--bc:var(--lr)}
+/* la tappa premio resta visibile ma bloccata: il lucchetto è un traino, non un ostacolo */
+.step.locked{opacity:.62}
+.step.locked .stn{background:var(--bd)}
+.step .lock{width:13px;height:13px;flex:0 0 auto;color:var(--tx3)}
 .score-card{display:flex;align-items:center;justify-content:space-around;text-align:center}
 .score-num{font-family:var(--head);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--lb);line-height:1}
 .score-done{font-family:var(--head);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--tx);line-height:1}
@@ -179,8 +184,9 @@ select{appearance:none;-webkit-appearance:none;
   .sidebar{gap:6px;padding:11px 12px}
   .brand-mark{width:30px;height:30px}
   .card-lite{padding:8px 11px}
-  .nav{gap:6px}
-  .step{padding:6px 10px;font-size:.76rem;margin-top:3px}
+  .nav{gap:5px}
+  .step{padding:5px 10px;font-size:.75rem;margin-top:3px}
+  .step .stn{width:17px;height:17px;font-size:.62rem}
   .score-num,.score-done{font-size:1.45rem}
   .board-card{min-height:70px}
 }
@@ -192,7 +198,11 @@ select{appearance:none;-webkit-appearance:none;
 .sec-head{flex:none;text-align:center;margin:0 0 4px}
 .sec-title{font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
 .sec-sub{font-size:.93rem;color:var(--tx2);margin-top:1px}
-.sec-body{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px}
+/* overflow-y:auto è una rete di sicurezza: le pagine sono progettate per stare
+   intere nello schermo, ma se un contenuto cresce (es. il confronto dei canali)
+   è meglio poter scorrere che vederlo tagliato. */
+.sec-body{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:11px;overflow-y:auto;overflow-x:hidden;width:100%;padding-bottom:2px}
 .brick-card{position:relative;background:var(--card);border:2px solid var(--bd);border-radius:14px;
   box-shadow:0 6px 0 var(--bd)}
 
@@ -385,7 +395,8 @@ select{appearance:none;-webkit-appearance:none;
   box-shadow:0 4px 0 var(--bd);font-family:var(--head)}
 .tr-mode svg{width:16px;height:16px;flex:0 0 auto;color:var(--tx2)}
 .tr-mode .trm-n{flex:1;min-width:0;font-size:.78rem;font-weight:700;color:var(--tx)}
-.tr-mode .trm-v{font-family:var(--mono);font-size:.66rem;font-weight:700;color:var(--tx2);flex:0 0 auto}
+.tr-mode .trm-v{font-family:var(--mono);font-size:.66rem;font-weight:700;color:var(--tx2);flex:0 0 auto;text-align:right}
+.tr-mode .trm-v i{display:block;font-style:normal;font-size:.55rem;opacity:.7;font-weight:600}
 .tr-mode:hover:not(:disabled){border-color:var(--lc);transform:translateY(-1px)}
 .tr-mode.a{background:var(--lc);border-color:var(--lc);box-shadow:0 4px 0 var(--lcD)}
 .tr-mode.a svg,.tr-mode.a .trm-n,.tr-mode.a .trm-v{color:#fff}
@@ -402,6 +413,8 @@ select{appearance:none;-webkit-appearance:none;
 .tr-go{flex:0 0 auto;display:inline-flex;align-items:center;gap:9px;padding:11px 26px;font-size:.95rem;
   background:var(--ly);color:var(--tx);box-shadow:0 5px 0 var(--lyD);--bc:var(--ly)}
 .tr-go svg{width:17px;height:17px}
+.tr-skip{flex:0 0 auto;padding:9px 16px;font-size:.8rem;background:var(--card);color:var(--tx2);
+  border:2px solid var(--bd);box-shadow:0 4px 0 var(--bd);--bc:var(--bd)}
 .tr-prog{flex:1;display:flex;align-items:center;gap:12px;min-width:0}
 .tr-bar{flex:1;height:20px;border-radius:7px;background:var(--panel);border:2px solid var(--bd);overflow:hidden}
 .tr-bar i{display:block;height:100%;width:0;background:var(--lc);
@@ -410,16 +423,74 @@ select{appearance:none;-webkit-appearance:none;
 .tr-bar i.ko{background:var(--warn)}
 .tr-time{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--tx);flex:0 0 auto;min-width:132px;text-align:right}
 /* confronto tra i canali */
-.tr-cmp{width:100%;max-width:1120px;display:none;flex-direction:column;gap:5px}
-.tr-cmp.show{display:flex}
-.tr-cmp-t{font-family:var(--head);font-size:.72rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--tx2)}
+.tr-cmp{width:100%;max-width:1120px;display:none;grid-template-columns:1fr 1fr;gap:4px 22px;align-items:center}
+.tr-cmp.show{display:grid}
+.tr-cmp-t{grid-column:1/-1;font-family:var(--head);font-size:.72rem;font-weight:700;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--tx2)}
 .tr-cmp-row{display:flex;align-items:center;gap:10px;font-size:.8rem}
-.tr-cmp-row .trc-n{width:170px;flex:0 0 auto;font-family:var(--head);font-weight:700;color:var(--tx2)}
+.tr-cmp-row .trc-n{width:150px;flex:0 0 auto;font-family:var(--head);font-weight:700;color:var(--tx2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tr-cmp-row .trc-b{flex:1;height:13px;border-radius:4px;background:var(--panel);border:1px solid var(--bd);overflow:hidden}
 .tr-cmp-row .trc-b i{display:block;height:100%;background:var(--lc);border-radius:3px}
 .tr-cmp-row.best .trc-n{color:var(--lgD)} .tr-cmp-row.best .trc-b i{background:var(--lg)}
 .tr-cmp-row.worst .trc-b i{background:var(--warn)}
-.tr-cmp-row .trc-t{width:120px;flex:0 0 auto;text-align:right;font-family:var(--mono);font-weight:700;color:var(--tx)}
+.tr-cmp-row .trc-t{width:96px;flex:0 0 auto;text-align:right;font-family:var(--mono);font-weight:700;color:var(--tx)}
+
+/* su schermi bassi la tappa più densa (trasferimenti) si stringe per entrare intera */
+@media (max-height:900px){
+  #sec4 .sec-body{gap:7px}
+  #sec4 .task{padding:7px 16px}
+  .tr-dev{padding:7px 11px;gap:4px}
+  .tr-dest{padding:6px 10px;gap:4px}
+  .tr-file{padding:7px 11px}
+  .tr-mode{padding:5px 9px}
+  .tr-cmp{gap:2px 22px}
+  .tr-cmp-row{font-size:.75rem}
+  .tr-run{gap:12px}
+  .tr-go{padding:9px 20px}
+}
+
+/* ============ BRICK INVADERS (tappa premio) ============ */
+/* il gioco riempie tutta l'altezza della colonna, come la sidebar: niente scroll */
+#sec8 .sec-body{overflow:hidden;justify-content:stretch}
+.bi-wrap{width:100%;max-width:1180px;flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;align-items:center}
+.bi-hud{width:100%;display:flex;align-items:center;gap:14px;padding:9px 16px;background:var(--card);
+  border:2px solid var(--bd);border-radius:12px;box-shadow:0 5px 0 var(--bd)}
+.bi-mis{flex:1;min-width:0}
+.bi-mis .bim-n{font-family:var(--head);font-size:.9rem;font-weight:700;line-height:1.2}
+.bi-mis .bim-d{font-size:.78rem;color:var(--tx2);line-height:1.25}
+.bi-stat{flex:0 0 auto;text-align:center}
+.bi-stat .bis-v{font-family:var(--head);font-size:1.25rem;font-weight:700;color:var(--lb);line-height:1}
+.bi-stat .bis-l{font-family:var(--head);font-size:.6rem;font-weight:700;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--tx2)}
+/* vite come mattoncini, mai cuori o emoji */
+.bi-life{display:flex;gap:4px}
+.bi-life i{width:17px;height:12px;border-radius:3px;background:var(--lo);display:block;
+  box-shadow:0 2px 0 var(--loD),inset 0 2px 0 rgba(255,255,255,.3)}
+.bi-life i.off{background:var(--bd);box-shadow:0 2px 0 var(--bd2)}
+.bi-stage{position:relative;width:100%;flex:1;min-height:0;border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow2),0 7px 0 var(--bd2);background:#101426}
+#biCanvas{display:block;width:100%;height:100%;cursor:none}
+.bi-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:11px;text-align:center;padding:22px;background:rgba(16,20,38,.93);color:#fff}
+.bi-over.hide{display:none}
+.bi-over h3{font-size:1.5rem;letter-spacing:-.01em}
+.bi-over p{font-size:.92rem;color:#c7cbe0;max-width:520px;line-height:1.45}
+.bi-over .bi-keys{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-family:var(--head);
+  font-size:.76rem;font-weight:700;color:#c7cbe0}
+.bi-over .bi-keys span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  border-radius:7px;padding:5px 11px}
+.bi-btn{padding:12px 30px;font-size:1rem;background:var(--ly);color:var(--tx);--bc:var(--ly);box-shadow:0 5px 0 var(--lyD)}
+/* schermata di blocco */
+.bi-lock{width:100%;max-width:640px;padding:26px 30px;text-align:center;display:flex;
+  flex-direction:column;align-items:center;gap:11px}
+.bi-lock svg{width:42px;height:42px;color:var(--tx3)}
+.bi-lock h3{font-size:1.2rem}
+.bi-lock p{font-size:.92rem;color:var(--tx2);line-height:1.45;max-width:460px}
+.bi-lock-bar{width:100%;max-width:340px;height:12px;border-radius:6px;background:var(--panel);
+  border:2px solid var(--bd);overflow:hidden}
+.bi-lock-bar i{display:block;height:100%;background:var(--lo);width:0;transition:width .4s;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.3) 0 2px,transparent 2px 14px)}
 
 /* ============ SFIDA ============ */
 .q-card{width:100%;max-width:860px;padding:18px 28px 20px;display:flex;flex-direction:column;gap:13px}
@@ -786,6 +857,7 @@ select{appearance:none;-webkit-appearance:none;
         <div class="tr-run">
           <button class="brick-btn tr-go" id="trGo" onclick="trAvvia()" disabled><span class="studs"><span></span><span></span><span></span></span><span id="trGoIc"></span><span>Avvia il trasferimento</span></button>
           <button class="brick-btn btn-next" id="trNextBtn" onclick="trNext()" style="display:none;flex:0 0 auto;"><span class="studs"><span></span><span></span></span>Consegna successiva</button>
+          <button class="brick-btn tr-skip" id="trSkip" onclick="trSalta()" style="display:none;"><span id="trSkipLbl">Salta l'attesa</span></button>
           <div class="tr-prog"><div class="tr-bar"><i id="trBar"></i></div><span class="tr-time" id="trTime">—</span></div>
         </div>
         <div class="fb" id="trFb"></div>
@@ -879,6 +951,46 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
+    <!-- TAPPA 8: BRICK INVADERS (premio di merito) -->
+    <section class="sec" id="sec8">
+      <div class="sec-head">
+        <div class="sec-title">Brick Invaders</div>
+        <div class="sec-sub" id="biSub">Cinque missioni: colpisci solo i mattoncini giusti.</div>
+      </div>
+      <div class="sec-body" style="justify-content:flex-start;">
+        <!-- schermata di blocco -->
+        <div class="bi-lock brick-card" id="biLock">
+          <span id="biLockIc"></span>
+          <h3 class="hd">Arcade bloccato</h3>
+          <p id="biLockMsg"></p>
+          <div class="bi-lock-bar"><i id="biLockBar"></i></div>
+        </div>
+        <!-- gioco -->
+        <div class="bi-wrap" id="biWrap" style="display:none;">
+          <div class="bi-hud">
+            <div class="bi-mis">
+              <div class="bim-n" id="biMisN"></div>
+              <div class="bim-d" id="biMisD"></div>
+            </div>
+            <div class="bi-stat"><div class="bis-v" id="biTarget">0</div><div class="bis-l">Bersagli</div></div>
+            <div class="bi-stat"><div class="bis-v" id="biPts">0</div><div class="bis-l">Punti</div></div>
+            <div class="bi-stat"><div class="bi-life" id="biLife"></div><div class="bis-l">Vite</div></div>
+          </div>
+          <div class="bi-stage">
+            <canvas id="biCanvas" width="900" height="440"></canvas>
+            <div class="bi-over" id="biOver">
+              <h3 class="hd" id="biOverT">Pronto?</h3>
+              <p id="biOverP"></p>
+              <div class="bi-keys">
+                <span>Mouse o frecce: muovi</span><span>Click o barra spazio: spara</span>
+              </div>
+              <button class="brick-btn bi-btn" id="biBtn" onclick="biStart()"><span class="studs"><span></span><span></span><span></span></span>Gioca</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- esito missione spazio -->
     <div class="sp-result" id="spResult">
       <div class="spr-card">
@@ -915,6 +1027,7 @@ select{appearance:none;-webkit-appearance:none;
       <li><b>Sfida Dati</b> — 10 domande generate con la <b>classifica live</b> di chi è in laboratorio in quel momento; il pool è seedato sul giorno, quindi tutta la classe gioca le stesse domande e sono discutibili insieme. Si può proseguire oltre le 10 per scalare la classifica.</li>
       <li><b>Missione Spazio</b> — decisioni con scarsità reale (mosse e cloud limitati, scelte irreversibili). Il feedback strategico arriva alla fine, come conseguenza.</li>
       <li><b>Rifletti</b> — metacognizione e manifesto digitale personale.</li>
+      <li><b>Brick Invaders</b> — <b>premio di merito</b>, si sblocca al grado Megabyte (500 punti) e fino ad allora resta visibile col lucchetto, come traino. Non è un arcade generico: le cinque missioni ripassano il percorso — riconoscere l'unità (solo i KB), gli ordini di grandezza (solo i file oltre 1 GB), il limite FAT32 (solo ciò che sta sotto i 4 GB), le famiglie (solo gli archivi) e infine la distinzione fra riscaricabile e unico, dove i mattoncini portano il nome del file («film noleggiato» contro «video recita») e bisogna decidere. Il punteggio arcade entra in classifica diviso per dieci: il percorso didattico deve valere più del gioco.</li>
     </ul>
 
     <h3><span id="docIc3"></span><span>Metodologie</span></h3>
@@ -1093,7 +1206,9 @@ function addPoints(n){
   document.getElementById('doneNum').textContent=st.done;
   const after=rankIdx(st.score);
   updateRankUI();
+  if(typeof biRenderLock==='function')biRenderLock();   // l'arcade può essersi appena sbloccato
   if(after>before){showToast(svgI('medal')+'<span>Promozione! Ora sei grado <b>'+RANKS[after].n+'</b></span>');sndRank();}
+  if(before<2&&after>=2)showToast(svgI('bolt')+'<span><b>Brick Invaders</b> sbloccato: lo trovi in fondo al percorso.</span>');
 }
 function updateRankUI(){
   const i=rankIdx(st.score),cur=RANKS[i],next=RANKS[i+1];
@@ -1149,7 +1264,8 @@ const SECS=[
   {t:'Trasferire un file',ic:'wifi'},
   {t:'Sfida Dati',ic:'bolt'},
   {t:'Missione Spazio',ic:'tablet'},
-  {t:'Rifletti',ic:'brain'}
+  {t:'Rifletti',ic:'brain'},
+  {t:'Brick Invaders',ic:'bolt'}
 ];
 function buildSteps(){
   document.getElementById('navSteps').innerHTML=SECS.map((s,i)=>
@@ -1163,6 +1279,8 @@ function G(i){
     document.getElementById('step'+k).classList.toggle('a',k===i);
   });
   if(ytPlayer&&ytPlayer.pauseVideo&&i!==0)ytPlayer.pauseVideo();
+  // il gioco non gira in una tappa nascosta; entrando va rimisurato sullo spazio reale
+  if(i===8){biRenderLock();requestAnimationFrame(biResize);} else biStop();
 }
 function markDone(i){document.getElementById('step'+i).classList.add('done');}
 
@@ -1569,15 +1687,19 @@ const TR_DEV=[
   {k:'icloud',n:'iCloud piano gratuito',  ic:'cloud',   cap:5,    used:4.6,
    conn:['net'], note:'Il piano gratuito è di soli 5 GB'}
 ];
-/* MB/s effettivi misurati, non velocità di targa */
+/* ATTENZIONE alla differenza che confonde tutti — ed è il cuore di questa tappa:
+   le CONNESSIONI si dichiarano in megaBIT al secondo (Mbit/s), i FILE si misurano
+   in megaBYTE (MB). 1 byte = 8 bit, quindi 500 Mbit/s = 62,5 MB/s.
+   `mbit` = velocità dichiarata, `mbs` = MB/s realmente disponibili.
+   >>> I valori della rete della scuola si correggono QUI. <<< */
 const TR_MODI=[
-  {k:'bt',     n:'Bluetooth',        ic:'bt',      mbs:0.15, perche:'nato per cuffie e tastiere, non per i file'},
-  {k:'wifi',   n:'Wi-Fi della scuola',ic:'wifi',   mbs:2.5,  perche:'la rete è condivisa da tutte le classi'},
-  {k:'net',    n:'Internet (cloud)', ic:'net',     mbs:2,    perche:'in salita la fibra è molto più lenta che in discesa'},
-  {k:'airdrop',n:'AirDrop',          ic:'airdrop', mbs:40,   perche:'crea un Wi-Fi diretto fra i due dispositivi'},
-  {k:'usb2',   n:'Cavo USB 2.0',     ic:'cable',   mbs:35,   perche:'il cavo classico delle chiavette economiche'},
-  {k:'usb3',   n:'Cavo USB 3.0',     ic:'cable',   mbs:110,  perche:'la porta blu: circa tre volte l\'USB 2.0'},
-  {k:'usbc',   n:'Cavo USB-C',       ic:'cable',   mbs:700,  perche:'il collegamento più veloce che hai a disposizione'}
+  {k:'bt',     n:'Bluetooth',        ic:'bt',      mbit:2,     mbs:0.25, perche:'nato per cuffie e tastiere, non per i file'},
+  {k:'wifi',   n:'Wi-Fi della scuola',ic:'wifi',   mbit:500,   mbs:62.5, perche:'la rete della scuola dichiara 500 Mbit/s, cioè 62,5 MB/s'},
+  {k:'net',    n:'Internet (cloud)', ic:'net',     mbit:500,   mbs:62.5, perche:'la fibra della scuola è simmetrica (1 Gbit/s): va veloce anche in salita'},
+  {k:'airdrop',n:'AirDrop',          ic:'airdrop', mbit:800,   mbs:100,  perche:'crea un Wi-Fi diretto fra i due dispositivi, senza passare dalla rete condivisa'},
+  {k:'usb2',   n:'Cavo USB 2.0',     ic:'cable',   mbit:480,   mbs:35,   perche:'dichiara 480 Mbit/s, ma nella pratica ne rende molti meno'},
+  {k:'usb3',   n:'Cavo USB 3.0',     ic:'cable',   mbit:5000,  mbs:110,  perche:'qui il freno non è il cavo ma il disco che scrive'},
+  {k:'usbc',   n:'Cavo USB-C',       ic:'cable',   mbit:10000, mbs:700,  perche:'il collegamento più veloce che hai a disposizione'}
 ];
 const TR_FILES=[
   {n:'saggio-di-natale.mov', mb:5200},
@@ -1663,8 +1785,9 @@ function trRender(){
     const ok=canali.some(c=>c.k===m.k);
     return '<button class="tr-mode'+(trMode&&trMode.k===m.k?' a':'')+'" onclick="trPickMode(\''+m.k+'\')"'+
       (ok?'':' disabled title="Non disponibile fra questi due dispositivi"')+'>'+
-      svgI(m.ic)+'<span class="trm-n">'+m.n+'</span><span class="trm-v">'+
-      (m.mbs>=1?nfmt(m.mbs):nfmt(m.mbs*1000)+'&nbsp;KB')+(m.mbs>=1?'&nbsp;MB':'')+'/s</span></button>';
+      svgI(m.ic)+'<span class="trm-n">'+m.n+'</span><span class="trm-v"><b>'+
+      (m.mbs>=1?nfmt(m.mbs)+'&nbsp;MB':nfmt(m.mbs*1000)+'&nbsp;KB')+'/s</b>'+
+      '<i>'+nfmt(m.mbit)+' Mbit/s</i></span></button>';
   }).join('');
   document.getElementById('trGo').disabled=!(trDest&&trMode)||trBusy||trChiusa;
 }
@@ -1713,17 +1836,37 @@ function trAvvia(){
     },40);
     return;
   }
+  // IL TEMPO È VERO: la barra avanza in tempo reale, un secondo vale un secondo.
+  // Aspettare davvero è il punto — è così che si capisce quanto costa un canale lento.
+  // Chi non vuole (o non può) aspettare usa "Salta l'attesa": la consegna vale comunque.
   const sec=trFile.mb/trMode.mbs;
   trBusy=true;bar.className='';bar.style.width='0';
   document.getElementById('trGo').disabled=true;
-  const DUR=2000;                       // l'animazione dura sempre ~2 s...
+  const skip=document.getElementById('trSkip');
   const t0=performance.now();
-  const anim=setInterval(()=>{
-    const k=Math.min(1,(performance.now()-t0)/DUR);
+  trTimer=setInterval(()=>{
+    const el=(performance.now()-t0)/1000;
+    const k=Math.min(1,el/sec);
     bar.style.width=(k*100)+'%';
-    tempo.textContent=fmtDur(sec*k)+' / '+fmtDur(sec);   // ...ma il tempo mostrato è quello VERO
-    if(k>=1){clearInterval(anim);trBusy=false;trFine(sec);}
-  },40);
+    tempo.textContent=fmtDur(el)+' / '+fmtDur(sec);
+    // il tasto per saltare compare solo quando l'attesa è davvero lunga
+    if(sec>12&&el>2.5&&skip.style.display==='none'){skip.style.display='inline-flex';}
+    if(skip.style.display!=='none')
+      document.getElementById('trSkipLbl').textContent='Salta l\'attesa (mancano '+fmtDur(sec-el)+')';
+    if(k>=1)trChiudiTrasferimento(sec);
+  },100);
+}
+let trTimer=null;
+function trChiudiTrasferimento(sec){
+  clearInterval(trTimer);trTimer=null;trBusy=false;
+  document.getElementById('trSkip').style.display='none';
+  document.getElementById('trBar').style.width='100%';
+  document.getElementById('trTime').textContent=fmtDur(sec)+' / '+fmtDur(sec);
+  trFine(sec);
+}
+function trSalta(){
+  if(!trBusy||!trMode)return;
+  trChiudiTrasferimento(trFile.mb/trMode.mbs);
 }
 function trFine(sec){
   const fb=document.getElementById('trFb');
@@ -1732,6 +1875,8 @@ function trFine(sec){
   const eraVeloce=trMode.k===piuVeloce.k;
   fb.className='fb show good';
   fb.innerHTML=svgI('check')+'<span><span class="fbl">Trasferimento completato in '+fmtDur(sec)+'</span><span>'+
+    '«'+trMode.n+'» dichiara <b>'+nfmt(trMode.mbit)+' Mbit/s</b>: sono megaBIT, e in un byte ce ne stanno 8, '+
+    'quindi in pratica sposta <b>'+nfmt(trMode.mbs)+' MB/s</b>. '+
     fmtSize(trFile.mb)+' ÷ '+nfmt(trMode.mbs)+' MB/s = '+fmtDur(sec)+'. '+
     (trTask.veloce&&!eraVeloce
       ? 'Funziona, ma non era la via più rapida: con <b>'+piuVeloce.n+'</b> ci volevano '+fmtDur(trFile.mb/piuVeloce.mbs)+'.'
@@ -1739,8 +1884,24 @@ function trFine(sec){
     '</span></span>';
   sndOk();
   trConfronto(canali);
-  const centrato=trDest.k===trTask.dest&&(!trTask.veloce||eraVeloce);
-  if(centrato)trPunti(false,'');
+  // Ogni esito deve avere una via d'uscita: o la consegna è centrata e si avanza,
+  // oppure l'app dice esattamente che cosa manca e si riprova. Mai restare appesi.
+  const destGiusta=trDest.k===trTask.dest;
+  const centrato=destGiusta&&(!trTask.veloce||eraVeloce);
+  if(centrato){trPunti(false,'');}
+  else{
+    fb.className='fb show bad';
+    fb.innerHTML=svgI('info')+'<span><span class="fbl">Il file è arrivato, ma la consegna non è ancora soddisfatta</span><span>'+
+      (!destGiusta
+        ? 'Ti era chiesto di portarlo su <b>'+dev(trTask.dest).n+'</b>: scegli quella destinazione e riprova.'
+        : 'Il trasferimento è riuscito in '+fmtDur(sec)+', ma la consegna chiede il modo <b>più veloce</b>: '+
+          'con <b>'+piuVeloce.n+'</b> bastavano '+fmtDur(trFile.mb/piuVeloce.mbs)+'. Riprova con quel canale.'+
+          // su file piccoli il divario è impercettibile: dirlo evita che la consegna sembri un capriccio
+          (sec-trFile.mb/piuVeloce.mbs<3
+            ? ' Su un file così leggero la differenza si sente appena, ma sullo stesso divario un file da 5 GB cambierebbe di minuti.'
+            : ''))+
+      '</span></span>';
+  }
   trRender();
 }
 /* il confronto è la parte che dà la percezione della realtà */
@@ -2017,6 +2178,222 @@ function chiudiPercorso(){
   lbPush();
 }
 
+/* ============ TAPPA 8 — BRICK INVADERS ============
+   Premio di merito: si sblocca al grado Megabyte. Non è un arcade qualsiasi —
+   ogni missione mette alla prova una cosa diversa fra quelle imparate nel percorso
+   (unità, ordini di grandezza, limite FAT32, famiglie, riscaricabile vs unico). */
+const BI_SBLOCCO=RANKS[2].p;            // grado Megabyte
+const BI_PER_MISSIONE=6;                // bersagli da centrare per superare una missione
+const BI_QUOTA_BERSAGLI=0.45;           // ~45% degli spawn è valido: senza questo si aspetta a vuoto
+const BI_MAX_SCENA=9;                   // oltre questo numero lo schermo diventa illeggibile
+const BI_MISSIONI=[
+  {n:'Solo i Kilobyte', d:'Colpisci i mattoncini misurati in KB. Lascia passare tutti gli altri.',
+   test:b=>b.u==='KB', et:b=>b.dim},
+  {n:'I pesi massimi',  d:'Colpisci solo i file da 1 GB in su.',
+   test:b=>b.mb>=1000, et:b=>b.dim},
+  {n:'Roba da chiavetta', d:'La chiavetta è FAT32: colpisci solo i file che ci starebbero, cioè sotto i 4 GB.',
+   test:b=>b.mb<4000, et:b=>b.dim},
+  {n:'Solo archivi', d:'Colpisci soltanto gli archivi compressi. Guarda l\'estensione.',
+   test:b=>b.fam==='arc', et:b=>b.ext},
+  // qui l'etichetta è il NOME del file: scrivere "riscaricabile" darebbe la risposta
+  {n:'Libera lo spazio', d:'Colpisci ciò che si può riscaricare. Risparmia i ricordi unici: quelli non tornano.',
+   test:b=>b.tag==='ric', et:b=>b.desc}
+];
+/* bersagli con dati veri e coerenti col resto dell'app */
+const BI_POOL=[
+  {dim:'1 KB',   mb:0.001, u:'KB',ext:'.txt',fam:'doc',tag:'uni',desc:'appunti tuoi'},
+  {dim:'80 KB',  mb:0.08,  u:'KB',ext:'.pdf',fam:'doc',tag:'ric',desc:'circolare'},
+  {dim:'500 KB', mb:0.5,   u:'KB',ext:'.jpg',fam:'img',tag:'uni',desc:'tua foto'},
+  {dim:'3 MB',   mb:3,     u:'MB',ext:'.jpg',fam:'img',tag:'uni',desc:'foto gita'},
+  {dim:'40 MB',  mb:40,    u:'MB',ext:'.zip',fam:'arc',tag:'ric',desc:'copia doppia'},
+  {dim:'150 MB', mb:150,   u:'MB',ext:'.mov',fam:'vid',tag:'uni',desc:'video recita'},
+  {dim:'800 MB', mb:800,   u:'MB',ext:'.rar',fam:'arc',tag:'ric',desc:'file scaricato'},
+  {dim:'2 GB',   mb:2000,  u:'GB',ext:'.mp4',fam:'vid',tag:'ric',desc:'film noleggiato'},
+  {dim:'4,5 GB', mb:4500,  u:'GB',ext:'.mkv',fam:'vid',tag:'ric',desc:'serie già vista'},
+  {dim:'5,2 GB', mb:5200,  u:'GB',ext:'.mov',fam:'vid',tag:'uni',desc:'saggio di Natale'},
+  {dim:'8 GB',   mb:8000,  u:'GB',ext:'.7z', fam:'arc',tag:'ric',desc:'gioco scaricato'},
+  {dim:'1 TB',   mb:1e6,   u:'TB',ext:'.zip',fam:'arc',tag:'ric',desc:'backup già copiato'},
+  {dim:'12 MB',  mb:12,    u:'MB',ext:'.mp3',fam:'aud',tag:'ric',desc:'canzone streaming'},
+  {dim:'300 MB', mb:300,   u:'MB',ext:'.m4a',fam:'aud',tag:'uni',desc:'tua registrazione'}
+];
+const BI_TAGL={ric:'riscaricabile',uni:'unico'};
+const BI_COL={B:'--lr',KB:'--lo',MB:'--ly',GB:'--lg',TB:'--lb'};
+let bi=null,biRaf=null,biKeys={};
+/* Il campo di gioco non ha più misure fisse: si adatta allo spazio della colonna.
+   biW/biH sono le dimensioni LOGICHE in px CSS; il buffer del canvas viene
+   moltiplicato per il devicePixelRatio, altrimenti su schermi retina è sfocato. */
+let biW=900,biH=440;
+function biResize(){
+  const c=document.getElementById('biCanvas');
+  if(!c)return;
+  const r=c.getBoundingClientRect();
+  if(r.width<10||r.height<10)return;          // tappa non visibile: niente da misurare
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  biW=Math.round(r.width);biH=Math.round(r.height);
+  c.width=Math.round(biW*dpr);c.height=Math.round(biH*dpr);
+  c.getContext('2d').setTransform(dpr,0,0,dpr,0,0);
+  if(bi)bi.px=Math.max(34,Math.min(biW-34,bi.px));
+}
+
+function biSbloccato(){return st.score>=BI_SBLOCCO;}
+function biRenderLock(){
+  const ok=biSbloccato();
+  document.getElementById('biLock').style.display=ok?'none':'flex';
+  document.getElementById('biWrap').style.display=ok?'flex':'none';
+  document.getElementById('biLockIc').innerHTML=svg('medal');
+  document.getElementById('biLockMsg').innerHTML=ok?'':
+    'Questo è il premio del percorso: si apre quando raggiungi il grado <b>Megabyte</b>. '+
+    'Ti mancano <b>'+Math.max(0,BI_SBLOCCO-st.score)+' punti</b> — ogni consegna delle altre tappe ti avvicina.';
+  document.getElementById('biLockBar').style.width=Math.min(100,st.score/BI_SBLOCCO*100)+'%';
+  // la voce di menu mostra il lucchetto finché non è meritata
+  const step=document.getElementById('step8');
+  if(step){step.classList.toggle('locked',!ok);
+    const lk=step.querySelector('.lock');
+    if(!ok&&!lk)step.insertAdjacentHTML('beforeend','<span class="lock">'+svg('medal')+'</span>');
+    if(ok&&lk)lk.remove();}
+}
+function biInit(){
+  biRenderLock();
+  window.addEventListener('resize',()=>{if(st.sec===8)biResize();});
+  const c=document.getElementById('biCanvas');
+  c.addEventListener('mousemove',e=>{if(!bi||!bi.run)return;
+    const r=c.getBoundingClientRect();bi.px=(e.clientX-r.left)/r.width*c.width;});
+  c.addEventListener('mousedown',e=>{e.preventDefault();biSpara();});
+  document.addEventListener('keydown',e=>{
+    if(st.sec!==8||!bi||!bi.run)return;
+    biKeys[e.key]=true;
+    if(e.key===' '){e.preventDefault();biSpara();}
+  });
+  document.addEventListener('keyup',e=>{biKeys[e.key]=false;});
+}
+function biStart(){
+  if(!biSbloccato())return;
+  biResize();
+  bi={run:true,mis:0,pts:0,vite:3,centrati:0,px:biW/2,proi:[],mattoni:[],t:0,spawn:0};
+  document.getElementById('biOver').classList.add('hide');
+  biHud();
+  cancelAnimationFrame(biRaf);
+  biLoop();
+}
+function biHud(){
+  const m=BI_MISSIONI[bi.mis];
+  document.getElementById('biMisN').textContent='Missione '+(bi.mis+1)+' di '+BI_MISSIONI.length+' — '+m.n;
+  document.getElementById('biMisD').textContent=m.d;
+  document.getElementById('biTarget').textContent=bi.centrati+' / '+BI_PER_MISSIONE;
+  document.getElementById('biPts').textContent=bi.pts;
+  document.getElementById('biLife').innerHTML=[0,1,2].map(i=>
+    '<i'+(i<bi.vite?'':' class="off"')+'></i>').join('');
+}
+function biSpara(){
+  if(!bi||!bi.run)return;
+  if(bi.proi.length>=3)return;                 // niente raffica infinita: bisogna mirare
+  bi.proi.push({x:bi.px,y:biH-48});
+  if(sndOn)tone(880,0,.05,.05);
+}
+function biSpawn(){
+  if(bi.mattoni.length>=BI_MAX_SCENA)return;
+  const m=BI_MISSIONI[bi.mis];
+  const prep=p=>{const q={...p};q.tagL=BI_TAGL[q.tag];q.bers=m.test(q);q.et=m.et(q);return q;};
+  const tutti=BI_POOL.map(prep);
+  const validi=tutti.filter(q=>q.bers), altri=tutti.filter(q=>!q.bers);
+  // senza una quota garantita di bersagli si resta ad aspettare senza far nulla
+  const src=(Math.random()<BI_QUOTA_BERSAGLI&&validi.length)?validi:(altri.length?altri:validi);
+  const b={...src[Math.floor(Math.random()*src.length)]};
+  b.w=Math.max(64,b.et.length*(b.et.length>11?7.6:10)+24);b.h=27;
+  b.x=20+Math.random()*Math.max(30,biW-40-b.w);b.y=-30;
+  // la velocità scala con l'altezza del campo: il tempo di discesa resta lo stesso
+  // su ogni schermo, altrimenti su un campo più alto il gioco si affloscia
+  b.v=(1.2+Math.random()*0.6+bi.mis*0.18)*(biH/440);
+  bi.mattoni.push(b);
+}
+function biLoop(){
+  if(!bi||!bi.run)return;
+  const c=document.getElementById('biCanvas'),x=c.getContext('2d');
+  bi.t++;
+  const passo=7*(biW/900);
+  if(biKeys['ArrowLeft'])bi.px-=passo;
+  if(biKeys['ArrowRight'])bi.px+=passo;
+  bi.px=Math.max(34,Math.min(biW-34,bi.px));
+  if(bi.t-bi.spawn>Math.max(34,74-bi.mis*7)){bi.spawn=bi.t;biSpawn();}
+  // fondo: base LEGO scura con borchie
+  x.fillStyle='#101426';x.fillRect(0,0,biW,biH);
+  x.fillStyle='rgba(255,255,255,.05)';
+  for(let gy=18;gy<biH;gy+=34)for(let gx=18;gx<biW;gx+=34){x.beginPath();x.arc(gx,gy,4,0,6.3);x.fill();}
+  // proiettili
+  bi.proi.forEach(p=>{p.y-=9*(biH/440);});
+  bi.proi=bi.proi.filter(p=>p.y>-10);
+  x.fillStyle='#FFED00';
+  bi.proi.forEach(p=>{x.fillRect(p.x-3,p.y,6,13);});
+  // mattoncini
+  bi.mattoni.forEach(b=>{b.y+=b.v;});
+  for(let i=bi.mattoni.length-1;i>=0;i--){
+    const b=bi.mattoni[i];
+    let colpito=false;
+    for(let j=bi.proi.length-1;j>=0;j--){
+      const p=bi.proi[j];
+      if(p.x>b.x&&p.x<b.x+b.w&&p.y<b.y+b.h&&p.y+13>b.y){
+        bi.proi.splice(j,1);colpito=true;break;
+      }
+    }
+    if(colpito){
+      bi.mattoni.splice(i,1);
+      if(b.bers){bi.pts+=10;bi.centrati++;sndOk();
+        if(bi.centrati>=BI_PER_MISSIONE)biAvanzaMissione();}
+      else{bi.vite--;sndMiss();if(bi.vite<=0){biFine(false);return;}}
+      biHud();
+      continue;
+    }
+    if(b.y>biH){
+      bi.mattoni.splice(i,1);
+      // perde una vita solo chi lascia scappare un BERSAGLIO: gli altri devono passare
+      if(b.bers){bi.vite--;sndMiss();biHud();if(bi.vite<=0){biFine(false);return;}}
+    }
+  }
+  bi.mattoni.forEach(b=>biDisegnaMattone(x,b));
+  // navicella: una piastra con due borchie
+  x.fillStyle='#0055BF';x.fillRect(bi.px-34,biH-36,68,20);
+  x.fillStyle='rgba(255,255,255,.28)';x.fillRect(bi.px-34,biH-36,68,5);
+  x.fillStyle='#0055BF';x.fillRect(bi.px-22,biH-44,14,8);x.fillRect(bi.px+8,biH-44,14,8);
+  biRaf=requestAnimationFrame(biLoop);
+}
+function biDisegnaMattone(x,b){
+  const col=getComputedStyle(document.documentElement).getPropertyValue(BI_COL[b.u]||'--lb').trim()||'#0055BF';
+  x.fillStyle=col;
+  x.fillRect(b.x,b.y,b.w,b.h);
+  x.fillStyle='rgba(255,255,255,.26)';x.fillRect(b.x,b.y,b.w,6);
+  x.fillStyle=col;x.fillRect(b.x+10,b.y-6,13,6);x.fillRect(b.x+b.w-23,b.y-6,13,6);
+  x.fillStyle=(b.u==='MB')?'#1A1A1A':'#fff';
+  x.font='700 '+(b.et.length>11?11:13)+'px Lexend, sans-serif';x.textAlign='center';x.textBaseline='middle';
+  x.fillText(b.et,b.x+b.w/2,b.y+b.h/2+1);
+}
+function biAvanzaMissione(){
+  if(bi.mis>=BI_MISSIONI.length-1){biFine(true);return;}
+  bi.mis++;bi.centrati=0;bi.mattoni=[];bi.proi=[];
+  const recuperata=bi.vite<3;
+  bi.vite=Math.min(3,bi.vite+1);          // una vita in premio: cinque missioni con tre sole sono troppe
+  sndRank();
+  biHud();
+  showToast(svgI('spark')+'<span>Missione superata'+(recuperata?', +1 vita':'')+
+    '! Ora: <b>'+BI_MISSIONI[bi.mis].n+'</b></span>');
+}
+function biFine(vinto){
+  bi.run=false;cancelAnimationFrame(biRaf);
+  const o=document.getElementById('biOver');
+  o.classList.remove('hide');
+  document.getElementById('biOverT').textContent=vinto?'Cinque missioni su cinque!':'Partita finita';
+  // il punteggio arcade entra in classifica, ma diviso per 10: il percorso vale di più del gioco
+  const bonus=Math.round(bi.pts/10);
+  document.getElementById('biOverP').innerHTML=vinto
+    ? 'Hai chiuso tutte le missioni con <b>'+bi.pts+' punti</b> di gioco. In classifica ne porti <b>+'+bonus+'</b>.'
+    : 'Hai totalizzato <b>'+bi.pts+' punti</b> di gioco, che valgono <b>+'+bonus+'</b> in classifica. Riprova quando vuoi.';
+  if(bonus>0){addPoints(bonus);lbPush();}
+  if(vinto)markDone(8);
+}
+function biStop(){if(bi&&bi.run){bi.run=false;cancelAnimationFrame(biRaf);
+  document.getElementById('biOver').classList.remove('hide');
+  document.getElementById('biOverT').textContent='In pausa';
+  document.getElementById('biOverP').textContent='Hai lasciato la partita: premi Gioca per ricominciare.';}}
+
 /* ============ LOGIN & AVVIO ============ */
 let pickedAv=-1;
 function buildLogin(){
@@ -2047,6 +2424,7 @@ function avvia(){
   cvNewEx();
   fxInit();
   trInit();
+  biInit();
   renderQ();
   spInit();
   lbStart();
