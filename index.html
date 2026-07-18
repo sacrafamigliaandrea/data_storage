@@ -21,6 +21,7 @@
   --lg:#00852B; --lgD:#00611F;   /* verde  — conferma */
   --lo:#FF7E14; --loD:#C25A00;   /* arancio— accento */
   --lp:#8B4DAB; --lpD:#653380;   /* viola  — riflessione */
+  --lc:#5AA5DE; --lcD:#3A7FB5;   /* azzurro medio — trasferimenti/connessioni */
   --warn:#C2610A; --warnL:rgba(194,97,10,.12);   /* ambra bruciata: feedback errore */
   --greenL:#E4F3E7; --blueL:rgba(0,85,191,.09); --yellL:rgba(255,237,0,.20);
   --bg:#F4F0E5; --bg2:#FAF8F2; --card:#FFFFFF; --panel:#F0ECE0; --bd:#D6D1C4; --bd2:#BFB8A8;
@@ -132,10 +133,11 @@ select{appearance:none;-webkit-appearance:none;
 .step.a.c1{background:var(--lo);box-shadow:0 4px 0 var(--loD);--bc:var(--lo)}
 .step.a.c2{background:var(--lg);box-shadow:0 4px 0 var(--lgD);--bc:var(--lg)}
 .step.a.c3{background:var(--lb);box-shadow:0 4px 0 var(--lbD);--bc:var(--lb)}
-.step.a.c4{background:var(--ly);color:var(--tx);box-shadow:0 4px 0 var(--lyD);--bc:var(--ly)}
-.step.a.c4 .stn{background:rgba(0,0,0,.16);color:var(--tx)}
-.step.a.c5{background:var(--lp);box-shadow:0 4px 0 var(--lpD);--bc:var(--lp)}
-.step.a.c6{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
+.step.a.c4{background:var(--lc);box-shadow:0 4px 0 var(--lcD);--bc:var(--lc)}
+.step.a.c5{background:var(--ly);color:var(--tx);box-shadow:0 4px 0 var(--lyD);--bc:var(--ly)}
+.step.a.c5 .stn{background:rgba(0,0,0,.16);color:var(--tx)}
+.step.a.c6{background:var(--lp);box-shadow:0 4px 0 var(--lpD);--bc:var(--lp)}
+.step.a.c7{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
 .score-card{display:flex;align-items:center;justify-content:space-around;text-align:center}
 .score-num{font-family:var(--head);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--lb);line-height:1}
 .score-done{font-family:var(--head);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--tx);line-height:1}
@@ -352,6 +354,72 @@ select{appearance:none;-webkit-appearance:none;
 .fz.mini .fz-name::after{width:8px;height:8px;right:-4px}
 .fz.mini .fz-ext{padding:3px 7px;font-size:.64rem;border-radius:0 5px 5px 0;margin-left:3px;box-shadow:none}
 .fx-hint{text-align:center;font-size:.88rem;color:var(--tx2)}
+
+/* ============ TRASFERIMENTI ============ */
+.tr-wrap{width:100%;max-width:1120px;display:grid;grid-template-columns:1fr 210px 1.15fr;gap:14px;align-items:start}
+.tr-col{display:flex;flex-direction:column;gap:7px;min-width:0}
+.tr-lbl{font-family:var(--head);font-size:.66rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  color:var(--tx2);text-align:center}
+/* card dispositivo */
+.tr-dev{padding:10px 13px;display:flex;flex-direction:column;gap:6px}
+.tr-dev-t{display:flex;align-items:center;gap:8px;font-family:var(--head);font-size:.85rem;font-weight:700}
+.tr-dev-t svg{width:18px;height:18px;flex:0 0 auto}
+.tr-dev-cap{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--tx2)}
+.tr-dev-bar{height:14px;border-radius:5px;background:var(--greenL);border:2px solid var(--bd);overflow:hidden;display:flex}
+.tr-dev-bar i{height:100%;display:block;background:#9A9384;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 2px,transparent 2px 14px)}
+.tr-dev-bar i.inbound{background:var(--lc)}
+.tr-dev-note{font-size:.74rem;line-height:1.3;color:var(--warn);display:flex;align-items:flex-start;gap:5px}
+.tr-dev-note svg{width:13px;height:13px;flex:0 0 auto;margin-top:2px}
+/* il file in viaggio */
+.tr-file{background:var(--panel);border:2px solid var(--bd);border-radius:11px;padding:9px 12px;
+  display:flex;align-items:center;gap:9px;box-shadow:0 4px 0 var(--bd)}
+.tr-file svg{width:19px;height:19px;color:var(--lb);flex:0 0 auto}
+.tr-file .trf-n{flex:1;min-width:0;font-family:var(--head);font-size:.82rem;font-weight:700;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-file .trf-s{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--lb);flex:0 0 auto}
+/* canali */
+.tr-modi{display:flex;flex-direction:column;gap:6px}
+.tr-mode{position:relative;display:flex;align-items:center;gap:8px;border:2px solid var(--bd);border-radius:9px;
+  background:var(--card);padding:7px 10px;cursor:pointer;transition:.12s;text-align:left;
+  box-shadow:0 4px 0 var(--bd);font-family:var(--head)}
+.tr-mode svg{width:16px;height:16px;flex:0 0 auto;color:var(--tx2)}
+.tr-mode .trm-n{flex:1;min-width:0;font-size:.78rem;font-weight:700;color:var(--tx)}
+.tr-mode .trm-v{font-family:var(--mono);font-size:.66rem;font-weight:700;color:var(--tx2);flex:0 0 auto}
+.tr-mode:hover:not(:disabled){border-color:var(--lc);transform:translateY(-1px)}
+.tr-mode.a{background:var(--lc);border-color:var(--lc);box-shadow:0 4px 0 var(--lcD)}
+.tr-mode.a svg,.tr-mode.a .trm-n,.tr-mode.a .trm-v{color:#fff}
+.tr-mode:disabled{opacity:.34;cursor:default;box-shadow:0 4px 0 var(--bd)}
+/* destinazioni */
+.tr-dests{display:flex;flex-direction:column;gap:7px}
+.tr-dest{position:relative;border:2px solid var(--bd);border-radius:11px;background:var(--card);padding:8px 12px;
+  cursor:pointer;transition:.12s;display:flex;flex-direction:column;gap:5px;box-shadow:0 4px 0 var(--bd);text-align:left;
+  width:100%;font-family:var(--body)}
+.tr-dest:hover{transform:translateY(-1px)}
+.tr-dest.a{border-color:var(--lc);box-shadow:0 4px 0 var(--lcD);background:rgba(90,165,222,.08)}
+/* avvio + avanzamento */
+.tr-run{width:100%;max-width:1120px;display:flex;align-items:center;gap:16px}
+.tr-go{flex:0 0 auto;display:inline-flex;align-items:center;gap:9px;padding:11px 26px;font-size:.95rem;
+  background:var(--ly);color:var(--tx);box-shadow:0 5px 0 var(--lyD);--bc:var(--ly)}
+.tr-go svg{width:17px;height:17px}
+.tr-prog{flex:1;display:flex;align-items:center;gap:12px;min-width:0}
+.tr-bar{flex:1;height:20px;border-radius:7px;background:var(--panel);border:2px solid var(--bd);overflow:hidden}
+.tr-bar i{display:block;height:100%;width:0;background:var(--lc);
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.25) 0 3px,transparent 3px 16px);
+  transition:width .12s linear}
+.tr-bar i.ko{background:var(--warn)}
+.tr-time{font-family:var(--mono);font-size:.86rem;font-weight:700;color:var(--tx);flex:0 0 auto;min-width:132px;text-align:right}
+/* confronto tra i canali */
+.tr-cmp{width:100%;max-width:1120px;display:none;flex-direction:column;gap:5px}
+.tr-cmp.show{display:flex}
+.tr-cmp-t{font-family:var(--head);font-size:.72rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--tx2)}
+.tr-cmp-row{display:flex;align-items:center;gap:10px;font-size:.8rem}
+.tr-cmp-row .trc-n{width:170px;flex:0 0 auto;font-family:var(--head);font-weight:700;color:var(--tx2)}
+.tr-cmp-row .trc-b{flex:1;height:13px;border-radius:4px;background:var(--panel);border:1px solid var(--bd);overflow:hidden}
+.tr-cmp-row .trc-b i{display:block;height:100%;background:var(--lc);border-radius:3px}
+.tr-cmp-row.best .trc-n{color:var(--lgD)} .tr-cmp-row.best .trc-b i{background:var(--lg)}
+.tr-cmp-row.worst .trc-b i{background:var(--warn)}
+.tr-cmp-row .trc-t{width:120px;flex:0 0 auto;text-align:right;font-family:var(--mono);font-weight:700;color:var(--tx)}
 
 /* ============ SFIDA ============ */
 .q-card{width:100%;max-width:860px;padding:18px 28px 20px;display:flex;flex-direction:column;gap:13px}
@@ -685,8 +753,48 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
-    <!-- TAPPA 4: SFIDA -->
+    <!-- TAPPA 4: TRASFERIMENTI -->
     <section class="sec" id="sec4">
+      <div class="sec-head">
+        <div class="sec-title">Trasferire un file</div>
+        <div class="sec-sub">Non conta solo quanto pesa il file: contano anche dove lo metti e come ce lo porti.</div>
+      </div>
+      <div class="sec-body" style="justify-content:flex-start;gap:9px;">
+        <div class="task">
+          <span class="task-n" id="trN"></span>
+          <span class="task-txt" id="trTxt"></span>
+          <span class="task-dots" id="trDots"></span>
+        </div>
+        <div class="tr-wrap">
+          <!-- SORGENTE -->
+          <div class="tr-col">
+            <div class="tr-lbl">Da qui</div>
+            <div class="brick-card tr-dev" id="trSrc"></div>
+            <div class="tr-file" id="trFile"></div>
+          </div>
+          <!-- CANALE -->
+          <div class="tr-col tr-mid">
+            <div class="tr-lbl">Come</div>
+            <div class="tr-modi" id="trModi"></div>
+          </div>
+          <!-- DESTINAZIONE -->
+          <div class="tr-col">
+            <div class="tr-lbl">A qui</div>
+            <div class="tr-dests" id="trDests"></div>
+          </div>
+        </div>
+        <div class="tr-run">
+          <button class="brick-btn tr-go" id="trGo" onclick="trAvvia()" disabled><span class="studs"><span></span><span></span><span></span></span><span id="trGoIc"></span><span>Avvia il trasferimento</span></button>
+          <button class="brick-btn btn-next" id="trNextBtn" onclick="trNext()" style="display:none;flex:0 0 auto;"><span class="studs"><span></span><span></span></span>Consegna successiva</button>
+          <div class="tr-prog"><div class="tr-bar"><i id="trBar"></i></div><span class="tr-time" id="trTime">—</span></div>
+        </div>
+        <div class="fb" id="trFb"></div>
+        <div class="tr-cmp" id="trCmp"></div>
+      </div>
+    </section>
+
+    <!-- TAPPA 5: SFIDA -->
+    <section class="sec" id="sec5">
       <div class="sec-head">
         <div class="sec-title">Sfida Dati</div>
         <div class="sec-sub">Domande sempre nuove, oggi uguali per tutti: la classifica a sinistra è live.</div>
@@ -710,8 +818,8 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
-    <!-- TAPPA 5: SPAZIO -->
-    <section class="sec" id="sec5">
+    <!-- TAPPA 6: SPAZIO -->
+    <section class="sec" id="sec6">
       <div class="sec-head">
         <div class="sec-title">Missione: libera lo spazio</div>
         <div class="sec-sub">L'iPad è pieno e serve posto per l'aggiornamento. Ogni scelta è definitiva: pensa prima di toccare.</div>
@@ -738,8 +846,8 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
-    <!-- TAPPA 6: RIFLETTI -->
-    <section class="sec" id="sec6">
+    <!-- TAPPA 7: RIFLETTI -->
+    <section class="sec" id="sec7">
       <div class="sec-head">
         <div class="sec-title">Rifletti</div>
         <div class="sec-sub">Niente punti giusti o sbagliati, qui: solo la tua testa.</div>
@@ -780,7 +888,7 @@ select{appearance:none;-webkit-appearance:none;
         <div class="task" style="max-width:100%;"><span id="azIcon3" style="width:19px;height:19px;color:var(--loD);flex:0 0 auto;"></span><span class="task-txt" style="text-align:left;font-size:.88rem;"><span><b>L'idea diventa azione:</b> stasera, sul tuo iPad, apri <b>Impostazioni → Generali → Spazio iPad</b> e guarda che cosa occupa di più. C'è qualcosa di «riscaricabile» che puoi salutare?</span></span></div>
         <div class="spr-btns">
           <button class="brick-btn spr-btn" onclick="spReset()"><span class="studs"><span></span><span></span></span>Rigioca la missione</button>
-          <button class="brick-btn spr-btn primary" onclick="document.getElementById('spResult').classList.remove('show');G(6)"><span class="studs"><span></span><span></span></span>Vai a Rifletti</button>
+          <button class="brick-btn spr-btn primary" onclick="document.getElementById('spResult').classList.remove('show');G(7)"><span class="studs"><span></span><span></span></span>Vai a Rifletti</button>
         </div>
       </div>
     </div>
@@ -797,12 +905,13 @@ select{appearance:none;-webkit-appearance:none;
     <h3><span id="docIc1"></span><span>Obiettivo didattico</span></h3>
     <p>Consapevolezza delle unità di misura digitali (Byte → Terabyte), padronanza operativa delle <b>conversioni ×1000 / ÷1000</b>, riconoscimento delle <b>famiglie di file</b> dalle estensioni e gestione dello spazio sui dispositivi. Competenze DigComp 2.2: area 1 (Informazione) e area 4 (Sicurezza/Benessere digitale).</p>
 
-    <h3><span id="docIc2"></span><span>Struttura (7 tappe, tutte a schermo pieno)</span></h3>
+    <h3><span id="docIc2"></span><span>Struttura (8 tappe, tutte a schermo pieno)</span></h3>
     <ul>
       <li><b>Video stimolo</b> — apre l'esperienza, prima di ogni spiegazione.</li>
       <li><b>La Scala dei Mattoncini</b> — <b>10 consegne guidate</b>: l'app chiede di costruire una dimensione precisa contandola in una unità precisa; una checklist mostra quali comandi sono già impostati, poi lo studente conta i pezzi comparsi e verifica. Difficoltà crescente: mattoncini singoli → piastre da 100 → pallet da un milione.</li>
       <li><b>Trasforma le unità</b> — <b>10 conversioni</b> con la <b>scala dei salti sempre visibile</b>: si accendono le unità coinvolte e i moltiplicatori tra un gradino e l'altro. Accanto, il convertitore libero per esplorare.</li>
       <li><b>Le famiglie dei file</b> — <b>5 livelli</b> da 5 file (uno per famiglia) a difficoltà crescente, con lo scaffolding che si ritira: 1) estensioni note con l'etichetta colorata che rivela la famiglia; 2) stesse estensioni ma etichette grigie; 3) formati meno comuni (.heic, .flac, .odt, .7z); 4) <i>il nome inganna</i> — «canzone.pdf» — per fissare che comanda l'estensione, non il nome; 5) <i>doppia estensione</i> — «compiti.pdf.zip» — vale sempre l'ultima, che è anche una nozione di sicurezza sugli allegati. Si tocca il file, poi la famiglia; l'errore spiega che cosa contiene davvero quel formato.</li>
+      <li><b>Trasferire un file</b> — <b>6 scenari</b> in cui il tempo di trasferimento è calcolato con <b>velocità reali effettive</b> (Bluetooth 150 KB/s, Wi-Fi scolastico 2,5 MB/s, AirDrop 40 MB/s, USB 2.0 35, USB 3.0 110, USB-C 700). Lo studente sceglie <i>dove</i> mettere il file e <i>come</i> portarcelo, e a fine trasferimento vede il confronto con tutti gli altri canali: lo stesso video di 5,2 GB richiede 7 secondi via cavo USB-C e 35 minuti sul Wi-Fi della scuola. Due scenari sono <b>fallimenti progettati</b>: un film da 5,4 GB su una chiavetta FAT32 quasi vuota (limite reale di 4 GB per singolo file) e un progetto da 1,8 GB su iCloud gratuito con 0,4 GB liberi. Servono a far capire che il trasferimento dipende dal contenitore quanto dal file.</li>
       <li><b>Sfida Dati</b> — 10 domande generate con la <b>classifica live</b> di chi è in laboratorio in quel momento; il pool è seedato sul giorno, quindi tutta la classe gioca le stesse domande e sono discutibili insieme. Si può proseguire oltre le 10 per scalare la classifica.</li>
       <li><b>Missione Spazio</b> — decisioni con scarsità reale (mosse e cloud limitati, scelte irreversibili). Il feedback strategico arriva alla fine, come conseguenza.</li>
       <li><b>Rifletti</b> — metacognizione e manifesto digitale personale.</li>
@@ -881,7 +990,14 @@ const ICONS={
   image:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-6 6-2-2-5 5"/>',
   doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
   music:'<path d="M9 18V6l10-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/>',
-  zip:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M11 5h2M11 8h2M11 11h2M11 14h2"/>'
+  zip:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M11 5h2M11 8h2M11 11h2M11 14h2"/>',
+  wifi:'<path d="M2.5 8.5a15 15 0 0 1 19 0M5.5 12a10 10 0 0 1 13 0M8.5 15.4a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r=".8"/>',
+  cable:'<path d="M7 3v5M11 3v5M5.5 8h7v4a3.5 3.5 0 0 1-3.5 3.5v0A3.5 3.5 0 0 1 5.5 12V8z"/><path d="M9 15.5V21h9v-4a3 3 0 0 0-3-3h-2"/>',
+  airdrop:'<circle cx="12" cy="17" r="1.6"/><path d="M8.6 13.6a4.8 4.8 0 0 1 6.8 0M5.6 10.4a9 9 0 0 1 12.8 0"/>',
+  bt:'<path d="M8.5 7.5L15 12l-3 2.5v-11L15 6l-6.5 4.5"/><path d="M12 3.5v17"/>',
+  net:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/>',
+  usbdrive:'<rect x="7" y="8" width="10" height="13" rx="2"/><path d="M10 8V4h4v4M10 12h4M10 15h4"/>',
+  disk:'<rect x="3" y="7" width="18" height="10" rx="2"/><circle cx="17" cy="12" r="1.2"/><path d="M6 10h6M6 14h6"/>'
 };
 function svg(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;">'+ICONS[name]+'</svg>';}
 function svgI(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;display:inline-block;vertical-align:-.12em;">'+ICONS[name]+'</svg>';}
@@ -1030,6 +1146,7 @@ const SECS=[
   {t:'La Scala',ic:'tower'},
   {t:'Trasforma le unità',ic:'swap'},
   {t:'Famiglie di file',ic:'tag'},
+  {t:'Trasferire un file',ic:'wifi'},
   {t:'Sfida Dati',ic:'bolt'},
   {t:'Missione Spazio',ic:'tablet'},
   {t:'Rifletti',ic:'brain'}
@@ -1431,7 +1548,235 @@ function fxAvanza(){
   }
 }
 
-/* ============ TAPPA 4 — SFIDA DATI ============ */
+/* ============ TAPPA 4 — TRASFERIRE UN FILE ============
+   Tre variabili in gioco: quanto pesa il file, quanto spazio ha il contenitore
+   che lo riceve, quanto è veloce il canale. I valori sono realistici:
+   velocità medie EFFETTIVE (non quelle di targa, sempre ottimistiche) e limiti
+   veri, come i 4 GB per singolo file delle chiavette formattate FAT32. */
+const TR_DEV=[
+  // Un dispositivo con porta USB può usare anche i cavi più lenti: una chiavetta
+  // USB 2.0 collegata a una porta moderna va comunque a 35 MB/s (vale l'anello debole)
+  {k:'ipad',  n:'Il tuo iPad',            ic:'tablet',  cap:64,   used:48,
+   conn:['usbc','usb2','wifi','airdrop','net'], note:''},
+  {k:'imac',  n:'iMac del laboratorio',   ic:'chip',    cap:256,  used:196,
+   conn:['usbc','usb3','usb2','wifi','airdrop','net'], note:''},
+  {k:'ipad2', n:'iPad del compagno',      ic:'tablet',  cap:64,   used:30,
+   conn:['wifi','airdrop','net'], note:''},
+  {k:'usb',   n:'Chiavetta USB 32 GB',    ic:'usbdrive',cap:32,   used:2,
+   conn:['usb2'], maxFile:4, note:'Formattata FAT32: un singolo file non può superare 4 GB'},
+  {k:'hd',    n:'Hard disk esterno 1 TB', ic:'disk',    cap:1000, used:600,
+   conn:['usb3','usb2'], note:''},
+  {k:'icloud',n:'iCloud piano gratuito',  ic:'cloud',   cap:5,    used:4.6,
+   conn:['net'], note:'Il piano gratuito è di soli 5 GB'}
+];
+/* MB/s effettivi misurati, non velocità di targa */
+const TR_MODI=[
+  {k:'bt',     n:'Bluetooth',        ic:'bt',      mbs:0.15, perche:'nato per cuffie e tastiere, non per i file'},
+  {k:'wifi',   n:'Wi-Fi della scuola',ic:'wifi',   mbs:2.5,  perche:'la rete è condivisa da tutte le classi'},
+  {k:'net',    n:'Internet (cloud)', ic:'net',     mbs:2,    perche:'in salita la fibra è molto più lenta che in discesa'},
+  {k:'airdrop',n:'AirDrop',          ic:'airdrop', mbs:40,   perche:'crea un Wi-Fi diretto fra i due dispositivi'},
+  {k:'usb2',   n:'Cavo USB 2.0',     ic:'cable',   mbs:35,   perche:'il cavo classico delle chiavette economiche'},
+  {k:'usb3',   n:'Cavo USB 3.0',     ic:'cable',   mbs:110,  perche:'la porta blu: circa tre volte l\'USB 2.0'},
+  {k:'usbc',   n:'Cavo USB-C',       ic:'cable',   mbs:700,  perche:'il collegamento più veloce che hai a disposizione'}
+];
+const TR_FILES=[
+  {n:'saggio-di-natale.mov', mb:5200},
+  {n:'film-vacanze.mp4',     mb:5400},
+  {n:'progetto-3D.zip',      mb:1800},
+  {n:'40-foto-della-gita',   mb:120},
+  {n:'backup-completo.zip',  mb:80000},
+  {n:'relazione.pdf',        mb:8}
+];
+/* Sei scenari scritti a mano: ognuno isola UN fattore del trasferimento */
+const TR_TASK=[
+  {file:0,src:'ipad',dest:'imac',  veloce:true,
+   t:'Devi consegnare al prof il <b>video del saggio</b>: portalo sull\'iMac del laboratorio nel modo <b>più veloce possibile</b>.'},
+  {file:3,src:'ipad',dest:'ipad2', veloce:true,
+   t:'Il tuo compagno seduto accanto vuole <b>le 40 foto della gita</b>. Mandagliele nel modo più veloce.'},
+  {file:1,src:'ipad',dest:'usb',   attesoFallimento:'maxFile',
+   t:'Copia il <b>film delle vacanze</b> sulla chiavetta da 32 GB, che è quasi vuota. Prova: non funzionerà, e devi scoprire perché.'},
+  {file:2,src:'ipad',dest:'icloud',attesoFallimento:'spazio',
+   t:'Metti al sicuro il <b>progetto 3D</b> su iCloud. Anche qui qualcosa va storto: guarda bene il contenitore.'},
+  {file:4,src:'imac',dest:'hd',    veloce:true,
+   t:'Il <b>backup completo</b> (80 GB) va sull\'hard disk esterno. Scegli il canale più veloce fra quelli possibili e guarda quanto tempo serve.'},
+  {file:5,src:'ipad',dest:'icloud',
+   t:'Ultima: manda la <b>relazione</b> su iCloud. Piccola com\'è, ci sta anche nello spazio rimasto.'}
+];
+const TR_GOAL=TR_TASK.length;
+let trI=0,trOk=0,trTask=null,trDest=null,trMode=null,trFile=null,trSrc=null,trBusy=false;
+
+const dev=k=>TR_DEV.find(d=>d.k===k);
+const modo=k=>TR_MODI.find(m=>m.k===k);
+const trFree=d=>d.cap-d.used;                       // GB liberi
+/* i canali possibili sono quelli che ENTRAMBI i dispositivi sanno usare */
+function trCanali(a,b){return TR_MODI.filter(m=>a.conn.includes(m.k)&&b.conn.includes(m.k));}
+function fmtDur(s){
+  if(s<1)return 'meno di 1 s';
+  if(s<60)return Math.round(s)+' s';
+  if(s<3600){const m=Math.floor(s/60),r=Math.round(s%60);return m+' min'+(r?' '+r+' s':'');}
+  const h=Math.floor(s/3600),m=Math.round(s%3600/60);return h+' h'+(m?' '+m+' min':'');
+}
+const mbToGb=mb=>mb/1000;
+function fmtSize(mb){return mb>=1000?nfmt(Math.round(mb/100)/10)+' GB':nfmt(mb)+' MB';}
+
+function trStart(){
+  trTask=TR_TASK[trI];
+  trFile=TR_FILES[trTask.file];
+  trSrc=dev(trTask.src);
+  trDest=null;trMode=null;trBusy=false;
+  document.getElementById('trN').innerHTML='Consegna<br>'+(trI+1)+' / '+TR_GOAL;
+  document.getElementById('trTxt').innerHTML='<span>'+trTask.t+'</span>';
+  document.getElementById('trDots').innerHTML=
+    Array.from({length:TR_GOAL},(_,i)=>'<i'+(i<trOk?' class="on"':'')+'></i>').join('');
+  document.getElementById('trFb').className='fb';
+  document.getElementById('trCmp').className='tr-cmp';
+  document.getElementById('trNextBtn').style.display='none';
+  document.getElementById('trBar').className='';
+  document.getElementById('trBar').style.width='0';
+  document.getElementById('trTime').textContent='—';
+  document.getElementById('trGoIc').innerHTML=svgI('arrowR');
+  trRender();
+}
+function devCardHTML(d,extra){
+  const free=trFree(d), usedPct=d.used/d.cap*100, inPct=extra?Math.min(100-usedPct,mbToGb(extra)/d.cap*100):0;
+  return '<div class="tr-dev-t">'+svgI(d.ic)+'<span>'+d.n+'</span></div>'+
+    '<div class="tr-dev-cap">'+nfmt(Math.round(free*10)/10)+' GB liberi su '+nfmt(d.cap)+'</div>'+
+    '<div class="tr-dev-bar"><i style="width:'+usedPct+'%"></i>'+
+      (inPct>0?'<i class="inbound" style="width:'+inPct+'%"></i>':'')+'</div>'+
+    (d.note?'<div class="tr-dev-note">'+svgI('info')+'<span>'+d.note+'</span></div>':'');
+}
+function trRender(){
+  document.getElementById('trSrc').innerHTML=devCardHTML(trSrc);
+  document.getElementById('trFile').innerHTML=svgI('film')+
+    '<span class="trf-n">'+esc(trFile.n)+'</span><span class="trf-s">'+fmtSize(trFile.mb)+'</span>';
+  // destinazioni: tutti i dispositivi tranne la sorgente
+  document.getElementById('trDests').innerHTML=TR_DEV.filter(d=>d.k!==trSrc.k).map(d=>
+    '<button class="tr-dest'+(trDest&&trDest.k===d.k?' a':'')+'" onclick="trPickDest(\''+d.k+'\')">'+
+    devCardHTML(d,trDest&&trDest.k===d.k?trFile.mb:0)+'</button>').join('');
+  // canali: solo quelli che i due dispositivi hanno in comune
+  const canali=trDest?trCanali(trSrc,trDest):[];
+  // senza canali in comune lo studente resterebbe bloccato senza capire perché
+  document.getElementById('trModi').innerHTML=(trDest&&!canali.length
+    ? '<div class="tr-dev-note" style="padding:6px 2px;">'+svgI('info')+
+      '<span>«'+trSrc.n+'» e «'+trDest.n+'» non si collegano direttamente: scegli un\'altra destinazione.</span></div>'
+    : '')+TR_MODI.map(m=>{
+    const ok=canali.some(c=>c.k===m.k);
+    return '<button class="tr-mode'+(trMode&&trMode.k===m.k?' a':'')+'" onclick="trPickMode(\''+m.k+'\')"'+
+      (ok?'':' disabled title="Non disponibile fra questi due dispositivi"')+'>'+
+      svgI(m.ic)+'<span class="trm-n">'+m.n+'</span><span class="trm-v">'+
+      (m.mbs>=1?nfmt(m.mbs):nfmt(m.mbs*1000)+'&nbsp;KB')+(m.mbs>=1?'&nbsp;MB':'')+'/s</span></button>';
+  }).join('');
+  document.getElementById('trGo').disabled=!(trDest&&trMode)||trBusy||trChiusa;
+}
+function trPickDest(k){
+  if(trBusy||trChiusa)return;
+  trDest=dev(k);
+  // se il canale scelto non è compatibile con la nuova destinazione, si azzera
+  if(trMode&&!trCanali(trSrc,trDest).some(c=>c.k===trMode.k))trMode=null;
+  document.getElementById('trFb').className='fb';
+  document.getElementById('trCmp').className='tr-cmp';
+  trRender();sndClick();
+}
+function trPickMode(k){
+  if(trBusy||trChiusa)return;
+  if(!trDest)return;
+  if(!trCanali(trSrc,trDest).some(c=>c.k===k))return;
+  trMode=modo(k);trRender();sndClick();
+}
+/* verifica i vincoli PRIMA di far partire il trasferimento */
+function trVerifica(){
+  if(mbToGb(trFile.mb)>trFree(trDest))
+    return {ok:false,tipo:'spazio',msg:'Il file pesa '+fmtSize(trFile.mb)+' ma su «'+trDest.n+'» restano solo '+
+      nfmt(Math.round(trFree(trDest)*10)/10)+' GB liberi. Il contenitore conta quanto il file.'};
+  if(trDest.maxFile&&mbToGb(trFile.mb)>trDest.maxFile)
+    return {ok:false,tipo:'maxFile',msg:'Sulla chiavetta ci sarebbe spazio ('+nfmt(Math.round(trFree(trDest)*10)/10)+
+      ' GB liberi), ma è formattata <b>FAT32</b>: nessun singolo file può superare <b>4 GB</b>. Il tuo ne pesa '+
+      fmtSize(trFile.mb)+'. Non è una questione di spazio, ma di come è formattato il contenitore.'};
+  return {ok:true};
+}
+function trAvvia(){
+  if(!trDest||!trMode||trBusy)return;
+  const esito=trVerifica();
+  const bar=document.getElementById('trBar'),tempo=document.getElementById('trTime'),fb=document.getElementById('trFb');
+  if(!esito.ok){
+    // il trasferimento parte e si blocca: l'errore si vede, non si legge soltanto
+    trBusy=true;bar.className='ko';bar.style.width='0';
+    let p=0;const stop=setInterval(()=>{p+=4;bar.style.width=Math.min(p,38)+'%';
+      if(p>=38){clearInterval(stop);trBusy=false;
+        tempo.textContent='interrotto';
+        fb.className='fb show bad';
+        fb.innerHTML=svgI('info')+'<span><span class="fbl">Trasferimento impossibile</span><span>'+esito.msg+'</span></span>';
+        sndMiss();
+        // se la consegna chiedeva proprio di scoprire questo limite, vale punti
+        if(trTask.attesoFallimento===esito.tipo)trPunti(true,'Hai capito che cosa blocca il trasferimento.');
+        trRender();}
+    },40);
+    return;
+  }
+  const sec=trFile.mb/trMode.mbs;
+  trBusy=true;bar.className='';bar.style.width='0';
+  document.getElementById('trGo').disabled=true;
+  const DUR=2000;                       // l'animazione dura sempre ~2 s...
+  const t0=performance.now();
+  const anim=setInterval(()=>{
+    const k=Math.min(1,(performance.now()-t0)/DUR);
+    bar.style.width=(k*100)+'%';
+    tempo.textContent=fmtDur(sec*k)+' / '+fmtDur(sec);   // ...ma il tempo mostrato è quello VERO
+    if(k>=1){clearInterval(anim);trBusy=false;trFine(sec);}
+  },40);
+}
+function trFine(sec){
+  const fb=document.getElementById('trFb');
+  const canali=trCanali(trSrc,trDest);
+  const piuVeloce=canali.reduce((a,b)=>b.mbs>a.mbs?b:a);
+  const eraVeloce=trMode.k===piuVeloce.k;
+  fb.className='fb show good';
+  fb.innerHTML=svgI('check')+'<span><span class="fbl">Trasferimento completato in '+fmtDur(sec)+'</span><span>'+
+    fmtSize(trFile.mb)+' ÷ '+nfmt(trMode.mbs)+' MB/s = '+fmtDur(sec)+'. '+
+    (trTask.veloce&&!eraVeloce
+      ? 'Funziona, ma non era la via più rapida: con <b>'+piuVeloce.n+'</b> ci volevano '+fmtDur(trFile.mb/piuVeloce.mbs)+'.'
+      : trMode.perche.charAt(0).toUpperCase()+trMode.perche.slice(1)+'.')+
+    '</span></span>';
+  sndOk();
+  trConfronto(canali);
+  const centrato=trDest.k===trTask.dest&&(!trTask.veloce||eraVeloce);
+  if(centrato)trPunti(false,'');
+  trRender();
+}
+/* il confronto è la parte che dà la percezione della realtà */
+function trConfronto(canali){
+  const righe=canali.map(m=>({m,sec:trFile.mb/m.mbs})).sort((a,b)=>a.sec-b.sec);
+  const max=righe[righe.length-1].sec;
+  const el=document.getElementById('trCmp');
+  el.className='tr-cmp show';
+  el.innerHTML='<div class="tr-cmp-t">Lo stesso file, con gli altri canali disponibili</div>'+
+    righe.map((r,i)=>'<div class="tr-cmp-row'+(i===0?' best':'')+(i===righe.length-1&&righe.length>1?' worst':'')+'">'+
+      '<span class="trc-n">'+r.m.n+'</span>'+
+      '<span class="trc-b"><i style="width:'+Math.max(2,r.sec/max*100)+'%"></i></span>'+
+      '<span class="trc-t">'+fmtDur(r.sec)+'</span></div>').join('');
+}
+let trPuntiDati=false,trChiusa=false;
+function trPunti(daFallimento,extra){
+  if(trPuntiDati)return;                 // una consegna paga una volta sola
+  trPuntiDati=true;trChiusa=true;
+  trOk++;st.done++;
+  addPoints(25);
+  document.getElementById('trDots').innerHTML=
+    Array.from({length:TR_GOAL},(_,i)=>'<i'+(i<trOk?' class="on"':'')+'></i>').join('');
+  // NIENTE avanzamento a tempo: lascerebbe l'interfaccia viva mentre sta per
+  // resettarsi, e cancellerebbe il confronto dei tempi prima che venga letto
+  if(trOk>=TR_GOAL){markDone(4);sndRank();
+    showToast(svgI('medal')+'<span>Sei consegne su sei: sai come viaggia un file.</span>');}
+  else{
+    document.getElementById('trNextBtn').style.display='inline-flex';
+    showToast(svgI('spark')+'<span>+25 punti. '+(extra||'Leggi il confronto, poi vai avanti.')+'</span>');
+  }
+  lbPush();trRender();
+}
+function trNext(){if(trI<TR_GOAL-1){trI++;trPuntiDati=false;trChiusa=false;trStart();sndClick();}}
+function trInit(){trI=0;trOk=0;trPuntiDati=false;trChiusa=false;trStart();}
+
+/* ============ TAPPA 5 — SFIDA DATI ============ */
 const STIME=[
   {n:'una foto scattata con l\'iPad',v:3,u:'MB'},
   {n:'una canzone scaricata',v:4,u:'MB'},
@@ -1528,7 +1873,7 @@ function answer(k){
     f.className='fb show good';
     f.innerHTML=svgI('check')+'<span><span class="fbl">+'+pts+' punti'+(bonus?' (serie di '+st.streak+')':'')+'</span><span>'+esc(curQ.expl)+'</span></span>';
     addPoints(pts);sndOk();
-    if(st.qOk>=GOAL)markDone(4);
+    if(st.qOk>=GOAL)markDone(5);
   }else{
     btns[k].classList.add('ko');
     st.streak=0;
@@ -1632,7 +1977,7 @@ function spInstalla(){
   document.getElementById('sprList').innerHTML=rows.map(x=>
     '<div class="spr-row '+x.c+'">'+svgI(x.c==='plus'?'check':'info')+'<span>'+x.t+'</span></div>').join('');
   document.getElementById('azIcon3').innerHTML=svgI('spark');
-  if(primaVolta){st.spDone=true;addPoints(pts);sndRank();lbPush();markDone(5);}
+  if(primaVolta){st.spDone=true;addPoints(pts);sndRank();lbPush();markDone(6);}
   document.getElementById('spResult').classList.add('show');
 }
 function spReset(){document.getElementById('spResult').classList.remove('show');spInit();}
@@ -1661,13 +2006,13 @@ function toggleMan(i){
 }
 function chiudiPercorso(){
   if(manSel.size!==3)return;
-  if(!st.rifDone){st.rifDone=true;addPoints(50);markDone(6);
+  if(!st.rifDone){st.rifDone=true;addPoints(50);markDone(7);
     showToast(svgI('spark')+'<span>+50 punti per la riflessione. Ben fatto.</span>');}
   document.getElementById('finescore').textContent=st.score;
   document.getElementById('finedone').textContent=st.done;
   document.getElementById('finerank').textContent=RANKS[rankIdx(st.score)].n;
   // il riepilogo prende il posto delle due card: la pagina resta senza scroll
-  document.querySelectorAll('#sec6 .rif-card').forEach(c=>c.style.display='none');
+  document.querySelectorAll('#sec7 .rif-card').forEach(c=>c.style.display='none');
   document.getElementById('fineCard').classList.add('show');
   lbPush();
 }
@@ -1701,6 +2046,7 @@ function avvia(){
   scStart();
   cvNewEx();
   fxInit();
+  trInit();
   renderQ();
   spInit();
   lbStart();
