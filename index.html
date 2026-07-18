@@ -802,7 +802,7 @@ select{appearance:none;-webkit-appearance:none;
       <li><b>Video stimolo</b> — apre l'esperienza, prima di ogni spiegazione.</li>
       <li><b>La Scala dei Mattoncini</b> — <b>10 consegne guidate</b>: l'app chiede di costruire una dimensione precisa contandola in una unità precisa; una checklist mostra quali comandi sono già impostati, poi lo studente conta i pezzi comparsi e verifica. Difficoltà crescente: mattoncini singoli → piastre da 100 → pallet da un milione.</li>
       <li><b>Trasforma le unità</b> — <b>10 conversioni</b> con la <b>scala dei salti sempre visibile</b>: si accendono le unità coinvolte e i moltiplicatori tra un gradino e l'altro. Accanto, il convertitore libero per esplorare.</li>
-      <li><b>Le famiglie dei file</b> — <b>10 file</b> da smistare nelle cinque famiglie (immagini, documenti, audio, video, archivi) toccando prima il file e poi la famiglia. L'errore spiega che cosa contiene davvero quel formato.</li>
+      <li><b>Le famiglie dei file</b> — <b>5 livelli</b> da 5 file (uno per famiglia) a difficoltà crescente, con lo scaffolding che si ritira: 1) estensioni note con l'etichetta colorata che rivela la famiglia; 2) stesse estensioni ma etichette grigie; 3) formati meno comuni (.heic, .flac, .odt, .7z); 4) <i>il nome inganna</i> — «canzone.pdf» — per fissare che comanda l'estensione, non il nome; 5) <i>doppia estensione</i> — «compiti.pdf.zip» — vale sempre l'ultima, che è anche una nozione di sicurezza sugli allegati. Si tocca il file, poi la famiglia; l'errore spiega che cosa contiene davvero quel formato.</li>
       <li><b>Sfida Dati</b> — 10 domande generate con la <b>classifica live</b> di chi è in laboratorio in quel momento; il pool è seedato sul giorno, quindi tutta la classe gioca le stesse domande e sono discutibili insieme. Si può proseguire oltre le 10 per scalare la classifica.</li>
       <li><b>Missione Spazio</b> — decisioni con scarsità reale (mosse e cloud limitati, scelte irreversibili). Il feedback strategico arriva alla fine, come conseguenza.</li>
       <li><b>Rifletti</b> — metacognizione e manifesto digitale personale.</li>
@@ -1297,49 +1297,83 @@ function cvCheck(){
   st.cvI=(st.cvI+1)%GOAL;
 }
 
-/* ============ TAPPA 3 — FAMIGLIE DI FILE (10 file da agganciare) ============ */
+/* ============ TAPPA 3 — FAMIGLIE DI FILE: 5 LIVELLI ============
+   Lo scaffolding si ritira gradualmente (Vygotskij): al livello 1 il colore
+   dell'estensione rivela già la famiglia, dal 2 sparisce; poi arrivano i formati
+   meno noti, i nomi che ingannano e infine la doppia estensione. */
 const FAM=[
   {k:'img',n:'Immagini', c:'--lg',ic:'image',cosa:'contiene un\'immagine',
-   ext:['jpg','png','heic','gif','svg','webp'],
+   base:['jpg','png','gif'], rare:['heic','svg','webp','tiff'],
    nomi:['gita','selfie','panorama','logo','disegno','tramonto','locandina']},
   {k:'doc',n:'Documenti',c:'--lb',ic:'doc',  cosa:'contiene testo o pagine da leggere',
-   ext:['pdf','docx','txt','pages','xlsx','pptx'],
+   base:['pdf','docx','txt'], rare:['pages','odt','rtf','xlsx','pptx'],
    nomi:['ricerca','relazione','appunti','compito','orario','tesina','verifica']},
   {k:'aud',n:'Audio',    c:'--lp',ic:'music',cosa:'contiene solo suono',
-   ext:['mp3','wav','m4a','aac','flac'],
+   base:['mp3','wav'], rare:['m4a','aac','flac','ogg','aiff'],
    nomi:['canzone','podcast','intervista','suoneria','vocale','jingle']},
   {k:'vid',n:'Video',    c:'--lr',ic:'film', cosa:'contiene immagini in movimento e audio insieme',
-   ext:['mp4','mov','mkv','avi'],
+   base:['mp4','mov'], rare:['mkv','avi','webm','m4v'],
    nomi:['recita','tutorial','trailer','lezione','saggio','vacanze']},
   {k:'arc',n:'Archivi',  c:'--lo',ic:'zip',  cosa:'è una scatola compressa che contiene altri file',
-   ext:['zip','rar','7z'],
+   base:['zip'], rare:['rar','7z','tar','gz'],
    nomi:['backup','foto_2026','progetto','scuola','export']}
 ];
-let fxFiles=[],fxSel=null;
-function fxInit(){
-  const r=mulberry32(cyrb53(DAY+'|fam'));
-  // 2 file per famiglia = 10 consegne, sempre le stesse per tutta la classe oggi
-  let list=[];
-  FAM.forEach(f=>{
-    const nomi=shuffle(f.nomi,r).slice(0,2), exts=shuffle(f.ext,r);
-    nomi.forEach((n,j)=>list.push({id:f.k+j,nome:n,ext:exts[j%exts.length],fam:f.k,posto:null}));
+const FX_LIV=[
+  {t:'Le estensioni che conosci', d:'Il colore dell\'etichetta ti aiuta: dice già a quale famiglia appartiene.', aiuto:true,  pool:'base', pts:10},
+  {t:'Senza aiuti',               d:'Stessi formati, ma le etichette ora sono tutte grigie: devi riconoscerle da solo.', aiuto:false, pool:'base', pts:15},
+  {t:'Formati meno comuni',       d:'Estensioni che si incontrano più di rado. Pensa a che cosa serve quel formato.', aiuto:false, pool:'rare', pts:20},
+  {t:'Il nome inganna',           d:'Attenzione: il nome del file dice una cosa, l\'estensione un\'altra. Comanda l\'estensione.', aiuto:false, pool:'mix', pts:25, inganno:true},
+  {t:'Doppia estensione',         d:'Alcuni file hanno due estensioni. Vale sempre e solo l\'ULTIMA: è quella che apre il file.', aiuto:false, pool:'mix', pts:30, doppia:true}
+];
+const FX_NLIV=FX_LIV.length;
+let fxFiles=[],fxSel=null,fxLv=0;
+/* ogni livello: un file per famiglia, così tutte e cinque restano in gioco */
+function fxGenLivello(lv){
+  const r=mulberry32(cyrb53(DAY+'|fam'+lv)), L=FX_LIV[lv];
+  const usati=new Set();   // due file con lo stesso nome nello stesso livello confondono
+  const list=FAM.map((f,i)=>{
+    const pool=L.pool==='base'?f.base:L.pool==='rare'?f.rare:f.base.concat(f.rare);
+    const ext=pick(pool,r);
+    // "il nome inganna": il nome viene dal lessico di un'ALTRA famiglia
+    const altra=pick(FAM.filter(x=>x.k!==f.k),r);
+    const sorgente=L.inganno?altra.nomi:f.nomi;
+    let nome=pick(sorgente,r),tent=0;
+    while(usati.has(nome)&&tent++<12)nome=pick(sorgente,r);
+    usati.add(nome);
+    // "doppia estensione": davanti a quella vera ne compare una di un'altra famiglia
+    const finta=L.doppia?pick(pick(FAM.filter(x=>x.k!==f.k),r).base,r):null;
+    return {id:'L'+lv+'f'+i,nome,ext,finta,fam:f.k,posto:null,esca:L.inganno?altra:null};
   });
-  fxFiles=shuffle(list,r);
-  st.fxOk=0;fxSel=null;
-  document.getElementById('fxTxt').innerHTML='<span>Tocca un file, poi tocca la <b>famiglia</b> a cui appartiene. Guarda l\'estensione dopo il punto: è lei che comanda.</span>';
+  return shuffle(list,r);
+}
+function fxInit(){
+  fxLv=0;st.fxOk=0;fxSel=null;
+  fxStartLivello();
+}
+function fxStartLivello(){
+  fxFiles=fxGenLivello(fxLv);fxSel=null;
+  const L=FX_LIV[fxLv];
+  document.getElementById('fxN').innerHTML='Livello<br>'+(fxLv+1)+' / '+FX_NLIV;
+  document.getElementById('fxTxt').innerHTML='<span><b>'+L.t+'.</b> '+L.d+
+    ' Tocca un file, poi tocca la famiglia a cui appartiene.</span>';
+  document.getElementById('fxFb').className='fb';
   fxRender();
 }
 function fxRender(){
-  taskN('fxN',st.fxOk);
-  dots('fxDots',st.fxOk);
+  document.getElementById('fxDots').innerHTML=
+    Array.from({length:FX_NLIV},(_,i)=>'<i'+(i<fxLv?' class="on"':'')+'></i>').join('');
+  const L=FX_LIV[fxLv];
   const rim=fxFiles.filter(f=>!f.posto);
-  document.getElementById('fxShelf').innerHTML=rim.length?rim.map(f=>
-    '<button class="fz'+(fxSel===f.id?' sel':'')+'" id="fz'+f.id+'" onclick="fxPick(\''+f.id+'\')">'+
-    '<span class="fz-name">'+esc(f.nome)+'</span><span class="fz-ext">.'+f.ext+'</span></button>').join('')
-    : '<span class="sim-note">Scaffale vuoto: tutti i file sono al loro posto.</span>';
+  const etichetta=f=>'.'+(f.finta?f.finta+'.':'')+f.ext;
+  document.getElementById('fxShelf').innerHTML=rim.length?rim.map(f=>{
+    const col=L.aiuto?'background:var('+FAM.find(x=>x.k===f.fam).c+');':'';
+    return '<button class="fz'+(fxSel===f.id?' sel':'')+'" id="fz'+f.id+'" onclick="fxPick(\''+f.id+'\')">'+
+      '<span class="fz-name">'+esc(f.nome)+'</span>'+
+      '<span class="fz-ext" style="'+col+'">'+esc(etichetta(f))+'</span></button>';
+  }).join('') : '<span class="sim-note">Scaffale vuoto: livello superato.</span>';
   document.getElementById('fxHint').textContent=fxSel
     ? 'Ora tocca la famiglia giusta qui sotto.'
-    : (rim.length?'Tocca il file che vuoi sistemare.':'Dieci file su dieci: ottimo lavoro.');
+    : (rim.length?('Restano '+rim.length+(rim.length===1?' file da sistemare.':' file da sistemare.')):'Livello completato.');
   document.getElementById('fxBins').innerHTML=FAM.map(f=>{
     const dentro=fxFiles.filter(x=>x.posto===f.k);
     // role+tabindex+Invio/Spazio: la base va raggiunta anche da tastiera, non solo a tocco
@@ -1350,7 +1384,7 @@ function fxRender(){
       '<span class="fx-bin-t" style="color:var('+f.c+'D);">'+svgI(f.ic)+'<span>'+f.n+'</span></span>'+
       '<span class="fx-bin-i">'+dentro.map(x=>
         '<span class="fz mini"><span class="fz-name">'+esc(x.nome)+'</span>'+
-        '<span class="fz-ext" style="background:var('+f.c+');">.'+x.ext+'</span></span>').join('')+'</span></div>';
+        '<span class="fz-ext" style="background:var('+f.c+');">'+esc(etichetta(x))+'</span></span>').join('')+'</span></div>';
   }).join('');
 }
 function fxPick(id){fxSel=fxSel===id?null:id;fxRender();sndClick();}
@@ -1358,25 +1392,43 @@ function fxDrop(famK){
   if(!fxSel)return;
   const f=fxFiles.find(x=>x.id===fxSel);
   if(!f)return;
-  const fb=document.getElementById('fxFb');
+  const L=FX_LIV[fxLv], fb=document.getElementById('fxFb');
+  const giusta=FAM.find(x=>x.k===f.fam);
   if(f.fam===famK){
     f.posto=famK;fxSel=null;st.fxOk++;st.done++;
-    const fam=FAM.find(x=>x.k===famK);
+    let perche='un file <b>.'+f.ext+'</b> '+giusta.cosa+'.';
+    if(L.doppia)perche='conta l\'ultima estensione: <b>.'+f.ext+'</b>. Il «.'+f.finta+'» davanti non apre nulla, '+giusta.cosa+'.';
+    else if(L.inganno)perche='il nome poteva ingannare, ma comanda l\'estensione: <b>.'+f.ext+'</b> '+giusta.cosa+'.';
     fb.className='fb show good';
-    fb.innerHTML=svgI('check')+'<span><span class="fbl">+15 punti</span><span>«'+esc(f.nome)+'.'+f.ext+
-      '» è al suo posto: un file <b>.'+f.ext+'</b> '+fam.cosa+'.</span></span>';
-    addPoints(15);sndOk();
-    if(st.fxOk>=GOAL){markDone(3);showToast(svgI('spark')+'<span>Tutti i file smistati!</span>');}
+    fb.innerHTML=svgI('check')+'<span><span class="fbl">+'+L.pts+' punti</span><span>«'+esc(f.nome)+
+      esc(f.finta?'.'+f.finta:'')+'.'+f.ext+'»: '+perche+'</span></span>';
+    addPoints(L.pts);sndOk();
+    if(!fxFiles.some(x=>!x.posto))setTimeout(fxAvanza,900);
   }else{
-    const giusta=FAM.find(x=>x.k===f.fam), sbagliata=FAM.find(x=>x.k===famK);
+    const sbagliata=FAM.find(x=>x.k===famK);
+    let perche='Un file <b>.'+f.ext+'</b> '+giusta.cosa+', quindi appartiene a <b>'+giusta.n+'</b>, non a '+sbagliata.n+'.';
+    if(L.doppia)perche='Quando ci sono due estensioni vale <b>l\'ultima</b>: qui è <b>.'+f.ext+'</b>, quindi '+giusta.n+'. Il «.'+f.finta+'» davanti fa parte del nome.';
+    else if(L.inganno)perche='Il nome «'+esc(f.nome)+'» fa pensare a '+f.esca.n+', ma il nome non conta: l\'estensione <b>.'+f.ext+'</b> dice '+giusta.n+'.';
     fb.className='fb show bad';
-    fb.innerHTML=svgI('info')+'<span><span class="fbl">Non è questa la famiglia</span><span>Un file <b>.'+f.ext+
-      '</b> '+giusta.cosa+', quindi appartiene a <b>'+giusta.n+'</b>, non a '+sbagliata.n+'.</span></span>';
+    fb.innerHTML=svgI('info')+'<span><span class="fbl">Non è questa la famiglia</span><span>'+perche+'</span></span>';
     const el=document.getElementById('fz'+f.id);
     if(el){el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),340);}
     sndMiss();
   }
   lbPush();fxRender();
+}
+function fxAvanza(){
+  if(fxLv<FX_NLIV-1){
+    fxLv++;
+    showToast(svgI('spark')+'<span>Livello superato! Ora: <b>'+FX_LIV[fxLv].t+'</b></span>');
+    sndRank();fxStartLivello();
+  }else{
+    document.getElementById('fxDots').innerHTML=
+      Array.from({length:FX_NLIV},()=>'<i class="on"></i>').join('');
+    markDone(3);sndRank();
+    showToast(svgI('medal')+'<span>Cinque livelli su cinque: sei un esperto di formati.</span>');
+    document.getElementById('fxHint').textContent='Hai superato tutti e cinque i livelli.';
+  }
 }
 
 /* ============ TAPPA 4 — SFIDA DATI ============ */
