@@ -878,8 +878,6 @@ select{appearance:none;-webkit-appearance:none;
                 <circle cx="200" cy="112" r="4.5" fill="#B9BFC9"/>
                 <ellipse cx="166" cy="74" rx="62" ry="44" fill="url(#pzVetro)" transform="rotate(-28 166 74)"/>
               </g>
-              <!-- oggetto appoggiato sul piatto -->
-              <g id="pzOggetto"></g>
               <!-- piatto con bordo rialzato e fondo incassato: non un vassoio piatto -->
               <g id="pzPiattoG">
                 <ellipse cx="200" cy="349" rx="152" ry="21" fill="#767C87"/>
@@ -891,6 +889,8 @@ select{appearance:none;-webkit-appearance:none;
                 <ellipse cx="200" cy="334" rx="112" ry="11" fill="#fff" opacity=".45"/>
                 <path d="M176 356 H224 L232 372 H168 Z" fill="#9AA1AC"/>
               </g>
+              <!-- l'oggetto va DOPO il piatto: in SVG chi viene dopo sta sopra -->
+              <g id="pzOggetto"></g>
               <g id="pzCorpo">
                 <path d="M170 372 H230 L248 396 H152 Z" fill="url(#pzAcciaio)"/>
                 <rect x="118" y="396" width="164" height="20" rx="7" fill="url(#pzAcciaio)"/>
@@ -1674,7 +1674,7 @@ function pzPesa(k){
   const {u,val,fondo}=pzPortata(o.v,o.dig);
   pzDisegnaQuadrante(fondo,u,o.dig);
   // l'oggetto si appoggia sul piatto, davanti al montante
-  const s=o.sc||1, w=64*s, appoggio=329-(o.b||54)*s;   // il fondo del disegno tocca il piatto
+  const s=o.sc||1, w=64*s, appoggio=333-(o.b||54)*s;   // il fondo del disegno tocca il piatto
   document.getElementById('pzOggetto').innerHTML=
     '<g transform="translate('+(200-w/2).toFixed(1)+','+appoggio.toFixed(1)+') scale('+s+')">'+PZ_ICONE[o.k]+'</g>';
   // il valore NON si legge subito: prima l'ago deve salire, ed è lì che si guarda
