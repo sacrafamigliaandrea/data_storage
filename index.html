@@ -130,15 +130,16 @@ select{appearance:none;-webkit-appearance:none;
 .step.a .stn{background:rgba(255,255,255,.28);color:#fff}
 .step.done .stn{background:var(--lg);color:#fff}
 .step.a.c0{background:var(--lr);box-shadow:0 4px 0 var(--lrD);--bc:var(--lr)}
-.step.a.c1{background:var(--lo);box-shadow:0 4px 0 var(--loD);--bc:var(--lo)}
-.step.a.c2{background:var(--lg);box-shadow:0 4px 0 var(--lgD);--bc:var(--lg)}
-.step.a.c3{background:var(--lb);box-shadow:0 4px 0 var(--lbD);--bc:var(--lb)}
-.step.a.c4{background:var(--lc);box-shadow:0 4px 0 var(--lcD);--bc:var(--lc)}
-.step.a.c5{background:var(--ly);color:var(--tx);box-shadow:0 4px 0 var(--lyD);--bc:var(--ly)}
-.step.a.c5 .stn{background:rgba(0,0,0,.16);color:var(--tx)}
+.step.a.c1{background:var(--ly);color:var(--tx);box-shadow:0 4px 0 var(--lyD);--bc:var(--ly)}
+.step.a.c1 .stn{background:rgba(0,0,0,.16);color:var(--tx)}
+.step.a.c2{background:var(--lo);box-shadow:0 4px 0 var(--loD);--bc:var(--lo)}
+.step.a.c3{background:var(--lg);box-shadow:0 4px 0 var(--lgD);--bc:var(--lg)}
+.step.a.c4{background:var(--lb);box-shadow:0 4px 0 var(--lbD);--bc:var(--lb)}
+.step.a.c5{background:var(--lc);box-shadow:0 4px 0 var(--lcD);--bc:var(--lc)}
 .step.a.c6{background:var(--lp);box-shadow:0 4px 0 var(--lpD);--bc:var(--lp)}
-.step.a.c7{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
-.step.a.c8{background:var(--lr);box-shadow:0 4px 0 var(--lrD);--bc:var(--lr)}
+.step.a.c7{background:var(--lo);box-shadow:0 4px 0 var(--loD);--bc:var(--lo)}
+.step.a.c8{background:var(--tx);box-shadow:0 4px 0 #000;--bc:var(--tx)}
+.step.a.c9{background:var(--lr);box-shadow:0 4px 0 var(--lrD);--bc:var(--lr)}
 /* la tappa premio resta visibile ma bloccata: il lucchetto è un traino, non un ostacolo */
 .step.locked{opacity:.62}
 .step.locked .stn{background:var(--bd)}
@@ -187,8 +188,13 @@ select{appearance:none;-webkit-appearance:none;
   .nav{gap:5px}
   .step{padding:5px 10px;font-size:.75rem;margin-top:3px}
   .step .stn{width:17px;height:17px;font-size:.62rem}
-  .score-num,.score-done{font-size:1.45rem}
-  .board-card{min-height:70px}
+  .step svg{width:14px;height:14px}
+  .sb-brand{padding:0 2px 2px}
+  .seed-lbl{font-size:.58rem}
+  .score-num,.score-done{font-size:1.4rem}
+  .score-lbl{font-size:.58rem}
+  .board-card{min-height:62px}
+  .rank-bar{height:8px;margin-top:5px}
 }
 
 /* --- FRAME CENTRALE: solo attività --- */
@@ -256,6 +262,66 @@ select{appearance:none;-webkit-appearance:none;
 .vtime{font-family:var(--mono);font-size:.73rem;color:rgba(255,255,255,.85);flex:0 0 auto;min-width:86px;text-align:right}
 .vid-caption{max-width:820px;text-align:center;font-size:.92rem;color:var(--tx2)}
 .vid-caption b{color:var(--tx)}
+
+/* ============ IL BANCO DELLA PESA ============ */
+.pz-wrap{width:100%;max-width:1120px;flex:1;min-height:0;display:grid;
+  grid-template-columns:minmax(330px,1fr) minmax(360px,1.05fr);gap:16px;align-items:stretch}
+.pz-scale{padding:10px 14px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:0}
+#pzSvg{flex:1;min-height:0;width:100%;max-height:100%;display:block}
+/* lettura digitale sotto la bilancia */
+.pz-read{flex:0 0 auto;width:100%;display:flex;align-items:baseline;justify-content:center;gap:10px;
+  flex-wrap:wrap;padding:7px 12px;border-radius:11px;background:var(--panel);border:2px solid var(--bd);
+  min-height:52px}
+.pz-val{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--tx);letter-spacing:-.01em}
+.pz-val.dig{color:var(--lb)}
+.pz-eq{font-size:.82rem;color:var(--tx2);line-height:1.3}
+.pz-empty{font-size:.88rem;color:var(--tx2)}
+/* colonna oggetti */
+.pz-side{display:flex;flex-direction:column;gap:9px;min-height:0;overflow-y:auto}
+.pz-group{display:flex;flex-direction:column;gap:6px}
+.pz-glbl{display:flex;align-items:center;gap:7px;font-family:var(--head);font-size:.7rem;font-weight:700;
+  letter-spacing:.7px;text-transform:uppercase;color:var(--tx2)}
+.pz-glbl svg{width:15px;height:15px}
+.pz-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:7px}
+.pz-item{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 5px 6px;
+  border:2px solid var(--bd);border-radius:11px;background:var(--card);cursor:pointer;transition:.12s;
+  box-shadow:0 4px 0 var(--bd)}
+.pz-item svg{width:38px;height:38px}
+.pz-item .pzi-n{font-family:var(--head);font-size:.68rem;font-weight:700;color:var(--tx);text-align:center;line-height:1.2}
+.pz-item:hover{transform:translateY(-2px);border-color:var(--lb);box-shadow:0 4px 0 var(--lbD)}
+.pz-item.sel{border-color:var(--lg);background:var(--greenL);box-shadow:0 4px 0 var(--lgD)}
+.pz-item.dig:hover{border-color:var(--lb)}
+/* lo stesso peso detto in tutte le unità: è qui che si capisce perché
+   si dice "1 MB" invece di "1.000.000 di Byte" */
+.pz-conv{padding:10px 14px 11px;display:flex;flex-direction:column;gap:5px}
+.pz-conv-t{font-family:var(--head);font-size:.68rem;font-weight:700;letter-spacing:.7px;
+  text-transform:uppercase;color:var(--tx2);margin-bottom:2px}
+.pz-row{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:9px;
+  padding:3px 8px;border-radius:7px;font-size:.84rem}
+.pz-row .pzr-v{font-family:var(--mono);font-weight:700;text-align:right;color:var(--tx2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pz-row .pzr-u{font-family:var(--head);font-weight:700;color:var(--tx2)}
+.pz-row .pzr-c{font-size:.72rem;color:var(--tx3);line-height:1.2}
+.pz-row.best{background:var(--greenL);border:2px solid var(--lg);padding:3px 6px}
+.pz-row.best .pzr-v{color:var(--lgD);font-size:1rem}
+.pz-row.best .pzr-u{color:var(--lgD)}
+.pz-row.best .pzr-c{color:var(--lgD);font-weight:700}
+.pz-conv-n{font-size:.79rem;color:var(--tx2);line-height:1.35;margin-top:3px}
+.pz-conv-n b{color:var(--tx)}
+.pz-conv-empty{font-size:.82rem;color:var(--tx2);line-height:1.35}
+@media (max-height:900px){
+  #sec1 .sec-body{gap:7px}
+  .pz-item{padding:6px 4px 5px}
+  .pz-item svg{width:32px;height:32px}
+  .pz-read{min-height:46px;padding:5px 10px}
+  .pz-val{font-size:1.3rem}
+  .pz-conv{padding:7px 11px 8px;gap:2px}
+  .pz-row{font-size:.76rem;padding:1px 8px}
+  .pz-row.best .pzr-v{font-size:.9rem}
+  .pz-conv-n{font-size:.72rem;margin-top:2px}
+  .pz-side{gap:7px}
+  .pz-items{gap:6px}
+}
 
 /* ============ SCALA + SIMULATORE ============ */
 .sim{width:100%;max-width:1000px;padding:12px 18px 14px;display:flex;flex-direction:column;gap:9px}
@@ -438,8 +504,8 @@ select{appearance:none;-webkit-appearance:none;
 
 /* su schermi bassi la tappa più densa (trasferimenti) si stringe per entrare intera */
 @media (max-height:900px){
-  #sec4 .sec-body{gap:7px}
-  #sec4 .task{padding:7px 16px}
+  #sec5 .sec-body{gap:7px}
+  #sec5 .task{padding:7px 16px}
   .tr-dev{padding:7px 11px;gap:4px}
   .tr-dest{padding:6px 10px;gap:4px}
   .tr-file{padding:7px 11px}
@@ -452,7 +518,7 @@ select{appearance:none;-webkit-appearance:none;
 
 /* ============ BRICK INVADERS (tappa premio) ============ */
 /* il gioco riempie tutta l'altezza della colonna, come la sidebar: niente scroll */
-#sec8 .sec-body{overflow:hidden;justify-content:stretch}
+#sec9 .sec-body{overflow:hidden;justify-content:stretch}
 .bi-wrap{width:100%;max-width:1180px;flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;align-items:center}
 .bi-hud{width:100%;display:flex;align-items:center;gap:14px;padding:9px 16px;background:var(--card);
   border:2px solid var(--bd);border-radius:12px;box-shadow:0 5px 0 var(--bd)}
@@ -729,8 +795,101 @@ select{appearance:none;-webkit-appearance:none;
       </div>
     </section>
 
-    <!-- TAPPA 1: LA SCALA — 10 CONSEGNE GUIDATE -->
+    <!-- TAPPA 1: IL BANCO DELLA PESA -->
     <section class="sec" id="sec1">
+      <div class="sec-head">
+        <div class="sec-title">Il banco della pesa</div>
+        <div class="sec-sub">Prima le cose che si toccano, poi quelle che non si toccano: la bilancia è la stessa.</div>
+      </div>
+      <div class="sec-body" style="justify-content:flex-start;gap:9px;">
+        <div class="task">
+          <span class="task-n" id="pzN"></span>
+          <span class="task-txt" id="pzTxt"></span>
+          <span class="task-dots" id="pzDots"></span>
+        </div>
+        <div class="pz-wrap">
+          <!-- BILANCIA -->
+          <div class="pz-scale brick-card">
+            <svg id="pzSvg" viewBox="0 0 400 440" role="img" aria-label="Bilancia da banco">
+              <defs>
+                <linearGradient id="pzAcciaio" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#E4E7EC"/><stop offset="1" stop-color="#A7ADB8"/>
+                </linearGradient>
+                <linearGradient id="pzMontante" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#8E949E"/><stop offset=".45" stop-color="#D3D7DE"/>
+                  <stop offset="1" stop-color="#8E949E"/>
+                </linearGradient>
+                <linearGradient id="pzPiatto" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#EDEFF3"/><stop offset="1" stop-color="#B9BFC9"/>
+                </linearGradient>
+                <linearGradient id="pzVetro" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#fff" stop-opacity=".40"/>
+                  <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <rect x="186" y="200" width="28" height="140" fill="url(#pzMontante)"/>
+              <g id="pzQuadrante">
+                <circle cx="200" cy="112" r="112" fill="#7E8590"/>
+                <circle cx="200" cy="112" r="107" fill="url(#pzAcciaio)"/>
+                <circle cx="200" cy="112" r="97"  fill="#FBF8F0"/>
+                <circle id="pzAnello" cx="200" cy="112" r="97" fill="none" stroke="#D6D1C4" stroke-width="2"/>
+                <g stroke="#1A1A1A" stroke-linecap="round">
+                  <g id="pzMinori" stroke-width="1.5" opacity=".5"></g>
+                  <g id="pzMaggiori" stroke-width="3"></g>
+                </g>
+                <g id="pzNumeri" font-family="Lexend, sans-serif" font-size="12" font-weight="700"
+                   fill="#1A1A1A" text-anchor="middle" dominant-baseline="central"></g>
+                <text id="pzUnita" x="200" y="146" font-family="Lexend, sans-serif" font-size="14"
+                      font-weight="700" fill="#5A5650" text-anchor="middle">grammi</text>
+                <g id="pzAgo" transform="rotate(0 200 112)">
+                  <path d="M200 112 L194.5 108 L200 22 L205.5 108 Z" fill="#E3000B"/>
+                  <path d="M200 112 L197.5 114 L200 136 L202.5 114 Z" fill="#A80008"/>
+                </g>
+                <circle cx="200" cy="112" r="10" fill="#3A3F48"/>
+                <circle cx="200" cy="112" r="4.5" fill="#B9BFC9"/>
+                <ellipse cx="166" cy="74" rx="62" ry="44" fill="url(#pzVetro)" transform="rotate(-28 166 74)"/>
+              </g>
+              <!-- oggetto appoggiato sul piatto -->
+              <g id="pzOggetto"></g>
+              <!-- piatto con bordo rialzato e fondo incassato: non un vassoio piatto -->
+              <g id="pzPiattoG">
+                <ellipse cx="200" cy="349" rx="152" ry="21" fill="#767C87"/>
+                <path d="M48 336 A152 21 0 0 0 352 336 L352 344 A152 21 0 0 1 48 344 Z" fill="#8E949E"/>
+                <ellipse cx="200" cy="336" rx="152" ry="21" fill="url(#pzPiatto)"/>
+                <ellipse cx="200" cy="336" rx="152" ry="21" fill="none" stroke="#fff" stroke-width="2" opacity=".55"/>
+                <ellipse cx="200" cy="338" rx="132" ry="16" fill="#98A0AB"/>
+                <ellipse cx="200" cy="336" rx="132" ry="16" fill="#D9DDE3"/>
+                <ellipse cx="200" cy="334" rx="112" ry="11" fill="#fff" opacity=".45"/>
+                <path d="M176 356 H224 L232 372 H168 Z" fill="#9AA1AC"/>
+              </g>
+              <g id="pzCorpo">
+                <path d="M170 372 H230 L248 396 H152 Z" fill="url(#pzAcciaio)"/>
+                <rect x="118" y="396" width="164" height="20" rx="7" fill="url(#pzAcciaio)"/>
+                <rect x="102" y="414" width="196" height="18" rx="8" fill="#6E7480"/>
+                <rect x="102" y="414" width="196" height="6"  rx="3" fill="#8E949E"/>
+              </g>
+            </svg>
+            <div class="pz-read" id="pzRead"></div>
+          </div>
+          <!-- OGGETTI -->
+          <div class="pz-side">
+            <div class="pz-group">
+              <div class="pz-glbl" id="pzL1"></div>
+              <div class="pz-items" id="pzReali"></div>
+            </div>
+            <div class="pz-group">
+              <div class="pz-glbl" id="pzL2"></div>
+              <div class="pz-items" id="pzDigitali"></div>
+            </div>
+            <div class="pz-conv brick-card" id="pzConv"></div>
+            <div class="fb" id="pzFb" style="max-width:100%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAPPA 2: LA SCALA — 10 CONSEGNE GUIDATE -->
+    <section class="sec" id="sec2">
       <div class="sec-head">
         <div class="sec-title">La Scala dei Mattoncini</div>
         <div class="sec-sub">Esegui la consegna con i comandi, poi conta i pezzi che vedi comparire.</div>
@@ -764,7 +923,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 2: TRASFORMA LE UNITÀ -->
-    <section class="sec" id="sec2">
+    <section class="sec" id="sec3">
       <div class="sec-head">
         <div class="sec-title">Trasforma le unità</div>
         <div class="sec-sub">Guarda la scala: ogni salto verso destra divide per 1.000, ogni salto verso sinistra moltiplica per 1.000.</div>
@@ -804,7 +963,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 3: FAMIGLIE DI FILE -->
-    <section class="sec" id="sec3">
+    <section class="sec" id="sec4">
       <div class="sec-head">
         <div class="sec-title">Le famiglie dei file</div>
         <div class="sec-sub">L'estensione è l'etichetta che dice al computer come aprire il file.</div>
@@ -825,7 +984,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 4: TRASFERIMENTI -->
-    <section class="sec" id="sec4">
+    <section class="sec" id="sec5">
       <div class="sec-head">
         <div class="sec-title">Trasferire un file</div>
         <div class="sec-sub">Non conta solo quanto pesa il file: contano anche dove lo metti e come ce lo porti.</div>
@@ -866,7 +1025,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 5: SFIDA -->
-    <section class="sec" id="sec5">
+    <section class="sec" id="sec6">
       <div class="sec-head">
         <div class="sec-title">Sfida Dati</div>
         <div class="sec-sub">Domande sempre nuove, oggi uguali per tutti: la classifica a sinistra è live.</div>
@@ -891,7 +1050,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 6: SPAZIO -->
-    <section class="sec" id="sec6">
+    <section class="sec" id="sec7">
       <div class="sec-head">
         <div class="sec-title">Missione: libera lo spazio</div>
         <div class="sec-sub">L'iPad è pieno e serve posto per l'aggiornamento. Ogni scelta è definitiva: pensa prima di toccare.</div>
@@ -919,7 +1078,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 7: RIFLETTI -->
-    <section class="sec" id="sec7">
+    <section class="sec" id="sec8">
       <div class="sec-head">
         <div class="sec-title">Rifletti</div>
         <div class="sec-sub">Niente punti giusti o sbagliati, qui: solo la tua testa.</div>
@@ -952,7 +1111,7 @@ select{appearance:none;-webkit-appearance:none;
     </section>
 
     <!-- TAPPA 8: BRICK INVADERS (premio di merito) -->
-    <section class="sec" id="sec8">
+    <section class="sec" id="sec9">
       <div class="sec-head">
         <div class="sec-title">Brick Invaders</div>
         <div class="sec-sub" id="biSub">Cinque missioni: colpisci solo i mattoncini giusti.</div>
@@ -1000,7 +1159,7 @@ select{appearance:none;-webkit-appearance:none;
         <div class="task" style="max-width:100%;"><span id="azIcon3" style="width:19px;height:19px;color:var(--loD);flex:0 0 auto;"></span><span class="task-txt" style="text-align:left;font-size:.88rem;"><span><b>L'idea diventa azione:</b> stasera, sul tuo iPad, apri <b>Impostazioni → Generali → Spazio iPad</b> e guarda che cosa occupa di più. C'è qualcosa di «riscaricabile» che puoi salutare?</span></span></div>
         <div class="spr-btns">
           <button class="brick-btn spr-btn" onclick="spReset()"><span class="studs"><span></span><span></span></span>Rigioca la missione</button>
-          <button class="brick-btn spr-btn primary" onclick="document.getElementById('spResult').classList.remove('show');G(7)"><span class="studs"><span></span><span></span></span>Vai a Rifletti</button>
+          <button class="brick-btn spr-btn primary" onclick="document.getElementById('spResult').classList.remove('show');G(8)"><span class="studs"><span></span><span></span></span>Vai a Rifletti</button>
         </div>
       </div>
     </div>
@@ -1100,6 +1259,7 @@ const ICONS={
   chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
   pen:'<path d="M4 20l4-1L20 7l-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/>',
   tower:'<rect x="6" y="15" width="12" height="5" rx="1"/><rect x="7.5" y="10" width="9" height="5" rx="1"/><rect x="9" y="5" width="6" height="5" rx="1"/>',
+  bilancia:'<circle cx="12" cy="8" r="5.5"/><path d="M12 8l2.6-2.6"/><path d="M6 15h12M9 15l-1 5h8l-1-5"/><path d="M6.5 20h11"/>',
   image:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-6 6-2-2-5 5"/>',
   doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
   music:'<path d="M9 18V6l10-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/>',
@@ -1258,6 +1418,7 @@ function lbStart(){
 /* ============ NAVIGAZIONE ============ */
 const SECS=[
   {t:'Video stimolo',ic:'film'},
+  {t:'Il banco della pesa',ic:'bilancia'},
   {t:'La Scala',ic:'tower'},
   {t:'Trasforma le unità',ic:'swap'},
   {t:'Famiglie di file',ic:'tag'},
@@ -1280,7 +1441,7 @@ function G(i){
   });
   if(ytPlayer&&ytPlayer.pauseVideo&&i!==0)ytPlayer.pauseVideo();
   // il gioco non gira in una tappa nascosta; entrando va rimisurato sullo spazio reale
-  if(i===8){biRenderLock();requestAnimationFrame(biResize);} else biStop();
+  if(i===9){biRenderLock();requestAnimationFrame(biResize);} else biStop();
 }
 function markDone(i){document.getElementById('step'+i).classList.add('done');}
 
@@ -1318,7 +1479,212 @@ function vidSeek(e){if(!ytPlayer||!ytPlayer.getDuration)return;
 function vidMute(){if(!ytPlayer||!ytPlayer.isMuted)return;
   ytPlayer.isMuted()?ytPlayer.unMute():ytPlayer.mute();setTimeout(vidUI,80);}
 
-/* ============ TAPPA 1 — SIMULATORE + 10 CONSEGNE ============ */
+/* ============ TAPPA 1 — IL BANCO DELLA PESA ============
+   Stessa bilancia, due mondi: prima grammi/chili/tonnellate, poi Byte/KB/MB/GB/TB.
+   I prefissi kilo, mega, giga sono gli stessi nei due sistemi, ed è questo il punto.
+   Il quadrante cambia PORTATA come le bilance vere: l'ago resta sempre leggibile. */
+const PZ_UM=[{s:'g',n:'grammi',k:1},{s:'kg',n:'chili',k:1000},{s:'t',n:'tonnellate',k:1e6}];
+const PZ_UD=[{s:'B',n:'Byte',k:1},{s:'KB',n:'Kilobyte',k:1e3},{s:'MB',n:'Megabyte',k:1e6},
+             {s:'GB',n:'Gigabyte',k:1e9},{s:'TB',n:'Terabyte',k:1e12}];
+/* illustrazioni flat su griglia 64, palette dei mattoncini */
+const PZ_ICONE={
+  graffetta:'<path d="M22 12v30a10 10 0 0 0 20 0V16a6 6 0 0 0-12 0v26a2.5 2.5 0 0 0 5 0V18" fill="none" stroke="#8E949E" stroke-width="5" stroke-linecap="round"/>',
+  moneta:'<circle cx="32" cy="34" r="19" fill="#C9A227"/><circle cx="32" cy="31" r="19" fill="#E3C04A"/><circle cx="32" cy="31" r="13" fill="#C9A227" opacity=".45"/><path d="M27 25h8a5 5 0 0 1 0 10h-8v-10zm0 10h9" stroke="#8A6D12" stroke-width="2.4" fill="none" stroke-linecap="round"/>',
+  pasta:'<rect x="18" y="10" width="28" height="44" rx="3" fill="#0055BF"/><rect x="18" y="10" width="28" height="10" rx="3" fill="#003D8C"/><rect x="24" y="24" width="16" height="20" rx="2" fill="#FFED00"/><g stroke="#D4C400" stroke-width="2"><path d="M28 26v16M32 26v16M36 26v16"/></g>',
+  zucchero:'<path d="M16 20h32l4 34H12z" fill="#FBF8F0" stroke="#D6D1C4" stroke-width="2"/><path d="M16 20l4-8h24l4 8z" fill="#E4E7EC" stroke="#D6D1C4" stroke-width="2"/><rect x="20" y="32" width="24" height="12" rx="2" fill="#00852B"/>',
+  patate:'<path d="M14 30c0-8 8-14 18-14s18 6 18 14v10c0 8-8 14-18 14s-18-6-18-14z" fill="#B8863F"/><ellipse cx="24" cy="30" rx="7" ry="5" fill="#8B6428"/><ellipse cx="39" cy="36" rx="8" ry="6" fill="#8B6428"/><ellipse cx="30" cy="44" rx="6" ry="4.5" fill="#8B6428"/>',
+  cemento:'<path d="M14 18h36v34a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4z" fill="#9AA1AC"/><path d="M14 18l6-8h24l6 8z" fill="#7E8590"/><rect x="21" y="30" width="22" height="9" rx="1.5" fill="#5A6068"/>',
+  auto:'<path d="M8 42v-8l6-2 6-10h24l7 10 5 2v8a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3z" fill="#E3000B"/><path d="M22 24h18l5 8H18z" fill="#BEE3F5"/><circle cx="19" cy="45" r="6" fill="#2A2E35"/><circle cx="45" cy="45" r="6" fill="#2A2E35"/><circle cx="19" cy="45" r="2.4" fill="#9AA1AC"/><circle cx="45" cy="45" r="2.4" fill="#9AA1AC"/>',
+  sms:'<path d="M10 16h44v28H28l-12 10v-10h-6z" fill="#00852B"/><g stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M19 26h26M19 34h16"/></g>',
+  testo:'<path d="M16 8h22l12 12v36a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z" fill="#FBF8F0" stroke="#D6D1C4" stroke-width="2"/><path d="M38 8v12h12" fill="#E4E7EC" stroke="#D6D1C4" stroke-width="2"/><g stroke="#8E949E" stroke-width="2.6" stroke-linecap="round"><path d="M21 30h22M21 37h22M21 44h14"/></g>',
+  foto:'<rect x="9" y="14" width="46" height="36" rx="4" fill="#0055BF"/><rect x="14" y="19" width="36" height="26" rx="2" fill="#BEE3F5"/><circle cx="23" cy="27" r="4" fill="#FFED00"/><path d="M14 45l11-12 8 8 6-6 11 10z" fill="#00852B"/>',
+  canzone:'<path d="M26 46V16l22-5v27" fill="none" stroke="#8B4DAB" stroke-width="5" stroke-linejoin="round"/><ellipse cx="20" cy="46" rx="8" ry="7" fill="#8B4DAB"/><ellipse cx="42" cy="38" rx="8" ry="7" fill="#8B4DAB"/>',
+  film:'<rect x="8" y="16" width="48" height="32" rx="4" fill="#2A2E35"/><g fill="#FBF8F0"><rect x="12" y="20" width="6" height="6" rx="1"/><rect x="12" y="30" width="6" height="6" rx="1"/><rect x="12" y="40" width="6" height="4" rx="1"/><rect x="46" y="20" width="6" height="6" rx="1"/><rect x="46" y="30" width="6" height="6" rx="1"/><rect x="46" y="40" width="6" height="4" rx="1"/></g><path d="M27 24l14 8-14 8z" fill="#E3000B"/>',
+  gioco:'<rect x="6" y="22" width="52" height="24" rx="12" fill="#FF7E14"/><g fill="#fff"><rect x="15" y="31" width="12" height="4" rx="2"/><rect x="19" y="27" width="4" height="12" rx="2"/></g><circle cx="43" cy="30" r="3.6" fill="#fff"/><circle cx="49" cy="37" r="3.6" fill="#fff"/>',
+  archivio:'<g fill="#5A6068"><rect x="12" y="12" width="40" height="12" rx="2"/><rect x="12" y="26" width="40" height="12" rx="2"/><rect x="12" y="40" width="40" height="12" rx="2"/></g><g fill="#00852B"><circle cx="19" cy="18" r="2.6"/><circle cx="19" cy="32" r="2.6"/><circle cx="19" cy="46" r="2.6"/></g><g stroke="#9AA1AC" stroke-width="2.4" stroke-linecap="round"><path d="M28 18h16M28 32h16M28 46h16"/></g>'
+};
+/* v = valore nell'unità base (grammi per il mondo reale, Byte per quello digitale) */
+const PZ_OGG=[
+  // sc = quanto l'oggetto riempie la fascia libera sopra il piatto (alta ~98 unità):
+  // le proporzioni relative restano realistiche, dalla graffetta all'utilitaria
+  // sc = quanto riempie la fascia libera sopra il piatto; b = dove finisce il
+  // disegno dentro il viewBox 64, così l'oggetto POGGIA sul piatto e non fluttua
+  {k:'graffetta',n:'Graffetta',      v:1,        dig:false,sc:.85,b:52},
+  {k:'moneta',   n:'Moneta da 1 €', v:7.5,      dig:false,sc:.95,b:53},
+  {k:'pasta',    n:'Pacco di pasta',v:500,      dig:false,sc:1.28,b:54},
+  {k:'zucchero', n:'Zucchero 1 kg', v:1000,     dig:false,sc:1.33,b:54},
+  {k:'patate',   n:'Sacchetto di patate',v:2500,dig:false,sc:1.4,b:54},
+  {k:'cemento',  n:'Sacco di cemento',v:25000,  dig:false,sc:1.45,b:56},
+  {k:'auto',     n:'Utilitaria',    v:1.2e6,    dig:false,sc:1.5,b:51},
+  {k:'sms',      n:'Un messaggio',  v:140,      dig:true, sc:1.2,b:54},
+  {k:'testo',    n:'Pagina di testo',v:3000,    dig:true, sc:1.25,b:58},
+  {k:'foto',     n:'Foto con l\'iPad',v:3e6,    dig:true, sc:1.3,b:50},
+  {k:'canzone',  n:'Una canzone',   v:4e6,      dig:true, sc:1.25,b:53},
+  {k:'film',     n:'Film in HD',    v:4e9,      dig:true, sc:1.4,b:48},
+  {k:'gioco',    n:'Videogioco',    v:8e10,     dig:true, sc:1.4,b:46},
+  {k:'archivio', n:'Archivio della scuola',v:2e12,dig:true,sc:1.45,b:52}
+];
+const PZ_TASK=[
+  {t:'Appoggia sul piatto il <b>pacco di pasta</b> e guarda dove si ferma l\'ago.', test:o=>o.k==='pasta'},
+  {t:'Ora trova qualcosa che pesa <b>esattamente un chilo</b>.', test:o=>o.v===1000},
+  {t:'Metti sul piatto <b>l\'oggetto più leggero</b> del banco: l\'ago quasi non si muove.', test:o=>o.k==='graffetta'},
+  {t:'E adesso qualcosa che <b>superi la tonnellata</b>. Guarda come cambia la scala del quadrante.', test:o=>!o.dig&&o.v>=1e6},
+  {t:'Passiamo alle cose che non si toccano: pesa una <b>foto scattata con l\'iPad</b>.', test:o=>o.k==='foto'},
+  {t:'Trova un file che pesa <b>meno di un Kilobyte</b>.', test:o=>o.dig&&o.v<1000},
+  {t:'Metti sul piatto un file da <b>circa 4 Gigabyte</b>.', test:o=>o.dig&&o.v>=3.5e9&&o.v<=4.5e9},
+  {t:'Ultima: il file <b>più pesante</b> di tutto il banco.', test:o=>o.k==='archivio'}
+];
+const PZ_GOAL=PZ_TASK.length;
+let pzI=0,pzOk=0,pzSel=null,pzAng=0,pzVel=0,pzTarget=0,pzRaf=null,pzVistoDigitale=false;
+
+function pzPt(p,r){const a=(p*3)*Math.PI/180;return[200+r*Math.sin(a),112-r*Math.cos(a)];}
+/* la portata segue la serie 1-2-5 come le bilance vere */
+function pzPortata(v,dig){
+  const U=dig?PZ_UD:PZ_UM;
+  let u=U[0];
+  U.forEach(x=>{if(v>=x.k)u=x;});
+  const val=v/u.k;
+  const serie=[1,2,5,10,20,50,100,200,500,1000];
+  const fondo=serie.find(s=>s>=val*1.06)||1000;
+  return {u,val,fondo};
+}
+function pzNum(n){
+  if(n>=10)return nfmt(Math.round(n));
+  if(n>=1)return nfmt(Math.round(n*10)/10);
+  return nfmt(Math.round(n*100)/100);
+}
+/* Qui NON si arrotonda via nulla: i numeri lunghissimi e quelli pieni di zeri
+   sono esattamente ciò che deve vedere lo studente per capire perché si sceglie
+   un'unità invece di un'altra. */
+function pzNumFull(n){
+  if(n===0)return '0';
+  if(n>=1000)return nfmt(Math.round(n));
+  if(n>=1)return nfmt(Math.round(n*100)/100);
+  const dec=Math.min(13,-Math.floor(Math.log10(n))+1);
+  return n.toFixed(dec).replace(/0+$/,'').replace('.',',');
+}
+function pzConversioni(o){
+  const U=o.dig?PZ_UD:PZ_UM;
+  const scelta=pzPortata(o.v,o.dig).u;
+  const righe=U.map(x=>{
+    const v=o.v/x.k, best=x.s===scelta.s;
+    let nota='';
+    if(best)nota='si legge così';
+    else if(v>=1e6)nota='troppo lungo';
+    else if(v<0.001)nota='troppi zeri';
+    return '<div class="pz-row'+(best?' best':'')+'">'+
+      '<span class="pzr-v">'+pzNumFull(v)+'</span>'+
+      '<span class="pzr-u">'+x.s+'</span>'+
+      '<span class="pzr-c">'+nota+'</span></div>';
+  }).join('');
+  document.getElementById('pzConv').innerHTML=
+    '<div class="pz-conv-t">'+esc(o.n)+': lo stesso peso in '+U.length+' modi</div>'+righe+
+    '<div class="pz-conv-n">Sono <b>tutti lo stesso peso</b>, scritto in unità diverse. '+
+    'Si sceglie quella che tiene il numero <b>tra 1 e 1.000</b>: è la più corta da scrivere e la più facile da capire.</div>';
+}
+function pzDisegnaQuadrante(fondo,u,dig){
+  let mi='',ma='',nu='';
+  for(let i=0;i<=50;i++){const p=i*2;if(p%10===0)continue;
+    const a=pzPt(p,88),b=pzPt(p,81);
+    mi+='<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'"/>';}
+  for(let i=0;i<10;i++){const p=i*10;
+    const a=pzPt(p,88),b=pzPt(p,76),c=pzPt(p,57);
+    ma+='<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'"/>';
+    nu+='<text x="'+c[0].toFixed(1)+'" y="'+c[1].toFixed(1)+'">'+pzNum(fondo*p/100)+'</text>';}
+  document.getElementById('pzMinori').innerHTML=mi;
+  document.getElementById('pzMaggiori').innerHTML=ma;
+  document.getElementById('pzNumeri').innerHTML=nu;
+  document.getElementById('pzUnita').textContent=u.n;
+  // il mondo digitale si riconosce a colpo d'occhio dall'anello blu
+  document.getElementById('pzAnello').setAttribute('stroke',dig?'#0055BF':'#D6D1C4');
+  document.getElementById('pzUnita').setAttribute('fill',dig?'#0055BF':'#5A5650');
+}
+function pzAnima(){
+  pzVel+=(pzTarget-pzAng)*0.11;pzVel*=0.86;pzAng+=pzVel;
+  document.getElementById('pzAgo').setAttribute('transform','rotate('+pzAng.toFixed(2)+' 200 112)');
+  if(Math.abs(pzTarget-pzAng)>0.06||Math.abs(pzVel)>0.06){pzRaf=requestAnimationFrame(pzAnima);}
+  else{pzAng=pzTarget;document.getElementById('pzAgo').setAttribute('transform','rotate('+pzAng.toFixed(2)+' 200 112)');pzRaf=null;}
+}
+function pzPesa(k){
+  const o=PZ_OGG.find(x=>x.k===k);
+  if(!o)return;
+  pzSel=o;
+  const {u,val,fondo}=pzPortata(o.v,o.dig);
+  pzDisegnaQuadrante(fondo,u,o.dig);
+  pzTarget=300*Math.min(1,val/fondo);
+  if(!pzRaf)pzRaf=requestAnimationFrame(pzAnima);
+  // l'oggetto si appoggia sul piatto, davanti al montante
+  const s=o.sc||1, w=64*s, appoggio=329-(o.b||54)*s;   // il fondo del disegno tocca il piatto
+  document.getElementById('pzOggetto').innerHTML=
+    '<g transform="translate('+(200-w/2).toFixed(1)+','+appoggio.toFixed(1)+') scale('+s+')">'+PZ_ICONE[o.k]+'</g>';
+  // lettura: valore grande + le equivalenze nelle altre unità
+  const U=o.dig?PZ_UD:PZ_UM;
+  // solo equivalenze leggibili: sotto 0,1 si arrotonderebbero a zero ("0 GB"),
+  // sopra il milione diventano file di cifre illeggibili
+  const altre=U.filter(x=>x.s!==u.s&&o.v/x.k>=0.1&&o.v/x.k<1e6)
+               .map(x=>pzNum(o.v/x.k)+' '+x.s).join(' = ');
+  document.getElementById('pzRead').innerHTML=
+    '<span class="pz-val'+(o.dig?' dig':'')+'">'+pzNum(val)+' '+u.s+'</span>'+
+    (altre?'<span class="pz-eq">= '+altre+'</span>':'');
+  pzConversioni(o);
+  sndClick();
+  pzRender();
+  pzVerifica(o);
+}
+function pzVerifica(o){
+  const task=PZ_TASK[pzI];
+  const fb=document.getElementById('pzFb');
+  // la prima volta che si pesa qualcosa di digitale, si chiarisce l'equivoco
+  if(o.dig&&!pzVistoDigitale){
+    pzVistoDigitale=true;
+    showToast(svgI('info')+'<span>Occhio: qui non pesiamo materia, misuriamo informazione.</span>');
+  }
+  if(pzI>=PZ_GOAL){fb.className='fb';return;}
+  if(task.test(o)){
+    pzOk++;st.done++;addPoints(20);sndOk();
+    let extra='';
+    if(pzI===4)extra=' Attenzione però: una foto non pesa davvero 3 milioni di grammi. Il tuo iPad pieno di foto pesa <b>esattamente quanto da vuoto</b>: qui la bilancia misura quanto <b>spazio</b> occupa l\'informazione, non quanta materia c\'è.';
+    if(pzI===3)extra=' Hai visto? Il quadrante è passato ai chili e poi alle tonnellate: la bilancia cambia portata invece di allungarsi all\'infinito.';
+    if(pzI===PZ_GOAL-1)extra=' E questa è la scoperta: <b>kilo, mega e giga vogliono dire mille, un milione, un miliardo</b> tanto nei grammi quanto nei Byte. Sono gli stessi prefissi.';
+    fb.className='fb show good';
+    fb.innerHTML=svgI('check')+'<span><span class="fbl">+20 punti</span><span>'+
+      esc(o.n)+': '+document.getElementById('pzRead').textContent.split('=')[0].trim()+'.'+extra+'</span></span>';
+    pzI++;
+    if(pzOk>=PZ_GOAL)markDone(1);
+    pzRender();
+  }else{
+    fb.className='fb show bad';
+    fb.innerHTML=svgI('info')+'<span><span class="fbl">Non è quello che chiede la consegna</span><span>'+
+      esc(o.n)+' pesa '+document.getElementById('pzRead').textContent.split('=')[0].trim()+
+      '. Rileggi la consegna e prova con un altro oggetto.</span></span>';
+    sndMiss();
+  }
+}
+function pzRender(){
+  document.getElementById('pzN').innerHTML='Consegna<br>'+Math.min(pzI+1,PZ_GOAL)+' / '+PZ_GOAL;
+  document.getElementById('pzTxt').innerHTML='<span>'+(pzI<PZ_GOAL?PZ_TASK[pzI].t:
+    'Consegne finite: ora puoi pesare quello che vuoi e confrontare i due mondi.')+'</span>';
+  document.getElementById('pzDots').innerHTML=
+    Array.from({length:PZ_GOAL},(_,i)=>'<i'+(i<pzOk?' class="on"':'')+'></i>').join('');
+  const card=o=>'<button class="pz-item'+(o.dig?' dig':'')+(pzSel&&pzSel.k===o.k?' sel':'')+'" onclick="pzPesa(\''+o.k+'\')">'+
+    '<svg viewBox="0 0 64 64" aria-hidden="true">'+PZ_ICONE[o.k]+'</svg>'+
+    '<span class="pzi-n">'+o.n+'</span></button>';
+  document.getElementById('pzReali').innerHTML=PZ_OGG.filter(o=>!o.dig).map(card).join('');
+  document.getElementById('pzDigitali').innerHTML=PZ_OGG.filter(o=>o.dig).map(card).join('');
+}
+function pzInit(){
+  pzI=0;pzOk=0;pzSel=null;pzAng=0;pzVel=0;pzTarget=0;pzVistoDigitale=false;
+  document.getElementById('pzL1').innerHTML=svgI('bilancia')+'<span>Cose che si toccano</span>';
+  document.getElementById('pzL2').innerHTML=svgI('chip')+'<span>Cose digitali</span>';
+  document.getElementById('pzRead').innerHTML='<span class="pz-empty">Il piatto è vuoto: tocca un oggetto per pesarlo.</span>';
+  document.getElementById('pzOggetto').innerHTML='';
+  document.getElementById('pzConv').innerHTML='<div class="pz-conv-empty">Quando pesi qualcosa, qui vedrai lo stesso peso scritto in tutte le unità: scoprirai perché si dice «1 MB» e non «1.000.000 di Byte».</div>';
+  document.getElementById('pzFb').className='fb';
+  pzDisegnaQuadrante(1000,PZ_UM[0],false);
+  pzRender();
+}
+
+/* ============ TAPPA 2 — SIMULATORE + 10 CONSEGNE ============ */
 const PIECES=[
   {k:'p1',  v:1,       lbl:'',    name:'mattoncino', plur:'mattoncini'},
   {k:'p100',v:100,     lbl:'100', name:'piastra',    plur:'piastre'},
@@ -1391,7 +1757,7 @@ function scCheckAns(){
       ', cioè '+nfmt(scTask.n)+' '+(scTask.n===1?scTask.piece.name:scTask.piece.plur)+
       (scTask.piece.v>1?' da '+nfmt(scTask.piece.v):'')+'.</span></span>';
     addPoints(20);sndOk();
-    if(st.scOk>=GOAL)markDone(1);
+    if(st.scOk>=GOAL)markDone(2);
   }else{
     fb.className='fb show bad';
     fb.innerHTML=svgI('info')+'<span><span class="fbl">Riguarda il conteggio</span><span>'+
@@ -1517,7 +1883,7 @@ function cvCheck(){
     fb.innerHTML=svgI('check')+'<span><span class="fbl">+25 punti</span><span>'+
       nfmt(cvEx.val)+' '+UNITS[cvEx.from].s+(cvEx.from>cvEx.to?' × ':' ÷ ')+fattore+' = '+nfmt(cvEx.res)+' '+UNITS[cvEx.to].s+'.</span></span>';
     addPoints(25);sndOk();
-    if(st.cvOk>=GOAL)markDone(2);
+    if(st.cvOk>=GOAL)markDone(3);
   }else{
     fb.className='fb show bad';
     fb.innerHTML=svgI('info')+'<span><span class="fbl">Dove si è inceppato il ragionamento?</span><span>Da '+
@@ -1660,7 +2026,7 @@ function fxAvanza(){
   }else{
     document.getElementById('fxDots').innerHTML=
       Array.from({length:FX_NLIV},()=>'<i class="on"></i>').join('');
-    markDone(3);sndRank();
+    markDone(4);sndRank();
     showToast(svgI('medal')+'<span>Cinque livelli su cinque: sei un esperto di formati.</span>');
     document.getElementById('fxHint').textContent='Hai superato tutti e cinque i livelli.';
   }
@@ -1926,7 +2292,7 @@ function trPunti(daFallimento,extra){
     Array.from({length:TR_GOAL},(_,i)=>'<i'+(i<trOk?' class="on"':'')+'></i>').join('');
   // NIENTE avanzamento a tempo: lascerebbe l'interfaccia viva mentre sta per
   // resettarsi, e cancellerebbe il confronto dei tempi prima che venga letto
-  if(trOk>=TR_GOAL){markDone(4);sndRank();
+  if(trOk>=TR_GOAL){markDone(5);sndRank();
     showToast(svgI('medal')+'<span>Sei consegne su sei: sai come viaggia un file.</span>');}
   else{
     document.getElementById('trNextBtn').style.display='inline-flex';
@@ -2034,7 +2400,7 @@ function answer(k){
     f.className='fb show good';
     f.innerHTML=svgI('check')+'<span><span class="fbl">+'+pts+' punti'+(bonus?' (serie di '+st.streak+')':'')+'</span><span>'+esc(curQ.expl)+'</span></span>';
     addPoints(pts);sndOk();
-    if(st.qOk>=GOAL)markDone(5);
+    if(st.qOk>=GOAL)markDone(6);
   }else{
     btns[k].classList.add('ko');
     st.streak=0;
@@ -2138,7 +2504,7 @@ function spInstalla(){
   document.getElementById('sprList').innerHTML=rows.map(x=>
     '<div class="spr-row '+x.c+'">'+svgI(x.c==='plus'?'check':'info')+'<span>'+x.t+'</span></div>').join('');
   document.getElementById('azIcon3').innerHTML=svgI('spark');
-  if(primaVolta){st.spDone=true;addPoints(pts);sndRank();lbPush();markDone(6);}
+  if(primaVolta){st.spDone=true;addPoints(pts);sndRank();lbPush();markDone(7);}
   document.getElementById('spResult').classList.add('show');
 }
 function spReset(){document.getElementById('spResult').classList.remove('show');spInit();}
@@ -2167,13 +2533,13 @@ function toggleMan(i){
 }
 function chiudiPercorso(){
   if(manSel.size!==3)return;
-  if(!st.rifDone){st.rifDone=true;addPoints(50);markDone(7);
+  if(!st.rifDone){st.rifDone=true;addPoints(50);markDone(8);
     showToast(svgI('spark')+'<span>+50 punti per la riflessione. Ben fatto.</span>');}
   document.getElementById('finescore').textContent=st.score;
   document.getElementById('finedone').textContent=st.done;
   document.getElementById('finerank').textContent=RANKS[rankIdx(st.score)].n;
   // il riepilogo prende il posto delle due card: la pagina resta senza scroll
-  document.querySelectorAll('#sec7 .rif-card').forEach(c=>c.style.display='none');
+  document.querySelectorAll('#sec8 .rif-card').forEach(c=>c.style.display='none');
   document.getElementById('fineCard').classList.add('show');
   lbPush();
 }
@@ -2246,7 +2612,7 @@ function biRenderLock(){
     'Ti mancano <b>'+Math.max(0,BI_SBLOCCO-st.score)+' punti</b> — ogni consegna delle altre tappe ti avvicina.';
   document.getElementById('biLockBar').style.width=Math.min(100,st.score/BI_SBLOCCO*100)+'%';
   // la voce di menu mostra il lucchetto finché non è meritata
-  const step=document.getElementById('step8');
+  const step=document.getElementById('step9');
   if(step){step.classList.toggle('locked',!ok);
     const lk=step.querySelector('.lock');
     if(!ok&&!lk)step.insertAdjacentHTML('beforeend','<span class="lock">'+svg('medal')+'</span>');
@@ -2254,7 +2620,7 @@ function biRenderLock(){
 }
 function biInit(){
   biRenderLock();
-  window.addEventListener('resize',()=>{if(st.sec===8)biResize();});
+  window.addEventListener('resize',()=>{if(st.sec===9)biResize();});
   const c=document.getElementById('biCanvas');
   c.addEventListener('mousemove',e=>{if(!bi||!bi.run)return;
     const r=c.getBoundingClientRect();bi.px=(e.clientX-r.left)/r.width*c.width;});
@@ -2387,7 +2753,7 @@ function biFine(vinto){
     ? 'Hai chiuso tutte le missioni con <b>'+bi.pts+' punti</b> di gioco. In classifica ne porti <b>+'+bonus+'</b>.'
     : 'Hai totalizzato <b>'+bi.pts+' punti</b> di gioco, che valgono <b>+'+bonus+'</b> in classifica. Riprova quando vuoi.';
   if(bonus>0){addPoints(bonus);lbPush();}
-  if(vinto)markDone(8);
+  if(vinto)markDone(9);
 }
 function biStop(){if(bi&&bi.run){bi.run=false;cancelAnimationFrame(biRaf);
   document.getElementById('biOver').classList.remove('hide');
@@ -2420,6 +2786,7 @@ function avvia(){
   document.getElementById('profCls').textContent=(clsOpt?clsOpt.textContent:cls)+' · '+AVATARS[st.avatar].n;
   ac(); // sblocca WebAudio col gesto del click
   updateRankUI();
+  pzInit();
   scStart();
   cvNewEx();
   fxInit();
