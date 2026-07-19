@@ -323,6 +323,30 @@ select{appearance:none;-webkit-appearance:none;
   .pz-items{gap:6px}
 }
 
+/* ---- la mappa della scala: come ci si muove tra le unità ---- */
+.scala-map{width:100%;max-width:1020px;display:flex;flex-direction:column;gap:9px;
+  padding:12px 18px 16px;background:var(--card);border:2px solid var(--bd);
+  border-radius:14px;box-shadow:0 6px 0 var(--bd)}
+.sm-t{display:flex;align-items:center;gap:8px;font-family:var(--head);font-size:.72rem;font-weight:700;
+  letter-spacing:.7px;text-transform:uppercase;color:var(--tx2)}
+.sm-t svg{width:16px;height:16px}
+.sm-row{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:nowrap}
+.sm-u{position:relative;flex:0 0 auto;min-width:94px;padding:18px 14px;border-radius:11px;
+  font-family:var(--head);font-weight:700;font-size:1.3rem;text-align:center;margin-top:6px;
+  letter-spacing:.02em}
+.sm-gap{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--tx2)}
+.sm-op{white-space:nowrap;line-height:1.1}
+.sm-op.giu{color:var(--lbD)} .sm-op.su{color:var(--loD)}
+.sm-ar{font-size:1.35rem;line-height:.8;color:var(--tx3)}
+.sm-sw{font-size:1.1rem;color:var(--bd2);line-height:1}
+@media (max-height:900px){
+  .scala-map{padding:9px 14px 12px;gap:6px}
+  .sm-u{padding:13px 12px;font-size:1.14rem;min-width:82px}
+  .sm-gap{font-size:.74rem;gap:2px}
+  .sm-ar{font-size:1.2rem}
+}
+
 /* ============ SCALA + SIMULATORE ============ */
 .sim{width:100%;max-width:1000px;padding:12px 18px 14px;display:flex;flex-direction:column;gap:9px}
 .sim-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -335,7 +359,7 @@ select{appearance:none;-webkit-appearance:none;
   box-shadow:0 3px 0 var(--bd);transition:.12s}
 .zoom-btn:hover{color:var(--lb);border-color:var(--lb)}
 .zoom-btn.a{background:var(--lb);border-color:var(--lb);color:#fff;box-shadow:0 3px 0 var(--lbD)}
-.sim-yard{flex:1;min-height:150px;background:var(--panel);border:2px solid var(--bd);border-radius:11px;
+.sim-yard{flex:1;min-height:104px;background:var(--panel);border:2px solid var(--bd);border-radius:11px;
   padding:11px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px;overflow:hidden;
   background-image:radial-gradient(circle at 9px 9px,rgba(120,105,70,.14) 3.6px,transparent 3.8px);
   background-size:28px 28px}
@@ -839,8 +863,13 @@ select{appearance:none;-webkit-appearance:none;
                 </g>
                 <g id="pzNumeri" font-family="Lexend, sans-serif" font-size="12" font-weight="700"
                    fill="#1A1A1A" text-anchor="middle" dominant-baseline="central"></g>
-                <text id="pzUnita" x="200" y="146" font-family="Lexend, sans-serif" font-size="14"
-                      font-weight="700" fill="#5A5650" text-anchor="middle">grammi</text>
+                <!-- etichetta dell'unità nel settore vuoto in alto a sinistra:
+                     al centro in basso finiva sotto l'ago e non si leggeva -->
+                <g id="pzUnitaG">
+                  <rect id="pzUnitaBox" x="134" y="47" width="58" height="18" rx="5" fill="#5A5650"/>
+                  <text id="pzUnita" x="163" y="56.5" font-family="Lexend, sans-serif" font-size="10.5"
+                        font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="central">grammi</text>
+                </g>
                 <g id="pzAgo" transform="rotate(0 200 112)">
                   <path d="M200 112 L194.5 108 L200 22 L205.5 108 Z" fill="#E3000B"/>
                   <path d="M200 112 L197.5 114 L200 136 L202.5 114 Z" fill="#A80008"/>
@@ -900,6 +929,7 @@ select{appearance:none;-webkit-appearance:none;
           <span class="task-txt" id="scTxt"></span>
           <span class="task-dots" id="scDots"></span>
         </div>
+        <div class="scala-map" id="scalaMap"></div>
         <div class="sim brick-card">
           <div class="sim-top">
             <span class="sim-lbl">Costruisci</span>
@@ -1594,16 +1624,48 @@ function pzDisegnaQuadrante(fondo,u,dig){
   document.getElementById('pzMinori').innerHTML=mi;
   document.getElementById('pzMaggiori').innerHTML=ma;
   document.getElementById('pzNumeri').innerHTML=nu;
-  document.getElementById('pzUnita').textContent=u.n;
-  // il mondo digitale si riconosce a colpo d'occhio dall'anello blu
+  const et=document.getElementById('pzUnita');
+  et.textContent=u.n;
+  et.setAttribute('font-size',u.n.length>8?'9':'10.5');   // "tonnellate" deve stare nel riquadro
+  // il mondo digitale si riconosce a colpo d'occhio: anello ed etichetta in blu
   document.getElementById('pzAnello').setAttribute('stroke',dig?'#0055BF':'#D6D1C4');
-  document.getElementById('pzUnita').setAttribute('fill',dig?'#0055BF':'#5A5650');
+  document.getElementById('pzUnitaBox').setAttribute('fill',dig?'#0055BF':'#5A5650');
 }
-function pzAnima(){
-  pzVel+=(pzTarget-pzAng)*0.11;pzVel*=0.86;pzAng+=pzVel;
-  document.getElementById('pzAgo').setAttribute('transform','rotate('+pzAng.toFixed(2)+' 200 112)');
-  if(Math.abs(pzTarget-pzAng)>0.06||Math.abs(pzVel)>0.06){pzRaf=requestAnimationFrame(pzAnima);}
-  else{pzAng=pzTarget;document.getElementById('pzAgo').setAttribute('transform','rotate('+pzAng.toFixed(2)+' 200 112)');pzRaf=null;}
+/* L'ago non salta al valore: torna a zero e poi ci sale in circa 2 secondi e
+   mezzo, attraversando tutte le tacche. È il momento in cui lo studente legge
+   la scala. In coda un piccolo assestamento, come le lancette vere. */
+const PZ_MS_GIU=280, PZ_MS_SU=2400;
+let pzFase=null,pzT0=0,pzDa=0,pzFine=null;
+function pzSetAgo(a){
+  document.getElementById('pzAgo').setAttribute('transform','rotate('+a.toFixed(2)+' 200 112)');
+}
+function pzMuovi(target,onEnd){
+  cancelAnimationFrame(pzRaf);
+  pzTarget=target;pzFine=onEnd||null;
+  if(pzAng>4){pzFase='giu';pzDa=pzAng;}      // c'era già un oggetto: prima l'ago rientra
+  else{pzFase='su';pzDa=0;pzAng=0;pzSetAgo(0);}
+  pzT0=performance.now();
+  pzRaf=requestAnimationFrame(pzTick);
+}
+function pzTick(){
+  const now=performance.now();
+  if(pzFase==='giu'){
+    const k=Math.min(1,(now-pzT0)/PZ_MS_GIU);
+    pzAng=pzDa*(1-k*k);
+    pzSetAgo(pzAng);
+    if(k>=1){pzFase='su';pzDa=0;pzAng=0;pzT0=now;}
+    pzRaf=requestAnimationFrame(pzTick);return;
+  }
+  const k=Math.min(1,(now-pzT0)/PZ_MS_SU);
+  let a=pzTarget*(1-Math.pow(1-k,3));         // parte decisa, rallenta arrivando
+  if(k>0.72&&pzTarget>6)a+=Math.sin((k-0.72)/0.28*Math.PI*3)*(1-k)*5.5;
+  pzAng=a;pzSetAgo(a);
+  if(k<1){pzRaf=requestAnimationFrame(pzTick);}
+  else{
+    pzAng=pzTarget;pzSetAgo(pzTarget);pzRaf=null;
+    if(sndOn)tone(1050,0,.12,.05);            // l'ago si è fermato
+    const f=pzFine;pzFine=null;if(f)f();
+  }
 }
 function pzPesa(k){
   const o=PZ_OGG.find(x=>x.k===k);
@@ -1611,27 +1673,29 @@ function pzPesa(k){
   pzSel=o;
   const {u,val,fondo}=pzPortata(o.v,o.dig);
   pzDisegnaQuadrante(fondo,u,o.dig);
-  pzTarget=300*Math.min(1,val/fondo);
-  if(!pzRaf)pzRaf=requestAnimationFrame(pzAnima);
   // l'oggetto si appoggia sul piatto, davanti al montante
   const s=o.sc||1, w=64*s, appoggio=329-(o.b||54)*s;   // il fondo del disegno tocca il piatto
   document.getElementById('pzOggetto').innerHTML=
     '<g transform="translate('+(200-w/2).toFixed(1)+','+appoggio.toFixed(1)+') scale('+s+')">'+PZ_ICONE[o.k]+'</g>';
-  // lettura: valore grande + le equivalenze nelle altre unità
-  const U=o.dig?PZ_UD:PZ_UM;
-  // solo equivalenze leggibili: sotto 0,1 si arrotonderebbero a zero ("0 GB"),
-  // sopra il milione diventano file di cifre illeggibili
-  const altre=U.filter(x=>x.s!==u.s&&o.v/x.k>=0.1&&o.v/x.k<1e6)
-               .map(x=>pzNum(o.v/x.k)+' '+x.s).join(' = ');
-  document.getElementById('pzRead').innerHTML=
-    '<span class="pz-val'+(o.dig?' dig':'')+'">'+pzNum(val)+' '+u.s+'</span>'+
-    (altre?'<span class="pz-eq">= '+altre+'</span>':'');
-  pzConversioni(o);
+  // il valore NON si legge subito: prima l'ago deve salire, ed è lì che si guarda
+  document.getElementById('pzRead').innerHTML='<span class="pz-empty">Sto pesando…</span>';
+  document.getElementById('pzFb').className='fb';
   sndClick();
   pzRender();
-  pzVerifica(o);
+  pzMuovi(300*Math.min(1,val/fondo),function(){
+    const U=o.dig?PZ_UD:PZ_UM;
+    // solo equivalenze leggibili: sotto 0,1 si arrotonderebbero a zero ("0 GB"),
+    // sopra il milione diventano file di cifre illeggibili
+    const altre=U.filter(x=>x.s!==u.s&&o.v/x.k>=0.1&&o.v/x.k<1e6)
+                 .map(x=>pzNum(o.v/x.k)+' '+x.s).join(' = ');
+    document.getElementById('pzRead').innerHTML=
+      '<span class="pz-val'+(o.dig?' dig':'')+'">'+pzNum(val)+' '+u.s+'</span>'+
+      (altre?'<span class="pz-eq">= '+altre+'</span>':'');
+    pzConversioni(o);
+    pzVerifica(o,pzNum(val)+' '+u.s);
+  });
 }
-function pzVerifica(o){
+function pzVerifica(o,lettura){
   const task=PZ_TASK[pzI];
   const fb=document.getElementById('pzFb');
   // la prima volta che si pesa qualcosa di digitale, si chiarisce l'equivoco
@@ -1648,15 +1712,14 @@ function pzVerifica(o){
     if(pzI===PZ_GOAL-1)extra=' E questa è la scoperta: <b>kilo, mega e giga vogliono dire mille, un milione, un miliardo</b> tanto nei grammi quanto nei Byte. Sono gli stessi prefissi.';
     fb.className='fb show good';
     fb.innerHTML=svgI('check')+'<span><span class="fbl">+20 punti</span><span>'+
-      esc(o.n)+': '+document.getElementById('pzRead').textContent.split('=')[0].trim()+'.'+extra+'</span></span>';
+      esc(o.n)+': '+lettura+'.'+extra+'</span></span>';
     pzI++;
     if(pzOk>=PZ_GOAL)markDone(1);
     pzRender();
   }else{
     fb.className='fb show bad';
     fb.innerHTML=svgI('info')+'<span><span class="fbl">Non è quello che chiede la consegna</span><span>'+
-      esc(o.n)+' pesa '+document.getElementById('pzRead').textContent.split('=')[0].trim()+
-      '. Rileggi la consegna e prova con un altro oggetto.</span></span>';
+      esc(o.n)+' pesa '+lettura+'. Rileggi la consegna e prova con un altro oggetto.</span></span>';
     sndMiss();
   }
 }
@@ -1674,6 +1737,7 @@ function pzRender(){
 }
 function pzInit(){
   pzI=0;pzOk=0;pzSel=null;pzAng=0;pzVel=0;pzTarget=0;pzVistoDigitale=false;
+  cancelAnimationFrame(pzRaf);pzRaf=null;pzFase=null;pzFine=null;pzSetAgo(0);
   document.getElementById('pzL1').innerHTML=svgI('bilancia')+'<span>Cose che si toccano</span>';
   document.getElementById('pzL2').innerHTML=svgI('chip')+'<span>Cose digitali</span>';
   document.getElementById('pzRead').innerHTML='<span class="pz-empty">Il piatto è vuoto: tocca un oggetto per pesarlo.</span>';
@@ -1706,6 +1770,22 @@ function genScTask(i){
   const count=val*Math.pow(1000,salti);
   const piece=salti===0?PIECES[0]:salti===1?PIECES[1]:PIECES[3];
   return {val,from,to,count,piece,n:count/piece.v,salti};
+}
+/* La mappa della scala: salendo verso destra si DIVIDE per mille, tornando
+   indietro si MOLTIPLICA. È il riferimento a cui lo studente torna a guardare. */
+function buildScalaMap(){
+  let h='';
+  UNITS.forEach((u,i)=>{
+    if(i>0)h+='<div class="sm-gap">'+
+      '<span class="sm-op giu">:1.000</span><span class="sm-ar">&#8594;</span>'+
+      '<span class="sm-sw">&#8644;</span>'+
+      '<span class="sm-ar">&#8592;</span><span class="sm-op su">&#215;1.000</span></div>';
+    h+='<div class="sm-u" style="background:var('+u.c+');color:'+inkOn(u.c)+
+       ';box-shadow:0 5px 0 var('+u.c+'D);--bc:var('+u.c+');" title="'+u.n+'">'+studs(2)+u.s+'</div>';
+  });
+  document.getElementById('scalaMap').innerHTML=
+    '<div class="sm-t">'+svgI('swap')+'<span>Come ci si muove tra le unità</span></div>'+
+    '<div class="sm-row">'+h+'</div>';
 }
 let scTask=null,scPhase='setup';
 function scStart(){
@@ -2787,6 +2867,7 @@ function avvia(){
   ac(); // sblocca WebAudio col gesto del click
   updateRankUI();
   pzInit();
+  buildScalaMap();
   scStart();
   cvNewEx();
   fxInit();
